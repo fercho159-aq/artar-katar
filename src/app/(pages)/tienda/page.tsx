@@ -5,43 +5,62 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Badge } from "@/components/ui/badge";
-import { useCart, type Product } from "@/context/CartContext";
+import { useCart, type Product as CartProduct } from "@/context/CartContext";
+import { useEffect, useState } from "react";
+import { Product } from "@/lib/types";
+import { Skeleton } from "@/components/ui/skeleton";
 
-const products: Omit<Product, 'image'>[] = [
-  { id: "prod_001", name: "Pulsera de Cuarzo Rosa", price: 44.00 },
-  { id: "prod_002", name: "Cristal Atlante", price: 77.00 },
-  { id: "prod_003", name: "Pulsera de Amatista", price: 44.00 },
-  { id: "prod_004", name: "Punta de Cuarzo Lemuriano", price: 88.00 },
-  { id: "prod_005", name: "Pulsera de Ojo de Tigre", price: 44.00 },
-  { id: "prod_006", name: "Orgonita Pleyadiana", price: 99.00 },
-  { id: "prod_007", name: "Pulsera de 7 Chakras", price: 55.00 },
-  { id: "prod_008", name: "Geoda de Amatista", price: 122.00 },
-];
+const getTagForProduct = (product: Product): string => {
+  if (product.name.toLowerCase().includes('cuarzo rosa')) return 'Amor';
+  if (product.name.toLowerCase().includes('atlante')) return 'Sabiduría';
+  if (product.name.toLowerCase().includes('amatista')) return 'Protección';
+  if (product.name.toLowerCase().includes('lemuriano')) return 'Conexión';
+  if (product.name.toLowerCase().includes('ojo de tigre')) return 'Fuerza';
+  if (product.name.toLowerCase().includes('orgonita')) return 'Energía';
+  if (product.name.toLowerCase().includes('chakras')) return 'Equilibrio';
+  return 'Paz';
+}
 
-const productDetails = [
-  { name: "Pulsera de Cuarzo Rosa", price: "$44.00", imageId: "shop-bracelet", tag: "Amor", id: "prod_001" },
-  { name: "Cristal Atlante", price: "$77.00", imageId: "shop-crystal", tag: "Sabiduría", id: "prod_002" },
-  { name: "Pulsera de Amatista", price: "$44.00", imageId: "shop-bracelet", tag: "Protección", id: "prod_003" },
-  { name: "Punta de Cuarzo Lemuriano", price: "$88.00", imageId: "shop-crystal", tag: "Conexión", id: "prod_004" },
-  { name: "Pulsera de Ojo de Tigre", price: "$44.00", imageId: "shop-bracelet", tag: "Fuerza", id: "prod_005" },
-  { name: "Orgonita Pleyadiana", price: "$99.00", imageId: "shop-crystal", tag: "Energía", id: "prod_006" },
-  { name: "Pulsera de 7 Chakras", price: "$55.00", imageId: "shop-bracelet", tag: "Equilibrio", id: "prod_007" },
-  { name: "Geoda de Amatista", price: "$122.00", imageId: "shop-crystal", tag: "Paz", id: "prod_008" },
-];
+const getImageIdForProduct = (product: Product): string => {
+    if (product.type === 'PHYSICAL_GOOD' && product.name.toLowerCase().includes('pulsera')) {
+        return 'shop-bracelet';
+    }
+    return 'shop-crystal';
+}
 
 
 export default function TiendaPage() {
   const { addToCart } = useCart();
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const handleAddToCart = (productDetail: (typeof productDetails)[0]) => {
-    const image = PlaceHolderImages.find(p => p.id === productDetail.imageId);
-    const product: Product = {
-      id: productDetail.id,
-      name: productDetail.name,
-      price: parseFloat(productDetail.price.replace('$', '')),
-      image: image?.imageUrl || '',
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        const response = await fetch('/api/products');
+        if (!response.ok) {
+          throw new Error('Failed to fetch products');
+        }
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    fetchProducts();
+  }, []);
+
+
+  const handleAddToCart = (product: Product) => {
+    const cartProduct: CartProduct = {
+      id: product.product_sku,
+      name: product.name,
+      price: product.price,
+      image: product.image_url || '',
     };
-    addToCart(product);
+    addToCart(cartProduct);
   };
 
   return (
@@ -54,24 +73,44 @@ export default function TiendaPage() {
           </p>
         </div>
         <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {productDetails.map(product => {
-            const image = PlaceHolderImages.find(p => p.id === product.imageId);
-            return (
-              <Card key={product.name} className="flex flex-col overflow-hidden group hover:shadow-xl transition-shadow duration-300">
-                <CardHeader className="p-0 relative overflow-hidden">
-                  {image && <Image src={image.imageUrl} alt={product.name} data-ai-hint={image.imageId === 'shop-bracelet' ? 'crystal bracelet' : 'quartz crystal'} width={500} height={500} className="object-cover aspect-square group-hover:scale-105 transition-transform duration-300" />}
-                  <Badge variant="secondary" className="absolute top-3 right-3 bg-accent/90 text-accent-foreground backdrop-blur-sm">{product.tag}</Badge>
-                </CardHeader>
-                <CardContent className="p-4 flex-grow">
-                  <CardTitle className="text-lg">{product.name}</CardTitle>
-                  <p className="text-xl font-semibold mt-2 text-primary">{product.price}</p>
-                </CardContent>
-                <CardFooter className="p-4 pt-0">
-                  <Button className="w-full" onClick={() => handleAddToCart(product)}>Añadir al Carrito</Button>
-                </CardFooter>
-              </Card>
-            );
-          })}
+          {isLoading ? (
+            Array.from({ length: 8 }).map((_, index) => (
+               <Card key={index} className="flex flex-col overflow-hidden">
+                  <CardHeader className="p-0 relative overflow-hidden">
+                     <Skeleton className="w-full aspect-square" />
+                  </CardHeader>
+                  <CardContent className="p-4 flex-grow space-y-2">
+                     <Skeleton className="h-5 w-3/4" />
+                     <Skeleton className="h-6 w-1/2" />
+                  </CardContent>
+                  <CardFooter className="p-4 pt-0">
+                     <Skeleton className="h-10 w-full" />
+                  </CardFooter>
+               </Card>
+            ))
+          ) : (
+            products.map(product => {
+              const imageId = getImageIdForProduct(product);
+              const image = PlaceHolderImages.find(p => p.id === imageId);
+              const tag = getTagForProduct(product);
+              
+              return (
+                <Card key={product.id} className="flex flex-col overflow-hidden group hover:shadow-xl transition-shadow duration-300">
+                  <CardHeader className="p-0 relative overflow-hidden">
+                    <Image src={product.image_url || image?.imageUrl || '/placeholder.svg'} alt={product.name} data-ai-hint={image?.imageHint} width={500} height={500} className="object-cover aspect-square group-hover:scale-105 transition-transform duration-300" />
+                    <Badge variant="secondary" className="absolute top-3 right-3 bg-accent/90 text-accent-foreground backdrop-blur-sm">{tag}</Badge>
+                  </CardHeader>
+                  <CardContent className="p-4 flex-grow">
+                    <CardTitle className="text-lg">{product.name}</CardTitle>
+                    <p className="text-xl font-semibold mt-2 text-primary">${product.price.toFixed(2)}</p>
+                  </CardContent>
+                  <CardFooter className="p-4 pt-0">
+                    <Button className="w-full" onClick={() => handleAddToCart(product)}>Añadir al Carrito</Button>
+                  </CardFooter>
+                </Card>
+              );
+            })
+          )}
         </div>
       </div>
     </div>
