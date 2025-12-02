@@ -5,14 +5,15 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Badge } from "@/components/ui/badge";
-import { useCart, type Product } from "@/context/CartContext";
-import { ShoppingCart } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
-const workshops = [
+export const workshops = [
   {
     id: "wshop_001",
     title: "Ciclo de Activación Nocturna",
     description: "Un viaje de 21 días para despertar tus dones y talentos multidimensionales.",
+    longDescription: "Sumérgete en un profundo viaje de autodescubrimiento y activación espiritual con nuestro Ciclo de Activación Nocturna. Durante 21 noches consecutivas, recibirás activaciones energéticas mientras duermes, diseñadas para despertar tus dones psíquicos, conectar con tus guías y alinear tu ser con las frecuencias más elevadas del universo. Este ciclo es ideal para quienes buscan una transformación profunda y sostenida en el tiempo.",
     imageId: "workshop-1",
     date: "Inicia el 1 de Agosto",
     price: 111,
@@ -22,6 +23,7 @@ const workshops = [
     id: "wshop_002",
     title: "Conexión con tu Yo Superior",
     description: "Un taller intensivo de fin de semana para alinear tu energía con tu propósito de vida.",
+    longDescription: "Este taller intensivo de fin de semana es una oportunidad única para establecer una conexión clara y directa con tu Yo Superior. A través de meditaciones guiadas, ejercicios prácticos y canalizaciones en vivo, aprenderás a escuchar la voz de tu alma, recibir guía divina y alinear tus acciones diarias con tu propósito de vida más elevado. Ideal para quienes sienten el llamado a dar un salto cuántico en su camino espiritual.",
     imageId: "workshop-2",
     date: "15 y 16 de Septiembre",
     price: 222,
@@ -31,6 +33,7 @@ const workshops = [
     id: "wshop_003",
     title: "Sanación del Niño Interior",
     description: "Libera bloqueos emocionales y patrones limitantes de tu infancia para abrazar tu verdadero ser.",
+    longDescription: "En este taller sanador, nos adentraremos en las memorias de nuestra infancia para rescatar, sanar y reintegrar a nuestro niño interior. A través de técnicas de visualización, regresión consciente y trabajo energético, liberaremos heridas emocionales, patrones limitantes y creencias que nos impiden vivir en plenitud. Prepárate para abrazar a tu ser más auténtico y vulnerable con amor y compasión.",
     imageId: "meditation-2",
     date: "Próximamente",
     price: 0,
@@ -39,19 +42,6 @@ const workshops = [
 ];
 
 export default function TalleresPage() {
-  const { addToCart } = useCart();
-
-  const handleAddToCart = (workshop: (typeof workshops)[0]) => {
-    const image = PlaceHolderImages.find(p => p.id === workshop.imageId);
-    const product: Product = {
-      id: workshop.id,
-      name: workshop.title,
-      price: workshop.price,
-      image: image?.imageUrl || '',
-    };
-    addToCart(product);
-  };
-
   return (
     <div className="bg-background">
       <div className="container py-16 md:py-24">
@@ -79,9 +69,10 @@ export default function TalleresPage() {
                   </div>
                 </CardContent>
                 <CardFooter className="p-6 pt-0">
-                  <Button className="w-full" disabled={workshop.status !== "Abierto"} onClick={() => handleAddToCart(workshop)}>
-                     <ShoppingCart className="mr-2 h-4 w-4" />
-                    Añadir al Carrito
+                  <Button className="w-full" asChild disabled={workshop.status !== "Abierto"}>
+                    <Link href={`/talleres/${workshop.id}`}>
+                      Más Información <ArrowRight className="ml-2" />
+                    </Link>
                   </Button>
                 </CardFooter>
               </Card>
