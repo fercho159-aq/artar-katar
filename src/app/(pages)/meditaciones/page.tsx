@@ -27,35 +27,42 @@ export default function MeditacionesPage() {
         </div>
 
         {/* Subscription Section */}
-        <div className="relative rounded-lg overflow-hidden mb-16 p-8 md:p-12 flex items-center text-white min-h-[300px]">
-           {subscriptionImage && (
-            <Image
-              src={subscriptionImage.imageUrl}
-              alt={subscriptionImage.description}
-              fill
-              className="object-cover -z-10 brightness-50"
-              data-ai-hint={subscriptionImage.imageHint}
-            />
-          )}
-          <div className="relative z-10 max-w-2xl">
-            <h2 className="text-3xl font-bold font-headline mb-4">Acceso Total a la Biblioteca</h2>
-            <p className="text-lg text-gray-200 mb-6">
-              Disfruta de todas las meditaciones existentes y futuras con nuestra suscripción mensual. Medita sin límites y profundiza en tu práctica.
-            </p>
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-              <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg">
-                <Star className="mr-2 h-5 w-5" /> Suscribirse Ahora
-              </Button>
-              <p className="text-2xl font-bold [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">
-                $300 MXN / mes
-              </p>
+        <div className="mb-16">
+          <Card className="relative overflow-hidden w-full max-w-4xl mx-auto">
+            <div className="absolute inset-0">
+               {subscriptionImage && (
+                <Image
+                  src={subscriptionImage.imageUrl}
+                  alt={subscriptionImage.description}
+                  fill
+                  className="object-cover brightness-[.35]"
+                  data-ai-hint={subscriptionImage.imageHint}
+                />
+              )}
             </div>
-          </div>
+            <div className="relative flex flex-col md:flex-row items-center justify-between p-8 md:p-12 text-white">
+              <div className="max-w-md text-center md:text-left">
+                <h2 className="text-3xl font-bold font-headline mb-4">Acceso Total a la Biblioteca</h2>
+                <p className="text-lg text-gray-200 mb-6 md:mb-0">
+                  Disfruta de todas las meditaciones existentes y futuras con nuestra suscripción mensual. Medita sin límites y profundiza en tu práctica.
+                </p>
+              </div>
+              <div className="flex flex-col items-center gap-4 mt-6 md:mt-0">
+                <p className="text-3xl font-bold [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">
+                  $300 MXN / mes
+                </p>
+                <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg">
+                  <Star className="mr-2 h-5 w-5" /> Suscribirse Ahora
+                </Button>
+              </div>
+            </div>
+          </Card>
         </div>
+
 
         <div className="flex items-center justify-center mb-12">
           <div className="w-full max-w-md h-px bg-border"></div>
-          <span className="mx-4 text-muted-foreground uppercase tracking-widest text-sm">O compra individualmente</span>
+          <span className="mx-4 text-muted-foreground uppercase tracking-widest text-sm text-center">O compra individualmente</span>
           <div className="w-full max-w-md h-px bg-border"></div>
         </div>
 
