@@ -32,19 +32,23 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useRouter } from 'next/navigation';
 
+// --- Meditations Data (now imported from a single source) ---
+const allMeditations = [
+  { id: "med_001", title: "Meditación de Anclaje a Tierra", duration: "15 min", description: "Conecta con la energía de Gaia y encuentra tu centro.", imageId: "meditation-1", price: 40 },
+  { id: "med_002", title: "Activación del Corazón Cristalino", duration: "25 min", description: "Abre tu corazón a la frecuencia del amor incondicional.", imageId: "meditation-2", price: 40 },
+  { id: "med_003", title: "Viaje al Templo de Sanación", duration: "30 min", description: "Recibe sanación y guía de los maestros ascendidos.", imageId: "workshop-1", price: 40 },
+  { id: "med_004", title: "Limpieza Energética Profunda", duration: "20 min", description: "Libera energías densas y revitaliza tu campo áurico.", imageId: "workshop-2", price: 40 },
+  { id: "med_005", title: "Conexión con tu Llama Gemela", duration: "22 min", description: "Armoniza la energía sagrada masculina y femenina en tu interior.", imageId: "meditation-1", price: 40 },
+  { id: "med_006", title: "Activación del ADN Cósmico", duration: "33 min", description: "Despierta tu potencial dormido y activa tus hebras de ADN.", imageId: "meditation-2", price: 40 },
+];
+
 // --- Dummy Data for Demonstration ---
-const purchasedMeditations = [
+const individualPurchases = [
   {
     id: 'med_001',
     title: 'Meditación de Anclaje a Tierra',
     duration: '15 min',
     imageId: 'meditation-1',
-  },
-  {
-    id: 'med_004',
-    title: 'Limpieza Energética Profunda',
-    duration: '20 min',
-    imageId: 'workshop-2',
   },
 ];
 
@@ -70,6 +74,8 @@ const subscription = {
   nextBilling: '2024-08-15',
   amount: '300.00',
 };
+
+const purchasedMeditations = subscription.status === 'Activa' ? allMeditations : individualPurchases;
 // ------------------------------------
 
 export default function MisComprasPage() {
@@ -103,9 +109,11 @@ export default function MisComprasPage() {
         <TabsContent value="meditations" className="mt-8">
           <Card>
             <CardHeader>
-              <CardTitle>Meditaciones Compradas</CardTitle>
+              <CardTitle>Mis Meditaciones</CardTitle>
               <CardDescription>
-                Aquí encontrarás todas las meditaciones que has adquirido.
+                {subscription.status === 'Activa'
+                  ? 'Acceso total a todas las meditaciones gracias a tu suscripción.'
+                  : 'Aquí encontrarás todas las meditaciones que has adquirido.'}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
