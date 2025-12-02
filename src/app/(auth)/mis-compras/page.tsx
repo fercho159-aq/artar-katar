@@ -49,17 +49,8 @@ const allWorkshops = [
     { id: "wshop_003", title: "Sanación del Niño Interior", imageId: "meditation-2" },
 ];
 
-
-// --- Dummy Data for Demonstration ---
-const subscription = {
-  status: 'Activa',
-  nextBilling: '2024-08-15',
-  amount: '300.00',
-};
-// ------------------------------------
-
 export default function MisComprasPage() {
-  const { user, logout, orders } = useAuth();
+  const { user, logout, orders, subscription } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
@@ -82,7 +73,7 @@ export default function MisComprasPage() {
     [purchasedItems]
   );
 
-  const purchasedMeditations = subscription.status === 'Activa' 
+  const purchasedMeditations = subscription?.status === 'Activa' 
     ? allMeditations 
     : individualPurchases.map(p => {
         const medData = allMeditations.find(m => m.id === p.id);
@@ -124,7 +115,7 @@ export default function MisComprasPage() {
             <CardHeader>
               <CardTitle>Mis Meditaciones</CardTitle>
               <CardDescription>
-                {subscription.status === 'Activa'
+                {subscription?.status === 'Activa'
                   ? 'Acceso total a todas las meditaciones gracias a tu suscripción.'
                   : 'Aquí encontrarás todas las meditaciones que has adquirido.'}
               </CardDescription>
@@ -197,19 +188,28 @@ export default function MisComprasPage() {
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-               <div className="flex justify-between items-center p-4 border rounded-lg">
-                <div>
-                  <h3 className="font-semibold text-lg">Acceso Total a Meditaciones</h3>
-                  <p className="text-sm text-muted-foreground">Próximo cobro: {subscription.nextBilling}</p>
+              {subscription ? (
+                <>
+                  <div className="flex justify-between items-center p-4 border rounded-lg">
+                    <div>
+                      <h3 className="font-semibold text-lg">Acceso Total a Meditaciones</h3>
+                      <p className="text-sm text-muted-foreground">Próximo cobro: {subscription.next_billing_date}</p>
+                    </div>
+                    <div className="text-right">
+                      <Badge variant={subscription.status === 'Activa' ? 'default' : 'secondary'} className="mb-2">{subscription.status}</Badge>
+                      <p className="font-bold text-lg text-primary">$300.00 MXN/mes</p>
+                    </div>
+                  </div>
+                  <Button variant="outline" className="w-full sm:w-auto">
+                    Cancelar Suscripción
+                  </Button>
+                </>
+              ) : (
+                <div className="text-center py-8">
+                  <p className="text-muted-foreground">No tienes una suscripción activa.</p>
+                  <Button className="mt-4">Suscribirse Ahora</Button>
                 </div>
-                <div className="text-right">
-                  <Badge variant={subscription.status === 'Activa' ? 'default' : 'secondary'} className="mb-2">{subscription.status}</Badge>
-                  <p className="font-bold text-lg text-primary">${subscription.amount} MXN/mes</p>
-                </div>
-              </div>
-              <Button variant="outline" className="w-full sm:w-auto">
-                Cancelar Suscripción
-              </Button>
+              )}
             </CardContent>
           </Card>
         </TabsContent>

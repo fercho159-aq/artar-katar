@@ -1,7 +1,8 @@
 'use client';
 
 import { CartItem } from './CartContext';
-import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import React, { createContext, useContext, useState, ReactNode } from 'react';
+import type { Subscription } from '@/lib/types';
 
 type User = {
   uid: string;
@@ -34,6 +35,7 @@ type Order = {
 type AuthContextType = {
   user: User | null;
   orders: Order[];
+  subscription: Subscription | null;
   login: (email: string, password: string) => Promise<void>;
   signup: (name: string, email: string, password: string) => Promise<void>;
   logout: () => void;
@@ -45,14 +47,14 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [orders, setOrders] = useState<Order[]>([]);
+  const [subscription, setSubscription] = useState<Subscription | null>(null);
 
-  const fetchOrders = async (userId: string) => {
+  const fetchUserData = async (userId: string) => {
+    // Fetch Orders
     try {
-      const response = await fetch(`/api/orders/${userId}`);
-      if (response.ok) {
-        const apiOrders: ApiOrder[] = await response.json();
-        
-        // Transform API orders to frontend Order format
+      const ordersResponse = await fetch(`/api/orders/${userId}`);
+      if (ordersResponse.ok) {
+        const apiOrders: ApiOrder[] = await ordersResponse.json();
         const formattedOrders: Order[] = apiOrders.map(apiOrder => ({
             id: apiOrder.order_id,
             date: new Date(apiOrder.order_date).toLocaleDateString('es-ES'),
@@ -63,7 +65,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                     id: item.product_id,
                     name: item.name,
                     price: parseFloat(item.price_at_purchase as any),
-                    image: '', // Image is not returned from this endpoint, but might be needed elsewhere
+                    image: '', 
                 }
             }))
         }));
@@ -74,6 +76,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     } catch (error) {
       console.error("Failed to fetch orders:", error);
       setOrders([]);
+    }
+
+    // Fetch Subscription
+    try {
+      const subResponse = await fetch(`/api/subscriptions/${userId}`);
+      if (subResponse.ok) {
+        const subData: Subscription | null = await subResponse.json();
+        setSubscription(subData);
+      } else {
+        setSubscription(null);
+      }
+    } catch (error) {
+      console.error("Failed to fetch subscription:", error);
+      setSubscription(null);
     }
   };
 
@@ -91,7 +107,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
     
     setUser(data);
-    await fetchOrders(data.uid);
+    await fetchUserData(data.uid);
   };
 
   const signup = async (name: string, email: string, password: string): Promise<void> => {
@@ -109,9 +125,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
      setUser(data);
      setOrders([]);
+     setSubscription(null);
   };
 
   const addOrder = (items: CartItem[], total: number) => {
+    // This is a simulation, in a real app this would call an API to create the order
     const newOrder: Order = {
       id: `ORD-${Date.now()}`,
       date: new Date().toLocaleDateString('es-ES'),
@@ -124,10 +142,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const logout = () => {
     setUser(null);
     setOrders([]);
+    setSubscription(null);
   };
 
   return (
-    <AuthContext.Provider value={{ user, orders, login, signup, logout, addOrder }}>
+    <AuthContext.Provider value={{ user, orders, subscription, login, signup, logout, addOrder }}>
       {children}
     </AuthContext.Provider>
   );
