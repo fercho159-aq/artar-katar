@@ -57,7 +57,7 @@ export default function TiendaPage() {
     const cartProduct: CartProduct = {
       id: product.product_sku,
       name: product.name,
-      price: product.price,
+      price: Number(product.price),
       image: product.image_url || '',
     };
     addToCart(cartProduct);
@@ -93,6 +93,7 @@ export default function TiendaPage() {
               const imageId = getImageIdForProduct(product);
               const image = PlaceHolderImages.find(p => p.id === imageId);
               const tag = getTagForProduct(product);
+              const priceAsNumber = Number(product.price);
               
               return (
                 <Card key={product.id} className="flex flex-col overflow-hidden group hover:shadow-xl transition-shadow duration-300">
@@ -102,7 +103,7 @@ export default function TiendaPage() {
                   </CardHeader>
                   <CardContent className="p-4 flex-grow">
                     <CardTitle className="text-lg">{product.name}</CardTitle>
-                    <p className="text-xl font-semibold mt-2 text-primary">${product.price.toFixed(2)}</p>
+                    <p className="text-xl font-semibold mt-2 text-primary">${priceAsNumber.toFixed(2)}</p>
                   </CardContent>
                   <CardFooter className="p-4 pt-0">
                     <Button className="w-full" onClick={() => handleAddToCart(product)}>Añadir al Carrito</Button>

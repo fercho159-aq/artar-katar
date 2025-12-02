@@ -41,7 +41,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
             : item
         );
       }
-      return [...prevCart, { product, quantity: 1 }];
+      return [...prevCart, { product: { ...product, price: Number(product.price) }, quantity: 1 }];
     });
     toast({
       title: "Producto añadido",
