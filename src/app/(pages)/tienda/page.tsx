@@ -1,21 +1,49 @@
+"use client";
+
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Badge } from "@/components/ui/badge";
+import { useCart, type Product } from "@/context/CartContext";
 
-const products = [
-  { name: "Pulsera de Cuarzo Rosa", price: "$44.00", imageId: "shop-bracelet", tag: "Amor" },
-  { name: "Cristal Atlante", price: "$77.00", imageId: "shop-crystal", tag: "Sabiduría" },
-  { name: "Pulsera de Amatista", price: "$44.00", imageId: "shop-bracelet", tag: "Protección" },
-  { name: "Punta de Cuarzo Lemuriano", price: "$88.00", imageId: "shop-crystal", tag: "Conexión" },
-  { name: "Pulsera de Ojo de Tigre", price: "$44.00", imageId: "shop-bracelet", tag: "Fuerza" },
-  { name: "Orgonita Pleyadiana", price: "$99.00", imageId: "shop-crystal", tag: "Energía" },
-  { name: "Pulsera de 7 Chakras", price: "$55.00", imageId: "shop-bracelet", tag: "Equilibrio" },
-  { name: "Geoda de Amatista", price: "$122.00", imageId: "shop-crystal", tag: "Paz" },
+const products: Omit<Product, 'image'>[] = [
+  { id: "prod_001", name: "Pulsera de Cuarzo Rosa", price: 44.00 },
+  { id: "prod_002", name: "Cristal Atlante", price: 77.00 },
+  { id: "prod_003", name: "Pulsera de Amatista", price: 44.00 },
+  { id: "prod_004", name: "Punta de Cuarzo Lemuriano", price: 88.00 },
+  { id: "prod_005", name: "Pulsera de Ojo de Tigre", price: 44.00 },
+  { id: "prod_006", name: "Orgonita Pleyadiana", price: 99.00 },
+  { id: "prod_007", name: "Pulsera de 7 Chakras", price: 55.00 },
+  { id: "prod_008", name: "Geoda de Amatista", price: 122.00 },
 ];
 
+const productDetails = [
+  { name: "Pulsera de Cuarzo Rosa", price: "$44.00", imageId: "shop-bracelet", tag: "Amor", id: "prod_001" },
+  { name: "Cristal Atlante", price: "$77.00", imageId: "shop-crystal", tag: "Sabiduría", id: "prod_002" },
+  { name: "Pulsera de Amatista", price: "$44.00", imageId: "shop-bracelet", tag: "Protección", id: "prod_003" },
+  { name: "Punta de Cuarzo Lemuriano", price: "$88.00", imageId: "shop-crystal", tag: "Conexión", id: "prod_004" },
+  { name: "Pulsera de Ojo de Tigre", price: "$44.00", imageId: "shop-bracelet", tag: "Fuerza", id: "prod_005" },
+  { name: "Orgonita Pleyadiana", price: "$99.00", imageId: "shop-crystal", tag: "Energía", id: "prod_006" },
+  { name: "Pulsera de 7 Chakras", price: "$55.00", imageId: "shop-bracelet", tag: "Equilibrio", id: "prod_007" },
+  { name: "Geoda de Amatista", price: "$122.00", imageId: "shop-crystal", tag: "Paz", id: "prod_008" },
+];
+
+
 export default function TiendaPage() {
+  const { addToCart } = useCart();
+
+  const handleAddToCart = (productDetail: (typeof productDetails)[0]) => {
+    const image = PlaceHolderImages.find(p => p.id === productDetail.imageId);
+    const product: Product = {
+      id: productDetail.id,
+      name: productDetail.name,
+      price: parseFloat(productDetail.price.replace('$', '')),
+      image: image?.imageUrl || '',
+    };
+    addToCart(product);
+  };
+
   return (
     <div className="bg-background">
       <div className="container py-16 md:py-24">
@@ -26,7 +54,7 @@ export default function TiendaPage() {
           </p>
         </div>
         <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {products.map(product => {
+          {productDetails.map(product => {
             const image = PlaceHolderImages.find(p => p.id === product.imageId);
             return (
               <Card key={product.name} className="flex flex-col overflow-hidden group hover:shadow-xl transition-shadow duration-300">
@@ -39,7 +67,7 @@ export default function TiendaPage() {
                   <p className="text-xl font-semibold mt-2 text-primary">{product.price}</p>
                 </CardContent>
                 <CardFooter className="p-4 pt-0">
-                  <Button className="w-full">Añadir al Carrito</Button>
+                  <Button className="w-full" onClick={() => handleAddToCart(product)}>Añadir al Carrito</Button>
                 </CardFooter>
               </Card>
             );
