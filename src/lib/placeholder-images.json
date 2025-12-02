@@ -41,6 +41,12 @@
       "description": "A calm lake at sunrise.",
       "imageUrl": "https://images.unsplash.com/photo-1532979772520-f2763956cce0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjYWxtJTIwbGFrZXxlbnwwfHx8fDE3NjQ2NTUwMjR8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "calm lake"
+    },
+    {
+      "id": "subscription-bg",
+      "description": "Abstract cosmic background with stars and nebulae, conveying a sense of infinite possibility.",
+      "imageUrl": "https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxhYnN0cmFjdCUyMGNvc21vc3xlbnwwfHx8fDE3MjA3MzM3MzF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "abstract cosmos"
     }
   ]
 }
