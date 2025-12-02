@@ -1,50 +1,86 @@
-"use client";
+'use client';
 
-import { useCart } from "@/context/CartContext";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { Minus, Plus, Trash2, ShoppingCart } from "lucide-react";
-import Link from "next/link";
-import { useToast } from "@/hooks/use-toast";
-import { useAuth } from "@/context/AuthContext";
-import { useRouter } from "next/navigation";
+import { useCart } from '@/context/CartContext';
+import Image from 'next/image';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
+import { Minus, Plus, Trash2, ShoppingCart } from 'lucide-react';
+import Link from 'next/link';
+import { useToast } from '@/hooks/use-toast';
+import { useAuth } from '@/context/AuthContext';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 export function CartView() {
   const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
   const { toast } = useToast();
-  const { user, addOrder } = useAuth();
+  const { user } = useAuth();
   const router = useRouter();
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const subtotal = cart.reduce(
     (sum, item) => sum + item.product.price * item.quantity,
     0
   );
-  const shipping = 10.0;
+  // Simulación de envío, podría ser 0 para productos digitales
+  const shipping = cart.some(item => !item.product.id.startsWith('med_') && !item.product.id.startsWith('wshop_')) ? 10.0 : 0;
   const total = subtotal + shipping;
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     if (!user) {
       toast({
-        variant: "destructive",
-        title: "Inicia sesión para continuar",
-        description: "Debes iniciar sesión para poder realizar la compra.",
+        variant: 'destructive',
+        title: 'Inicia sesión para continuar',
+        description: 'Debes iniciar sesión para poder realizar la compra.',
       });
       router.push('/login');
       return;
     }
-    
-    // Add order to auth context
-    addOrder(cart, total);
 
-    toast({
-      title: "¡Gracias por tu compra!",
-      description: "Hemos recibido tu pedido. (Esto es una simulación)",
-    });
-    clearCart();
-    router.push('/mis-compras');
+    setIsProcessing(true);
+
+    try {
+      const response = await fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userId: user.uid,
+          items: cart,
+          totalAmount: total,
+        }),
+      });
+      
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Error al procesar el pedido.');
+      }
+
+      toast({
+        title: '¡Gracias por tu compra!',
+        description: 'Hemos recibido tu pedido.',
+      });
+      clearCart();
+      router.push('/mis-compras');
+
+    } catch (error) {
+      console.error("Checkout error:", error);
+      toast({
+        variant: "destructive",
+        title: "Error en la compra",
+        description: (error as Error).message || "No se pudo completar el pedido.",
+      });
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   if (cart.length === 0) {
@@ -52,7 +88,9 @@ export function CartView() {
       <div className="flex flex-col items-center justify-center text-center h-[50vh]">
         <ShoppingCart className="h-16 w-16 text-muted-foreground mb-4" />
         <h2 className="text-2xl font-bold mb-2">Tu carrito está vacío</h2>
-        <p className="text-muted-foreground mb-6">Parece que aún no has añadido nada. ¡Explora nuestros productos!</p>
+        <p className="text-muted-foreground mb-6">
+          Parece que aún no has añadido nada. ¡Explora nuestros productos!
+        </p>
         <Button asChild>
           <Link href="/tienda">Ir a la tienda</Link>
         </Button>
@@ -68,7 +106,7 @@ export function CartView() {
           {cart.map((item) => (
             <div key={item.product.id} className="flex items-start gap-4">
               <Image
-                src={item.product.image}
+                src={item.product.image || '/placeholder.svg'}
                 alt={item.product.name}
                 width={120}
                 height={120}
@@ -76,27 +114,42 @@ export function CartView() {
               />
               <div className="flex-grow">
                 <h3 className="font-semibold text-lg">{item.product.name}</h3>
-                <p className="text-primary font-bold text-md">${item.product.price.toFixed(2)}</p>
+                <p className="text-primary font-bold text-md">
+                  ${item.product.price.toFixed(2)}
+                </p>
                 <div className="flex items-center gap-2 mt-2">
                   <Button
                     variant="outline"
                     size="icon"
                     className="h-8 w-8"
-                    onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
+                    onClick={() =>
+                      updateQuantity(item.product.id, item.quantity - 1)
+                    }
+                    disabled={isProcessing}
                   >
                     <Minus className="h-4 w-4" />
                   </Button>
                   <Input
                     type="number"
                     value={item.quantity}
-                    onChange={(e) => updateQuantity(item.product.id, parseInt(e.target.value) || 1)}
+                    onChange={(e) =>
+                      updateQuantity(
+                        item.product.id,
+                        parseInt(e.target.value) || 1
+                      )
+                    }
                     className="w-16 h-8 text-center"
+                    readOnly
+                    disabled={isProcessing}
                   />
                   <Button
                     variant="outline"
                     size="icon"
                     className="h-8 w-8"
-                    onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
+                    onClick={() =>
+                      updateQuantity(item.product.id, item.quantity + 1)
+                    }
+                    disabled={isProcessing}
                   >
                     <Plus className="h-4 w-4" />
                   </Button>
@@ -106,6 +159,7 @@ export function CartView() {
                 variant="ghost"
                 size="icon"
                 onClick={() => removeFromCart(item.product.id)}
+                disabled={isProcessing}
               >
                 <Trash2 className="h-5 w-5 text-muted-foreground" />
               </Button>
@@ -134,8 +188,12 @@ export function CartView() {
           </div>
         </CardContent>
         <CardFooter>
-          <Button className="w-full" onClick={handleCheckout}>
-            {user ? "Proceder al Pago (Simulación)" : "Inicia sesión para pagar"}
+          <Button
+            className="w-full"
+            onClick={handleCheckout}
+            disabled={isProcessing || cart.length === 0}
+          >
+            {isProcessing ? "Procesando..." : (user ? 'Proceder al Pago' : 'Inicia sesión para pagar')}
           </Button>
         </CardFooter>
       </Card>
