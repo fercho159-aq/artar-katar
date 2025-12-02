@@ -15,7 +15,7 @@ import { useRouter } from "next/navigation";
 export function CartView() {
   const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
   const { toast } = useToast();
-  const { user } = useAuth();
+  const { user, addOrder } = useAuth();
   const router = useRouter();
 
   const subtotal = cart.reduce(
@@ -36,11 +36,15 @@ export function CartView() {
       return;
     }
     
+    // Add order to auth context
+    addOrder(cart, total);
+
     toast({
       title: "¡Gracias por tu compra!",
       description: "Hemos recibido tu pedido. (Esto es una simulación)",
     });
     clearCart();
+    router.push('/mis-compras');
   };
 
   if (cart.length === 0) {

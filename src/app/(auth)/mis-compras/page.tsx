@@ -27,12 +27,13 @@ import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { BookUser, CreditCard, History, Music, PlayCircle } from 'lucide-react';
+import { BookUser, CreditCard, History, Music, PlayCircle, Users } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useRouter } from 'next/navigation';
+import { useMemo } from 'react';
 
-// --- Meditations Data (now imported from a single source) ---
+// --- Meditations Data ---
 const allMeditations = [
   { id: "med_001", title: "Meditación de Anclaje a Tierra", duration: "15 min", description: "Conecta con la energía de Gaia y encuentra tu centro.", imageId: "meditation-1", price: 40 },
   { id: "med_002", title: "Activación del Corazón Cristalino", duration: "25 min", description: "Abre tu corazón a la frecuencia del amor incondicional.", imageId: "meditation-2", price: 40 },
@@ -42,46 +43,51 @@ const allMeditations = [
   { id: "med_006", title: "Activación del ADN Cósmico", duration: "33 min", description: "Despierta tu potencial dormido y activa tus hebras de ADN.", imageId: "meditation-2", price: 40 },
 ];
 
+const allWorkshops = [
+    { id: "wshop_001", title: "Ciclo de Activación Nocturna", imageId: "workshop-1" },
+    { id: "wshop_002", title: "Conexión con tu Yo Superior", imageId: "workshop-2" },
+    { id: "wshop_003", title: "Sanación del Niño Interior", imageId: "meditation-2" },
+];
+
+
 // --- Dummy Data for Demonstration ---
-const individualPurchases = [
-  {
-    id: 'med_001',
-    title: 'Meditación de Anclaje a Tierra',
-    duration: '15 min',
-    imageId: 'meditation-1',
-  },
-];
-
-const orderHistory = [
-  {
-    id: 'ORD-001',
-    date: '2023-10-26',
-    total: '88.00',
-    status: 'Completado',
-    items: ['Pulsera de Cuarzo Rosa', 'Pulsera de Amatista'],
-  },
-  {
-    id: 'ORD-002',
-    date: '2023-09-15',
-    total: '300.00',
-    status: 'Completado',
-    items: ['Suscripción Mensual'],
-  },
-];
-
 const subscription = {
   status: 'Activa',
   nextBilling: '2024-08-15',
   amount: '300.00',
 };
-
-const purchasedMeditations = subscription.status === 'Activa' ? allMeditations : individualPurchases;
 // ------------------------------------
 
 export default function MisComprasPage() {
-  const { user, logout } = useAuth();
+  const { user, logout, orders } = useAuth();
   const router = useRouter();
 
+  const purchasedItems = useMemo(() => {
+    return orders.flatMap(order => order.items.map(item => item.product));
+  }, [orders]);
+
+  const individualPurchases = useMemo(() => 
+    purchasedItems.filter(p => p.id.startsWith('med_')),
+    [purchasedItems]
+  );
+  
+  const purchasedWorkshops = useMemo(() =>
+    purchasedItems.filter(p => p.id.startsWith('wshop_')),
+    [purchasedItems]
+  );
+
+  const purchasedMeditations = subscription.status === 'Activa' 
+    ? allMeditations 
+    : individualPurchases.map(p => {
+        const medData = allMeditations.find(m => m.id === p.id);
+        return {
+            id: p.id,
+            title: p.name,
+            duration: medData?.duration || 'N/A',
+            imageId: medData?.imageId || 'meditation-1',
+        };
+    });
+    
   if (!user) {
     // This could redirect to login or show a loading state
     return null; 
@@ -94,13 +100,14 @@ export default function MisComprasPage() {
           Bienvenido, {user.name}
         </h1>
         <p className="text-muted-foreground">
-          Aquí puedes gestionar tus meditaciones, suscripciones y detalles de tu cuenta.
+          Aquí puedes gestionar tus meditaciones, talleres, suscripciones y detalles de tu cuenta.
         </p>
       </div>
 
       <Tabs defaultValue="meditations" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 h-auto">
-          <TabsTrigger value="meditations" className="py-2"><Music className="mr-2"/>Mis Meditaciones</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-2 md:grid-cols-5 h-auto">
+          <TabsTrigger value="meditations" className="py-2"><Music className="mr-2"/>Meditaciones</TabsTrigger>
+          <TabsTrigger value="workshops" className="py-2"><Users className="mr-2"/>Talleres</TabsTrigger>
           <TabsTrigger value="subscriptions" className="py-2"><CreditCard className="mr-2"/>Suscripción</TabsTrigger>
           <TabsTrigger value="history" className="py-2"><History className="mr-2"/>Historial</TabsTrigger>
           <TabsTrigger value="profile" className="py-2"><BookUser className="mr-2"/>Mi Perfil</TabsTrigger>
@@ -141,6 +148,40 @@ export default function MisComprasPage() {
           </Card>
         </TabsContent>
 
+        <TabsContent value="workshops" className="mt-8">
+            <Card>
+                <CardHeader>
+                    <CardTitle>Mis Talleres</CardTitle>
+                    <CardDescription>
+                        Aquí encontrarás todos los talleres que has adquirido.
+                    </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                    {purchasedWorkshops.length > 0 ? (
+                        purchasedWorkshops.map((workshop) => {
+                            const workshopData = allWorkshops.find(w => w.id === workshop.id);
+                            const image = PlaceHolderImages.find(p => p.id === workshopData?.imageId);
+                            return (
+                                <div key={workshop.id} className="flex items-center justify-between p-4 border rounded-lg hover:bg-muted/50">
+                                    <div className="flex items-center gap-4">
+                                        {image && <Image src={image.imageUrl} alt={workshop.name} width={80} height={80} className="rounded-md object-cover aspect-square" />}
+                                        <div>
+                                            <h3 className="font-semibold">{workshop.name}</h3>
+                                        </div>
+                                    </div>
+                                    <Button variant="outline">
+                                        Ver Taller
+                                    </Button>
+                                </div>
+                            )
+                        })
+                    ) : (
+                        <p className="text-muted-foreground text-center py-8">Aún no has comprado ningún taller.</p>
+                    )}
+                </CardContent>
+            </Card>
+        </TabsContent>
+
         <TabsContent value="subscriptions" className="mt-8">
           <Card>
             <CardHeader>
@@ -176,28 +217,36 @@ export default function MisComprasPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Pedido</TableHead>
-                    <TableHead>Fecha</TableHead>
-                    <TableHead>Estado</TableHead>
-                    <TableHead className="text-right">Total</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {orderHistory.map((order) => (
-                    <TableRow key={order.id}>
-                      <TableCell className="font-medium">{order.id}</TableCell>
-                      <TableCell>{order.date}</TableCell>
-                      <TableCell>
-                        <Badge variant="outline">{order.status}</Badge>
-                      </TableCell>
-                      <TableCell className="text-right">${order.total}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+              {orders.length > 0 ? (
+                <Table>
+                    <TableHeader>
+                        <TableRow>
+                            <TableHead>Pedido</TableHead>
+                            <TableHead>Fecha</TableHead>
+                            <TableHead>Estado</TableHead>
+                            <TableHead>Items</TableHead>
+                            <TableHead className="text-right">Total</TableHead>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                        {orders.map((order) => (
+                            <TableRow key={order.id}>
+                                <TableCell className="font-medium">{order.id}</TableCell>
+                                <TableCell>{order.date}</TableCell>
+                                <TableCell>
+                                    <Badge variant="outline">Completado</Badge>
+                                </TableCell>
+                                <TableCell>
+                                    {order.items.map(item => item.product.name).join(', ')}
+                                </TableCell>
+                                <TableCell className="text-right">${order.total.toFixed(2)}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+              ) : (
+                <p className="text-muted-foreground text-center py-8">No tienes pedidos anteriores.</p>
+              )}
             </CardContent>
           </Card>
         </TabsContent>
