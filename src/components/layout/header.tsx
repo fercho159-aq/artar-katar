@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Menu, Sparkles, ShoppingCart } from "lucide-react";
+import { Menu, Sparkles, ShoppingCart, User } from "lucide-react";
 import { useState }from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -52,6 +52,12 @@ export function Header() {
                     </span>
                   )}
                   <span className="sr-only">Carrito de compras</span>
+                </Link>
+              </Button>
+               <Button asChild variant="ghost" size="icon">
+                <Link href="/login">
+                  <User className="h-5 w-5" />
+                  <span className="sr-only">Iniciar Sesión</span>
                 </Link>
               </Button>
               <div className="md:hidden">
