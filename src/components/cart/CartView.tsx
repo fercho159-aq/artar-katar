@@ -9,10 +9,14 @@ import { Separator } from "@/components/ui/separator";
 import { Minus, Plus, Trash2, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 
 export function CartView() {
   const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
   const { toast } = useToast();
+  const { user } = useAuth();
+  const router = useRouter();
 
   const subtotal = cart.reduce(
     (sum, item) => sum + item.product.price * item.quantity,
@@ -22,6 +26,16 @@ export function CartView() {
   const total = subtotal + shipping;
 
   const handleCheckout = () => {
+    if (!user) {
+      toast({
+        variant: "destructive",
+        title: "Inicia sesión para continuar",
+        description: "Debes iniciar sesión para poder realizar la compra.",
+      });
+      router.push('/login');
+      return;
+    }
+    
     toast({
       title: "¡Gracias por tu compra!",
       description: "Hemos recibido tu pedido. (Esto es una simulación)",
@@ -117,7 +131,7 @@ export function CartView() {
         </CardContent>
         <CardFooter>
           <Button className="w-full" onClick={handleCheckout}>
-            Proceder al Pago (Simulación)
+            {user ? "Proceder al Pago (Simulación)" : "Inicia sesión para pagar"}
           </Button>
         </CardFooter>
       </Card>
