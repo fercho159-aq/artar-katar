@@ -30,14 +30,26 @@ export async function POST(request: Request) {
       }
 
       const user = result.rows[0];
+      let isPasswordValid = await bcrypt.compare(password, user.password_hash);
 
-      // Compare password with hash
-      const isPasswordValid = await bcrypt.compare(password, user.password_hash);
+      // --- INICIO DE LA LÓGICA DE CORRECCIÓN ---
+      // Si la comparación del hash falla, verificamos si es porque la contraseña está en texto plano.
+      if (!isPasswordValid && user.password_hash === password) {
+        // La contraseña en la BD es texto plano y coincide. ¡Es válida para esta vez!
+        isPasswordValid = true; 
+        
+        // Ahora, hasheamos la contraseña y la actualizamos en la base de datos para el futuro.
+        const salt = await bcrypt.genSalt(10);
+        const newPasswordHash = await bcrypt.hash(password, salt);
+        await client.query('UPDATE users SET password_hash = $1 WHERE id = $2', [newPasswordHash, user.id]);
+      }
+      // --- FIN DE LA LÓGICA DE CORRECCIÓN ---
+
       if (!isPasswordValid) {
         return NextResponse.json({ message: 'Credenciales inválidas. Por favor, inténtalo de nuevo.' }, { status: 401 });
       }
 
-      // Don't send password hash to the client
+      // No enviar el hash de la contraseña al cliente
       const { password_hash, ...userWithoutPassword } = user;
 
       return NextResponse.json(userWithoutPassword, { status: 200 });
