@@ -8,7 +8,7 @@ type User = {
   name: string;
   email: string;
   photoURL?: string;
-  isAdmin: boolean;
+  is_admin: boolean;
 };
 
 type Order = {
@@ -29,69 +29,42 @@ type AuthContextType = {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// --- Dummy Users for Local Simulation ---
-const dummyUsers = [
-  {
-    uid: 'admin001',
-    name: 'Admin User',
-    email: 'admin@test.com',
-    password: 'admin',
-    isAdmin: true,
-  },
-  {
-    uid: 'user001',
-    name: 'Test User',
-    email: 'user@test.com',
-    password: 'password',
-    isAdmin: false,
-  },
-];
-// ----------------------------------------
-
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [orders, setOrders] = useState<Order[]>([]);
 
   const login = async (email: string, password: string): Promise<void> => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const foundUser = dummyUsers.find(
-          (u) => u.email === email && u.password === password
-        );
-        if (foundUser) {
-          const { password: _, ...userToSet } = foundUser;
-          setUser(userToSet);
-          setOrders([]); // Reset orders on login
-          resolve();
-        } else {
-          reject(new Error('Credenciales inválidas. Por favor, inténtalo de nuevo.'));
-        }
-      }, 500);
+    const response = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
     });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || 'Error al iniciar sesión.');
+    }
+    
+    setUser(data);
+    setOrders([]); // Reset orders on login
   };
 
   const signup = async (name: string, email: string, password: string): Promise<void> => {
-     return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const existingUser = dummyUsers.find(u => u.email === email);
-        if(existingUser) {
-          return reject(new Error('Este email ya está en uso.'));
-        }
-        
-        const newUser: User = {
-            uid: `user${Date.now()}`,
-            name,
-            email,
-            isAdmin: false,
-        };
-        // In a real scenario, you'd add the new user to your database
-        // dummyUsers.push({ ...newUser, password });
-        
-        setUser(newUser);
-        setOrders([]); // Reset orders on signup
-        resolve();
-      }, 500);
-    });
+     const response = await fetch('/api/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password }),
+     });
+
+     const data = await response.json();
+
+     if (!response.ok) {
+        throw new Error(data.message || 'Error al registrarse.');
+     }
+
+     setUser(data);
+     setOrders([]);
   };
 
   const addOrder = (items: CartItem[], total: number) => {
