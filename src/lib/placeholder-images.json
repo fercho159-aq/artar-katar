@@ -1,3 +1,46 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero-background",
+      "description": "A beautiful nebula in deep space, representing the multidimensional portal.",
+      "imageUrl": "https://images.unsplash.com/photo-1681673819004-695da4fa9328?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjb3NtaWMlMjBuZWJ1bGF8ZW58MHx8fHwxNzY0NjAzMTAxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "cosmic nebula"
+    },
+    {
+      "id": "workshop-1",
+      "description": "A group of people meditating in a peaceful setting.",
+      "imageUrl": "https://images.unsplash.com/photo-1532190795157-3f983fb7fa3b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxzcGlyaXR1YWwlMjBsZWFybmluZ3xlbnwwfHx8fDE3NjQ2OTIxNDB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "spiritual learning"
+    },
+    {
+      "id": "workshop-2",
+      "description": "Hands holding a glowing crystal.",
+      "imageUrl": "https://images.unsplash.com/photo-1560287810-1c89fede7218?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxzcGlyaXR1YWwlMjBhY3RpdmF0aW9ufGVufDB8fHx8MTc2NDY5MjE0MHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "spiritual activation"
+    },
+    {
+      "id": "shop-bracelet",
+      "description": "A beautiful bracelet with crystals on a wrist.",
+      "imageUrl": "https://images.unsplash.com/photo-1743127671067-62af70aa67c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjcnlzdGFsJTIwYnJhY2VsZXR8ZW58MHx8fHwxNzY0NjkyMTM5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "crystal bracelet"
+    },
+    {
+      "id": "shop-crystal",
+      "description": "A large, clear quartz crystal point.",
+      "imageUrl": "https://images.unsplash.com/photo-1727430473786-e88adb86e463?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxxdWFydHolMjBjcnlzdGFsfGVufDB8fHx8MTc2NDY5MjE0MHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "quartz crystal"
+    },
+    {
+      "id": "meditation-1",
+      "description": "A person sitting in a lotus position on a mountain top.",
+      "imageUrl": "https://images.unsplash.com/photo-1609718561976-d52836e625cd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxzZXJlbmUlMjBtZWRpdGF0aW9ufGVufDB8fHx8MTc2NDYzNzYxMnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "serene meditation"
+    },
+    {
+      "id": "meditation-2",
+      "description": "A calm lake at sunrise.",
+      "imageUrl": "https://images.unsplash.com/photo-1532979772520-f2763956cce0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjYWxtJTIwbGFrZXxlbnwwfHx8fDE3NjQ2NTUwMjR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "calm lake"
+    }
+  ]
 }
