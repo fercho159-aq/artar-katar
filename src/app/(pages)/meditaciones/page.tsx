@@ -1,21 +1,37 @@
+"use client";
+
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Clock, ShoppingCart, Star } from "lucide-react";
+import { useCart, type Product } from "@/context/CartContext";
 
 const meditations = [
-  { title: "Meditación de Anclaje a Tierra", duration: "15 min", description: "Conecta con la energía de Gaia y encuentra tu centro.", imageId: "meditation-1", price: 40 },
-  { title: "Activación del Corazón Cristalino", duration: "25 min", description: "Abre tu corazón a la frecuencia del amor incondicional.", imageId: "meditation-2", price: 40 },
-  { title: "Viaje al Templo de Sanación", duration: "30 min", description: "Recibe sanación y guía de los maestros ascendidos.", imageId: "workshop-1", price: 40 },
-  { title: "Limpieza Energética Profunda", duration: "20 min", description: "Libera energías densas y revitaliza tu campo áurico.", imageId: "workshop-2", price: 40 },
-  { title: "Conexión con tu Llama Gemela", duration: "22 min", description: "Armoniza la energía sagrada masculina y femenina en tu interior.", imageId: "meditation-1", price: 40 },
-  { title: "Activación del ADN Cósmico", duration: "33 min", description: "Despierta tu potencial dormido y activa tus hebras de ADN.", imageId: "meditation-2", price: 40 },
+  { id: "med_001", title: "Meditación de Anclaje a Tierra", duration: "15 min", description: "Conecta con la energía de Gaia y encuentra tu centro.", imageId: "meditation-1", price: 40 },
+  { id: "med_002", title: "Activación del Corazón Cristalino", duration: "25 min", description: "Abre tu corazón a la frecuencia del amor incondicional.", imageId: "meditation-2", price: 40 },
+  { id: "med_003", title: "Viaje al Templo de Sanación", duration: "30 min", description: "Recibe sanación y guía de los maestros ascendidos.", imageId: "workshop-1", price: 40 },
+  { id: "med_004", title: "Limpieza Energética Profunda", duration: "20 min", description: "Libera energías densas y revitaliza tu campo áurico.", imageId: "workshop-2", price: 40 },
+  { id: "med_005", title: "Conexión con tu Llama Gemela", duration: "22 min", description: "Armoniza la energía sagrada masculina y femenina en tu interior.", imageId: "meditation-1", price: 40 },
+  { id: "med_006", title: "Activación del ADN Cósmico", duration: "33 min", description: "Despierta tu potencial dormido y activa tus hebras de ADN.", imageId: "meditation-2", price: 40 },
 ];
 
 const subscriptionImage = PlaceHolderImages.find(p => p.id === 'subscription-bg');
 
 export default function MeditacionesPage() {
+  const { addToCart } = useCart();
+
+  const handleAddToCart = (meditation: (typeof meditations)[0]) => {
+    const image = PlaceHolderImages.find(p => p.id === meditation.imageId);
+    const product: Product = {
+      id: meditation.id,
+      name: meditation.title,
+      price: meditation.price,
+      image: image?.imageUrl || '',
+    };
+    addToCart(product);
+  };
+
   return (
     <div className="bg-background">
       <div className="container py-16 md:py-24">
@@ -84,11 +100,11 @@ export default function MeditacionesPage() {
                   </div>
                   <CardDescription className="mt-2 flex-grow">{meditation.description}</CardDescription>
                   <div className="mt-4 text-2xl font-bold text-primary">
-                    ${meditation.price}.00 MXN
+                    ${meditation.price.toFixed(2)} MXN
                   </div>
                 </CardContent>
                 <CardFooter className="p-6 pt-0">
-                  <Button className="w-full mt-4">
+                  <Button className="w-full mt-4" onClick={() => handleAddToCart(meditation)}>
                     <ShoppingCart className="mr-2 h-4 w-4" /> Comprar Grabación
                   </Button>
                 </CardFooter>
