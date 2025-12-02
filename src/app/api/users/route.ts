@@ -33,11 +33,14 @@ export async function POST(request: Request) {
       const salt = await bcrypt.genSalt(10);
       const password_hash = await bcrypt.hash(password, salt);
       const uid = `user_${Date.now()}`; // Simple UID generation
+      
+      // Set isAdmin to true if the email is the admin email
+      const isAdmin = email === 'admin@test.com';
 
       // Insert new user
       const result = await client.query(
-        'INSERT INTO users (uid, name, email, password_hash) VALUES ($1, $2, $3, $4) RETURNING id, uid, name, email, created_at',
-        [uid, name, email, password_hash]
+        'INSERT INTO users (uid, name, email, password_hash, is_admin) VALUES ($1, $2, $3, $4, $5) RETURNING id, uid, name, email, is_admin, created_at',
+        [uid, name, email, password_hash, isAdmin]
       );
       
       const newUser = result.rows[0];
