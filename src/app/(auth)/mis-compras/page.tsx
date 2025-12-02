@@ -31,7 +31,7 @@ import { BookUser, CreditCard, History, Music, PlayCircle, Users } from 'lucide-
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useRouter } from 'next/navigation';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 
 // --- Meditations Data ---
 const allMeditations = [
@@ -61,6 +61,12 @@ const subscription = {
 export default function MisComprasPage() {
   const { user, logout, orders } = useAuth();
   const router = useRouter();
+
+  useEffect(() => {
+    if (!user) {
+      router.push('/login');
+    }
+  }, [user, router]);
 
   const purchasedItems = useMemo(() => {
     return orders.flatMap(order => order.items.map(item => item.product));
