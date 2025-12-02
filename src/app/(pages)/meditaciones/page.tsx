@@ -2,7 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
-import { Headphones, Clock, ShoppingCart, Star } from "lucide-react";
+import { Clock, ShoppingCart, Star } from "lucide-react";
 
 const meditations = [
   { title: "Meditación de Anclaje a Tierra", duration: "15 min", description: "Conecta con la energía de Gaia y encuentra tu centro.", imageId: "meditation-1", price: 40 },
@@ -79,10 +79,12 @@ export default function MeditacionesPage() {
                   <div className="mt-4 text-2xl font-bold text-primary">
                     ${meditation.price}.00 MXN
                   </div>
+                </CardContent>
+                <CardFooter className="p-6 pt-0">
                   <Button className="w-full mt-4">
                     <ShoppingCart className="mr-2 h-4 w-4" /> Comprar Grabación
                   </Button>
-                </CardContent>
+                </CardFooter>
               </Card>
             );
           })}
