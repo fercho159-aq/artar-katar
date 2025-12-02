@@ -17,6 +17,13 @@ const meditations = [
 ];
 
 const subscriptionImage = PlaceHolderImages.find(p => p.id === 'subscription-bg');
+const subscriptionProduct: Product = {
+  id: "sub_001",
+  name: "Suscripción Mensual - Acceso Total",
+  price: 300,
+  image: subscriptionImage?.imageUrl || '',
+};
+
 
 export default function MeditacionesPage() {
   const { addToCart } = useCart();
@@ -30,6 +37,10 @@ export default function MeditacionesPage() {
       image: image?.imageUrl || '',
     };
     addToCart(product);
+  };
+  
+  const handleSubscribe = () => {
+    addToCart(subscriptionProduct);
   };
 
   return (
@@ -67,7 +78,7 @@ export default function MeditacionesPage() {
                 <p className="text-3xl font-bold [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">
                   $300 MXN / mes
                 </p>
-                <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg">
+                <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg" onClick={handleSubscribe}>
                   <Star className="mr-2 h-5 w-5" /> Suscribirse Ahora
                 </Button>
               </div>
