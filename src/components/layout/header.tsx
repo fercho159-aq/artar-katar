@@ -43,14 +43,16 @@ export function Header() {
                 ))}
             </nav>
             <div className="flex items-center gap-2">
-              <Button variant="ghost" size="icon" className="relative">
-                <ShoppingCart className="h-5 w-5" />
-                {totalItems > 0 && (
-                  <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
-                    {totalItems}
-                  </span>
-                )}
-                <span className="sr-only">Carrito de compras</span>
+              <Button asChild variant="ghost" size="icon" className="relative">
+                <Link href="/cart">
+                  <ShoppingCart className="h-5 w-5" />
+                  {totalItems > 0 && (
+                    <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
+                      {totalItems}
+                    </span>
+                  )}
+                  <span className="sr-only">Carrito de compras</span>
+                </Link>
               </Button>
               <div className="md:hidden">
                 <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
