@@ -72,7 +72,7 @@ const subscription = {
 };
 // ------------------------------------
 
-export default function DashboardPage() {
+export default function MisComprasPage() {
   const { user, logout } = useAuth();
   const router = useRouter();
 

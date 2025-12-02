@@ -47,7 +47,7 @@ export default function SignupPage() {
         title: '¡Cuenta Creada!',
         description: 'Te has registrado correctamente.',
       });
-      router.push('/dashboard');
+      router.push('/mis-compras');
     } catch (error) {
       toast({
         variant: 'destructive',

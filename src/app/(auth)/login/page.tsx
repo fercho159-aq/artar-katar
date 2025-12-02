@@ -45,7 +45,7 @@ export default function LoginPage() {
         title: '¡Bienvenido!',
         description: 'Has iniciado sesión correctamente.',
       });
-      router.push('/dashboard');
+      router.push('/mis-compras');
     } catch (error) {
       toast({
         variant: 'destructive',
