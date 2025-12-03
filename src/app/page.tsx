@@ -3,26 +3,26 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight, Gem, Group, Headphones } from "lucide-react";
-import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 export default function Home() {
-  const heroImage = PlaceHolderImages.find(p => p.id === 'hero-background');
-  const workshopImage1 = PlaceHolderImages.find(p => p.id === 'workshop-1');
-  const workshopImage2 = PlaceHolderImages.find(p => p.id === 'workshop-2');
-  const braceletImage = PlaceHolderImages.find(p => p.id === 'shop-bracelet');
-  const crystalImage = PlaceHolderImages.find(p => p.id === 'shop-crystal');
-  const meditationImage1 = PlaceHolderImages.find(p => p.id === 'meditation-1');
-  const meditationImage2 = PlaceHolderImages.find(p => p.id === 'meditation-2');
+  const heroImageUrl = "https://cdn.pixabay.com/photo/2022/12/29/21/29/passage-7685853_1280.jpg";
+  const workshopImage1Url = "https://images.unsplash.com/photo-1532190795157-3f983fb7fa3b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxzcGlyaXR1YWwlMjBsZWFybmluZ3xlbnwwfHx8fDE3NjQ2OTIxNDB8MA&ixlib=rb-4.1.0&q=80&w=1080";
+  const workshopImage2Url = "https://images.unsplash.com/photo-1560287810-1c89fede7218?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxzcGlyaXR1YWwlMjBhY3RpdmF0aW9ufGVufDB8fHx8MTc2NDY5MjE0MHww&ixlib=rb-4.1.0&q=80&w=1080";
+  const braceletImageUrl = "https://images.unsplash.com/photo-1743127671067-62af70aa67c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjcnlzdGFsJTIwYnJhY2VsZXR8ZW58MHx8fHwxNzY0NjkyMTM5fDA&ixlib=rb-4.1.0&q=80&w=1080";
+  const crystalImageUrl = "https://images.unsplash.com/photo-1727430473786-e88adb86e463?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxxdWFydHolMjBjcnlzdGFsfGVufDB8fHx8MTc2NDY5MjE0MHww&ixlib=rb-4.1.0&q=80&w=1080";
+  const meditationImage1Url = "https://images.unsplash.com/photo-1609718561976-d52836e625cd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxzZXJlbmUlMjBtZWRpdGF0aW9ufGVufDB8fHx8MTc2NDYzNzYxMnww&ixlib=rb-4.1.0&q=80&w=1080";
+  const meditationImage2Url = "https://images.unsplash.com/photo-1532979772520-f2763956cce0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjYWxtJTIwbGFrZXxlbnwwfHx8fDE3NjQ2NTUwMjR8MA&ixlib=rb-4.1.0&q=80&w=1080";
+  const shopImages = [braceletImageUrl, crystalImageUrl, braceletImageUrl, crystalImageUrl];
 
   return (
       <>
         {/* Hero Section */}
         <section className="relative w-full h-[60vh] md:h-[80vh] flex items-center justify-center text-center text-white">
-          {heroImage && (
+          {heroImageUrl && (
             <Image
-              src={heroImage.imageUrl}
-              alt={heroImage.description}
-              data-ai-hint={heroImage.imageHint}
+              src={heroImageUrl}
+              alt="A mystical archway opening to a starry sky"
+              data-ai-hint="mystical archway"
               fill
               className="object-cover -z-10 brightness-75"
               priority
@@ -96,7 +96,7 @@ export default function Home() {
             <div className="mx-auto grid max-w-5xl items-stretch gap-8 sm:grid-cols-2 mt-12">
               <Card className="hover:shadow-xl transition-shadow duration-300">
                 <CardHeader className="p-0">
-                  {workshopImage1 && <Image src={workshopImage1.imageUrl} alt={workshopImage1.description} data-ai-hint={workshopImage1.imageHint} width={600} height={400} className="rounded-t-lg object-cover aspect-video" />}
+                  {workshopImage1Url && <Image src={workshopImage1Url} alt="Spiritual learning" data-ai-hint="spiritual learning" width={600} height={400} className="rounded-t-lg object-cover aspect-video" />}
                 </CardHeader>
                 <CardContent className="p-6">
                   <CardTitle>Ciclo de Activación Nocturna</CardTitle>
@@ -110,7 +110,7 @@ export default function Home() {
               </Card>
               <Card className="hover:shadow-xl transition-shadow duration-300">
                 <CardHeader className="p-0">
-                  {workshopImage2 && <Image src={workshopImage2.imageUrl} alt={workshopImage2.description} data-ai-hint={workshopImage2.imageHint} width={600} height={400} className="rounded-t-lg object-cover aspect-video" />}
+                  {workshopImage2Url && <Image src={workshopImage2Url} alt="Spiritual activation" data-ai-hint="spiritual activation" width={600} height={400} className="rounded-t-lg object-cover aspect-video" />}
                 </CardHeader>
                 <CardContent className="p-6">
                   <CardTitle>Conexión con tu Yo Superior</CardTitle>
@@ -138,10 +138,10 @@ export default function Home() {
               </div>
             </div>
             <div className="mx-auto grid items-start gap-8 sm:grid-cols-2 lg:grid-cols-4 mt-12">
-              {[braceletImage, crystalImage, braceletImage, crystalImage].slice(0, 4).map((item, index) => item && (
+              {shopImages.map((item, index) => (
                 <Card key={index} className="hover:shadow-xl transition-shadow duration-300">
                   <CardHeader className="p-0">
-                    <Image src={item.imageUrl} alt={item.description} data-ai-hint={item.imageHint} width={500} height={500} className="rounded-t-lg object-cover aspect-square" />
+                    <Image src={item} alt={index % 2 === 0 ? 'Crystal bracelet' : 'Quartz crystal'} data-ai-hint={index % 2 === 0 ? 'crystal bracelet' : 'quartz crystal'} width={500} height={500} className="rounded-t-lg object-cover aspect-square" />
                   </CardHeader>
                   <CardContent className="p-4">
                     <CardTitle className="text-lg">{index % 2 === 0 ? 'Pulsera de Cuarzo Rosa' : 'Cristal Atlante'}</CardTitle>
@@ -170,7 +170,7 @@ export default function Home() {
             <div className="grid w-full grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
               <Card className="hover:shadow-xl transition-shadow duration-300">
                 <div className="flex flex-col md:flex-row">
-                  {meditationImage1 && <Image src={meditationImage1.imageUrl} alt={meditationImage1.description} data-ai-hint={meditationImage1.imageHint} width={250} height={167} className="rounded-t-lg md:rounded-l-lg md:rounded-t-none object-cover aspect-[3/2] md:w-1/3" />}
+                  {meditationImage1Url && <Image src={meditationImage1Url} alt="Serene meditation" data-ai-hint="serene meditation" width={250} height={167} className="rounded-t-lg md:rounded-l-lg md:rounded-t-none object-cover aspect-[3/2] md:w-1/3" />}
                   <div className="flex flex-col justify-between p-6">
                     <div>
                       <CardTitle>Meditación de Anclaje a Tierra</CardTitle>
@@ -184,7 +184,7 @@ export default function Home() {
               </Card>
                <Card className="hover:shadow-xl transition-shadow duration-300">
                 <div className="flex flex-col md:flex-row">
-                  {meditationImage2 && <Image src={meditationImage2.imageUrl} alt={meditationImage2.description} data-ai-hint={meditationImage2.imageHint} width={250} height={167} className="rounded-t-lg md:rounded-l-lg md:rounded-t-none object-cover aspect-[3/2] md:w-1/3" />}
+                  {meditationImage2Url && <Image src={meditationImage2Url} alt="Calm lake" data-ai-hint="calm lake" width={250} height={167} className="rounded-t-lg md:rounded-l-lg md:rounded-t-none object-cover aspect-[3/2] md:w-1/3" />}
                   <div className="flex flex-col justify-between p-6">
                     <div>
                       <CardTitle>Activación del Corazón Cristalino</CardTitle>
