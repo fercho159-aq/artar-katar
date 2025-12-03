@@ -8,7 +8,7 @@ export async function GET() {
     const client = await pool.connect();
     try {
       const result = await client.query<Product>(
-        'SELECT * FROM products WHERE is_active = TRUE'
+        "SELECT * FROM products WHERE is_active = TRUE AND type = 'PHYSICAL_GOOD'"
       );
       return NextResponse.json(result.rows, { status: 200 });
     } finally {
