@@ -6,9 +6,10 @@ import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Calendar, ShoppingCart, Tag } from 'lucide-react';
+import { Calendar, ShoppingCart, MessageSquare } from 'lucide-react';
 import { useCart, type Product } from '@/context/CartContext';
 import { Card, CardContent } from '@/components/ui/card';
+import Link from 'next/link';
 
 export default function TallerDetailPage() {
   const params = useParams();
@@ -22,6 +23,9 @@ export default function TallerDetailPage() {
         <p className="text-muted-foreground mt-2">
           El taller que buscas no existe o ha sido movido.
         </p>
+        <Button asChild className="mt-4">
+          <Link href="/talleres">Volver a Talleres</Link>
+        </Button>
       </div>
     );
   }
@@ -37,6 +41,10 @@ export default function TallerDetailPage() {
     };
     addToCart(product);
   };
+  
+  const whatsappNumber = "528181139378";
+  const whatsappMessage = encodeURIComponent(`Hola, me gustaría recibir más información sobre el taller: "${workshop.title}"`);
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
 
   return (
@@ -69,26 +77,34 @@ export default function TallerDetailPage() {
           </p>
 
           <Card className="bg-muted/50 mb-6">
-            <CardContent className="p-4 space-y-3">
+            <CardContent className="p-4 grid grid-cols-2 gap-4">
               <div className="flex items-center text-foreground">
                 <Calendar className="mr-3 text-primary" />
                 <span className='font-semibold'>Fecha: {workshop.date}</span>
               </div>
               <div className="flex items-center text-foreground">
-                <Tag className="mr-3 text-primary" />
-                <span className="font-semibold text-2xl text-primary">${workshop.price} USD</span>
+                <p className="font-semibold text-2xl text-primary">${workshop.price} USD</p>
               </div>
             </CardContent>
           </Card>
 
-          <Button 
-            size="lg" 
-            onClick={handleAddToCart}
-            disabled={workshop.status !== 'Abierto'}
-          >
-            <ShoppingCart className="mr-2" />
-            Añadir al Carrito
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Button 
+              size="lg" 
+              onClick={handleAddToCart}
+              disabled={workshop.status !== 'Abierto'}
+              className="flex-1"
+            >
+              <ShoppingCart className="mr-2" />
+              Inscribirme Ahora
+            </Button>
+            <Button asChild size="lg" variant="outline" className="flex-1">
+              <Link href={whatsappUrl} target="_blank">
+                <MessageSquare className="mr-2" />
+                Pedir Información
+              </Link>
+            </Button>
+          </div>
         </div>
       </div>
     </div>

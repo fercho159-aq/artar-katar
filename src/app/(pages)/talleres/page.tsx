@@ -56,20 +56,22 @@ export default function TalleresPage() {
             const image = PlaceHolderImages.find(p => p.id === workshop.imageId);
             return (
               <Card key={workshop.title} className="flex flex-col overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                <CardHeader className="p-0 relative">
-                  {image && <Image src={image.imageUrl} alt={image.description} data-ai-hint={image.imageHint} width={600} height={400} className="rounded-t-lg object-cover aspect-video" />}
-                  <Badge className="absolute top-2 right-2" variant={workshop.status === "Abierto" ? "default" : "secondary"}>{workshop.status}</Badge>
-                </CardHeader>
-                <CardContent className="p-6 flex-grow flex flex-col">
-                  <CardTitle>{workshop.title}</CardTitle>
-                  <CardDescription className="mt-2 flex-grow">{workshop.description}</CardDescription>
-                  <div className="mt-4 text-sm text-foreground">
-                    <p><span className="font-semibold text-muted-foreground">Fecha:</span> {workshop.date}</p>
-                     <p className="font-bold text-primary text-lg mt-1">{workshop.status === 'Abierto' ? `$${workshop.price} USD` : 'Por anunciar'}</p>
-                  </div>
-                </CardContent>
+                <Link href={`/talleres/${workshop.id}`} className="flex flex-col flex-grow">
+                  <CardHeader className="p-0 relative">
+                    {image && <Image src={image.imageUrl} alt={image.description} data-ai-hint={image.imageHint} width={600} height={400} className="rounded-t-lg object-cover aspect-video" />}
+                    <Badge className="absolute top-2 right-2" variant={workshop.status === "Abierto" ? "default" : "secondary"}>{workshop.status}</Badge>
+                  </CardHeader>
+                  <CardContent className="p-6 flex-grow flex flex-col">
+                    <CardTitle>{workshop.title}</CardTitle>
+                    <CardDescription className="mt-2 flex-grow">{workshop.description}</CardDescription>
+                    <div className="mt-4 text-sm text-foreground">
+                      <p><span className="font-semibold text-muted-foreground">Fecha:</span> {workshop.date}</p>
+                       <p className="font-bold text-primary text-lg mt-1">{workshop.status === 'Abierto' ? `$${workshop.price} USD` : 'Por anunciar'}</p>
+                    </div>
+                  </CardContent>
+                </Link>
                 <CardFooter className="p-6 pt-0">
-                  <Button className="w-full" asChild disabled={workshop.status !== "Abierto"}>
+                  <Button className="w-full" asChild>
                     <Link href={`/talleres/${workshop.id}`}>
                       Más Información <ArrowRight className="ml-2" />
                     </Link>
