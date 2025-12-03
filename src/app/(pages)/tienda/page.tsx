@@ -1,14 +1,15 @@
 'use client';
 
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { useEffect, useState } from 'react';
 import { Product } from '@/lib/types';
 import { Skeleton } from '@/components/ui/skeleton';
-import { CheckCircle } from 'lucide-react';
+import { CheckCircle, ShoppingCart } from 'lucide-react';
 import Link from 'next/link';
+import { useCart } from '@/context/CartContext';
 
 const getImageIdForProduct = (product: Product): string => {
   if (
@@ -32,6 +33,7 @@ const parseDescription = (description: string | null) => {
 export default function TiendaPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { addToCart } = useCart();
 
   useEffect(() => {
     async function fetchProducts() {
@@ -50,6 +52,18 @@ export default function TiendaPage() {
     }
     fetchProducts();
   }, []);
+  
+  const handleAddToCart = (product: Product) => {
+    const imageId = getImageIdForProduct(product);
+    const image = PlaceHolderImages.find((p) => p.id === imageId);
+    
+    addToCart({
+      id: product.product_sku,
+      name: product.name,
+      price: Number(product.price),
+      image: product.image_url || image?.imageUrl || '',
+    });
+  };
 
   return (
     <div className="bg-background">
@@ -87,16 +101,14 @@ export default function TiendaPage() {
                 const image = PlaceHolderImages.find((p) => p.id === imageId);
                 const priceAsNumber = Number(product.price);
                 const { benefits, material } = parseDescription(product.description);
-                const whatsappMessage = `Hola, estoy interesado/a en el producto: ${product.name}.`;
-                const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(whatsappMessage)}`;
-
+                
                 return (
                   <Card
                     key={product.id}
                     className="flex flex-col overflow-hidden group hover:shadow-xl transition-shadow duration-300 border-primary/20"
                   >
-                    <div className="p-0 relative overflow-hidden">
-                      <Image
+                    <Link href={`/tienda/${product.id}`} className="block p-0 relative overflow-hidden">
+                       <Image
                         src={
                           product.image_url ||
                           image?.imageUrl ||
@@ -108,22 +120,23 @@ export default function TiendaPage() {
                         height={500}
                         className="object-cover aspect-square"
                       />
-                    </div>
+                    </Link>
                     <CardContent className="p-6 flex flex-col flex-grow text-foreground/80">
                       <h3 className="text-xl font-bold font-headline text-center uppercase text-foreground mb-2">
-                        {product.name}
+                        <Link href={`/tienda/${product.id}`}>{product.name}</Link>
                       </h3>
                       <p className="text-sm text-center text-muted-foreground mb-4">
                         Cargadas para potenciar tu energía
                       </p>
                       
                       <div className="space-y-2 mb-4 text-sm flex-grow">
-                        {benefits.map((benefit, i) => (
+                        {benefits.slice(0, 3).map((benefit, i) => ( // Show first 3 benefits
                             <div key={i} className="flex items-center gap-2">
                                 <CheckCircle className="h-4 w-4 text-primary" />
                                 <span>{benefit}</span>
                             </div>
                         ))}
+                         {benefits.length > 3 && <p className="text-sm text-muted-foreground">y más...</p>}
                       </div>
 
                       {material && (
@@ -135,13 +148,13 @@ export default function TiendaPage() {
                       <p className="text-3xl font-bold text-center text-primary mb-4">
                         ${priceAsNumber.toFixed(0)} MXN
                       </p>
-
-                      <Button className="w-full" asChild>
-                         <Link href={whatsappUrl} target="_blank">
-                            Pedir por WhatsApp
-                         </Link>
-                      </Button>
                     </CardContent>
+                    <CardFooter className="p-6 pt-0">
+                       <Button className="w-full" onClick={() => handleAddToCart(product)}>
+                          <ShoppingCart className="mr-2 h-4 w-4" />
+                          Añadir al Carrito
+                       </Button>
+                    </CardFooter>
                   </Card>
                 );
               })}
