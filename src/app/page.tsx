@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { ArrowRight, Gem, Group, Headphones } from "lucide-react";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 
+// Re-evaluating placeholder images
 const heroImage = PlaceHolderImages.find(p => p.id === 'hero-background');
 const workshopImage1 = PlaceHolderImages.find(p => p.id === 'workshop-1');
 const workshopImage2 = PlaceHolderImages.find(p => p.id === 'workshop-2');
@@ -104,7 +105,7 @@ export default function Home() {
                 </CardContent>
                 <CardFooter className="p-6 pt-0">
                   <Button asChild className="w-full">
-                    <Link href="/talleres">Registrarse Ahora</Link>
+                    <Link href="/talleres/wshop_001">Registrarse Ahora</Link>
                   </Button>
                 </CardFooter>
               </Card>
@@ -118,7 +119,7 @@ export default function Home() {
                 </CardContent>
                 <CardFooter className="p-6 pt-0">
                   <Button asChild className="w-full">
-                    <Link href="/talleres">Más Información</Link>
+                    <Link href="/talleres/wshop_002">Más Información</Link>
                   </Button>
                 </CardFooter>
               </Card>
@@ -177,7 +178,7 @@ export default function Home() {
                       <CardDescription className="mt-2">15 min - Conecta con la energía de Gaia.</CardDescription>
                     </div>
                     <Button asChild className="mt-4 w-full sm:w-auto">
-                      <Link href="/meditaciones">Escuchar Ahora</Link>
+                      <Link href="/meditaciones/med_001">Escuchar Ahora</Link>
                     </Button>
                   </div>
                 </div>
@@ -191,7 +192,7 @@ export default function Home() {
                       <CardDescription className="mt-2">25 min - Abre tu corazón a la frecuencia del amor.</CardDescription>
                     </div>
                     <Button asChild className="mt-4 w-full sm:w-auto">
-                      <Link href="/meditaciones">Escuchar Ahora</Link>
+                      <Link href="/meditaciones/med_002">Escuchar Ahora</Link>
                     </Button>
                   </div>
                 </div>
