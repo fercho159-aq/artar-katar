@@ -5,16 +5,16 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { ArrowRight, Gem, Group, Headphones } from "lucide-react";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 
-// Re-evaluating placeholder images
-const heroImage = PlaceHolderImages.find(p => p.id === 'hero-background');
-const workshopImage1 = PlaceHolderImages.find(p => p.id === 'workshop-1');
-const workshopImage2 = PlaceHolderImages.find(p => p.id === 'workshop-2');
-const braceletImage = PlaceHolderImages.find(p => p.id === 'shop-bracelet');
-const crystalImage = PlaceHolderImages.find(p => p.id === 'shop-crystal');
-const meditationImage1 = PlaceHolderImages.find(p => p.id === 'meditation-1');
-const meditationImage2 = PlaceHolderImages.find(p => p.id === 'meditation-2');
-
 export default function Home() {
+  // Re-evaluating placeholder images inside the component
+  const heroImage = PlaceHolderImages.find(p => p.id === 'hero-background');
+  const workshopImage1 = PlaceHolderImages.find(p => p.id === 'workshop-1');
+  const workshopImage2 = PlaceHolderImages.find(p => p.id === 'workshop-2');
+  const braceletImage = PlaceHolderImages.find(p => p.id === 'shop-bracelet');
+  const crystalImage = PlaceHolderImages.find(p => p.id === 'shop-crystal');
+  const meditationImage1 = PlaceHolderImages.find(p => p.id === 'meditation-1');
+  const meditationImage2 = PlaceHolderImages.find(p => p.id === 'meditation-2');
+
   return (
       <>
         {/* Hero Section */}
