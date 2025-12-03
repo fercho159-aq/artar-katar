@@ -19,16 +19,13 @@ export default function Home() {
       <>
         {/* Hero Section */}
         <section className="relative w-full h-[60vh] md:h-[80vh] flex items-center justify-center text-center text-white">
-          {heroImage && (
-            <Image
-              src={heroImage.imageUrl}
-              alt={heroImage.description}
-              fill
-              className="object-cover -z-10 brightness-75"
-              priority
-              data-ai-hint={heroImage.imageHint}
-            />
-          )}
+          <Image
+            src="https://cdn.pixabay.com/photo/2022/12/29/21/29/passage-7685853_1280.jpg"
+            alt="Portal Multidimensional"
+            fill
+            className="object-cover -z-10 brightness-75"
+            priority
+          />
           <div className="absolute inset-0 bg-black/30 -z-10" />
           <div className="container px-4 md:px-6 opacity-0 animate-fade-in-up [animation-fill-mode:forwards] [animation-delay:0.3s]">
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl font-headline [text-shadow:0_3px_6px_rgba(0,0,0,0.5)]">
