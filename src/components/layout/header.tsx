@@ -51,7 +51,7 @@ export function Header() {
             className="mr-6 flex items-center space-x-2"
             onClick={() => setIsMenuOpen(false)}
           >
-            <Image src="https://pulserasportalviviente.vercel.app/images/logo.png" alt="Astar Katar Logo" width={40} height={40} className="h-10 w-auto" />
+            <Image src="/images/logo.png" alt="Astar Katar Logo" width={40} height={40} className="h-10 w-auto" />
             <span className="font-bold text-lg font-headline text-primary sr-only">
               Astar Katar
             </span>
@@ -142,7 +142,7 @@ export function Header() {
                     className="mr-6 flex items-center space-x-2"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                     <Image src="https://pulserasportalviviente.vercel.app/images/logo.png" alt="Astar Katar Logo" width={40} height={40} className="h-10 w-auto" />
+                     <Image src="/images/logo.png" alt="Astar Katar Logo" width={40} height={40} className="h-10 w-auto" />
                     <span className="font-bold text-lg font-headline text-primary sr-only">
                       Astar Katar
                     </span>

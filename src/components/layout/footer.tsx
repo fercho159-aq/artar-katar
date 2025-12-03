@@ -48,7 +48,7 @@ export function Footer() {
       <div className="container grid grid-cols-1 lg:grid-cols-3 gap-10 py-16">
         <div className="flex flex-col items-start gap-4">
           <Link href="/" className="flex items-center space-x-2">
-             <Image src="https://pulserasportalviviente.vercel.app/images/logo.png" alt="Astar Katar Logo" width={50} height={50} className="h-12 w-auto" />
+             <Image src="/images/logo.png" alt="Astar Katar Logo" width={50} height={50} className="h-12 w-auto" />
             <span className="font-bold text-2xl font-headline text-primary sr-only">
               Astar Katar
             </span>
