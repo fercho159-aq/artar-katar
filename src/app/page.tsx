@@ -5,29 +5,25 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { ArrowRight, Gem, Group, Headphones } from "lucide-react";
 
 export default function Home() {
-  const heroImageUrl = "https://cdn.pixabay.com/photo/2022/12/29/21/29/passage-7685853_1280.jpg";
-  const workshopImage1Url = "https://images.unsplash.com/photo-1532190795157-3f983fb7fa3b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxzcGlyaXR1YWwlMjBsZWFybmluZ3xlbnwwfHx8fDE3NjQ2OTIxNDB8MA&ixlib=rb-4.1.0&q=80&w=1080";
-  const workshopImage2Url = "https://images.unsplash.com/photo-1560287810-1c89fede7218?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxzcGlyaXR1YWwlMjBhY3RpdmF0aW9ufGVufDB8fHx8MTc2NDY5MjE0MHww&ixlib=rb-4.1.0&q=80&w=1080";
-  const braceletImageUrl = "https://images.unsplash.com/photo-1743127671067-62af70aa67c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjcnlzdGFsJTIwYnJhY2VsZXR8ZW58MHx8fHwxNzY0NjkyMTM5fDA&ixlib=rb-4.1.0&q=80&w=1080";
-  const crystalImageUrl = "https://images.unsplash.com/photo-1727430473786-e88adb86e463?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxxdWFydHolMjBjcnlzdGFsfGVufDB8fHx8MTc2NDY5MjE0MHww&ixlib=rb-4.1.0&q=80&w=1080";
-  const meditationImage1Url = "https://images.unsplash.com/photo-1609718561976-d52836e625cd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxzZXJlbmUlMjBtZWRpdGF0aW9ufGVufDB8fHx8MTc2NDYzNzYxMnww&ixlib=rb-4.1.0&q=80&w=1080";
-  const meditationImage2Url = "https://images.unsplash.com/photo-1532979772520-f2763956cce0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjYWxtJTIwbGFrZXxlbnwwfHx8fDE3NjQ2NTUwMjR8MA&ixlib=rb-4.1.0&q=80&w=1080";
-  const shopImages = [braceletImageUrl, crystalImageUrl, braceletImageUrl, crystalImageUrl];
+  const shopImages = [
+    "https://images.unsplash.com/photo-1743127671067-62af70aa67c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjcnlzdGFsJTIwYnJhY2VsZXR8ZW58MHx8fHwxNzY0NjkyMTM5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+    "https://images.unsplash.com/photo-1727430473786-e88adb86e463?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxxdWFydHolMjBjcnlzdGFsfGVufDB8fHx8MTc2NDY5MjE0MHww&ixlib=rb-4.1.0&q=80&w=1080",
+    "https://images.unsplash.com/photo-1743127671067-62af70aa67c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjcnlzdGFsJTIwYnJhY2VsZXR8ZW58MHx8fHwxNzY0NjkyMTM5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+    "https://images.unsplash.com/photo-1727430473786-e88adb86e463?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxxdWFydHolMjBjcnlzdGFsfGVufDB8fHx8MTc2NDY5MjE0MHww&ixlib=rb-4.1.0&q=80&w=1080"
+  ];
 
   return (
       <>
         {/* Hero Section */}
         <section className="relative w-full h-[60vh] md:h-[80vh] flex items-center justify-center text-center text-white">
-          {heroImageUrl && (
-            <Image
-              src={heroImageUrl}
-              alt="A mystical archway opening to a starry sky"
-              data-ai-hint="mystical archway"
-              fill
-              className="object-cover -z-10 brightness-75"
-              priority
-            />
-          )}
+          <Image
+            src="https://cdn.pixabay.com/photo/2022/12/29/21/29/passage-7685853_1280.jpg"
+            alt="A mystical archway opening to a starry sky"
+            data-ai-hint="mystical archway"
+            fill
+            className="object-cover -z-10 brightness-75"
+            priority
+          />
           <div className="absolute inset-0 bg-black/30 -z-10" />
           <div className="container px-4 md:px-6 opacity-0 animate-fade-in-up [animation-fill-mode:forwards] [animation-delay:0.3s]">
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl font-headline [text-shadow:0_3px_6px_rgba(0,0,0,0.5)]">
@@ -96,7 +92,7 @@ export default function Home() {
             <div className="mx-auto grid max-w-5xl items-stretch gap-8 sm:grid-cols-2 mt-12">
               <Card className="hover:shadow-xl transition-shadow duration-300">
                 <CardHeader className="p-0">
-                  {workshopImage1Url && <Image src={workshopImage1Url} alt="Spiritual learning" data-ai-hint="spiritual learning" width={600} height={400} className="rounded-t-lg object-cover aspect-video" />}
+                  <Image src="https://images.unsplash.com/photo-1532190795157-3f983fb7fa3b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxzcGlyaXR1YWwlMjBsZWFybmluZ3xlbnwwfHx8fDE3NjQ2OTIxNDB8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="Spiritual learning" data-ai-hint="spiritual learning" width={600} height={400} className="rounded-t-lg object-cover aspect-video" />
                 </CardHeader>
                 <CardContent className="p-6">
                   <CardTitle>Ciclo de Activación Nocturna</CardTitle>
@@ -110,7 +106,7 @@ export default function Home() {
               </Card>
               <Card className="hover:shadow-xl transition-shadow duration-300">
                 <CardHeader className="p-0">
-                  {workshopImage2Url && <Image src={workshopImage2Url} alt="Spiritual activation" data-ai-hint="spiritual activation" width={600} height={400} className="rounded-t-lg object-cover aspect-video" />}
+                  <Image src="https://images.unsplash.com/photo-1560287810-1c89fede7218?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxzcGlyaXR1YWwlMjBhY3RpdmF0aW9ufGVufDB8fHx8MTc2NDY5MjE0MHww&ixlib=rb-4.1.0&q=80&w=1080" alt="Spiritual activation" data-ai-hint="spiritual activation" width={600} height={400} className="rounded-t-lg object-cover aspect-video" />
                 </CardHeader>
                 <CardContent className="p-6">
                   <CardTitle>Conexión con tu Yo Superior</CardTitle>
@@ -170,7 +166,7 @@ export default function Home() {
             <div className="grid w-full grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
               <Card className="hover:shadow-xl transition-shadow duration-300">
                 <div className="flex flex-col md:flex-row">
-                  {meditationImage1Url && <Image src={meditationImage1Url} alt="Serene meditation" data-ai-hint="serene meditation" width={250} height={167} className="rounded-t-lg md:rounded-l-lg md:rounded-t-none object-cover aspect-[3/2] md:w-1/3" />}
+                  <Image src="https://images.unsplash.com/photo-1609718561976-d52836e625cd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxzZXJlbmUlMjBtZWRpdGF0aW9ufGVufDB8fHx8MTc2NDYzNzYxMnww&ixlib=rb-4.1.0&q=80&w=1080" alt="Serene meditation" data-ai-hint="serene meditation" width={250} height={167} className="rounded-t-lg md:rounded-l-lg md:rounded-t-none object-cover aspect-[3/2] md:w-1/3" />
                   <div className="flex flex-col justify-between p-6">
                     <div>
                       <CardTitle>Meditación de Anclaje a Tierra</CardTitle>
@@ -184,7 +180,7 @@ export default function Home() {
               </Card>
                <Card className="hover:shadow-xl transition-shadow duration-300">
                 <div className="flex flex-col md:flex-row">
-                  {meditationImage2Url && <Image src={meditationImage2Url} alt="Calm lake" data-ai-hint="calm lake" width={250} height={167} className="rounded-t-lg md:rounded-l-lg md:rounded-t-none object-cover aspect-[3/2] md:w-1/3" />}
+                  <Image src="https://images.unsplash.com/photo-1532979772520-f2763956cce0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjYWxtJTIwbGFrZXxlbnwwfHx8fDE3NjQ2NTUwMjR8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="Calm lake" data-ai-hint="calm lake" width={250} height={167} className="rounded-t-lg md:rounded-l-lg md:rounded-t-none object-cover aspect-[3/2] md:w-1/3" />
                   <div className="flex flex-col justify-between p-6">
                     <div>
                       <CardTitle>Activación del Corazón Cristalino</CardTitle>
