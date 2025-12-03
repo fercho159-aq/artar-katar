@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
 import { Label } from "../ui/label";
+import Image from 'next/image';
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "El nombre debe tener al menos 2 caracteres." }),
@@ -47,8 +48,8 @@ export function Footer() {
       <div className="container grid grid-cols-1 lg:grid-cols-3 gap-10 py-16">
         <div className="flex flex-col items-start gap-4">
           <Link href="/" className="flex items-center space-x-2">
-            <Sparkles className="h-8 w-8 text-primary" />
-            <span className="font-bold text-2xl font-headline text-primary">
+             <Image src="https://pulserasportalviviente.vercel.app/images/logo.png" alt="Astar Katar Logo" width={50} height={50} className="h-12 w-auto" />
+            <span className="font-bold text-2xl font-headline text-primary sr-only">
               Astar Katar
             </span>
           </Link>

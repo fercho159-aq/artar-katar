@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 const navLinks = [
   { href: '/talleres', label: 'Talleres' },
@@ -50,8 +51,8 @@ export function Header() {
             className="mr-6 flex items-center space-x-2"
             onClick={() => setIsMenuOpen(false)}
           >
-            <Sparkles className="h-6 w-6 text-primary" />
-            <span className="font-bold text-lg font-headline text-primary">
+            <Image src="https://pulserasportalviviente.vercel.app/images/logo.png" alt="Astar Katar Logo" width={40} height={40} className="h-10 w-auto" />
+            <span className="font-bold text-lg font-headline text-primary sr-only">
               Astar Katar
             </span>
           </Link>
@@ -141,8 +142,8 @@ export function Header() {
                     className="mr-6 flex items-center space-x-2"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    <Sparkles className="h-6 w-6 text-primary" />
-                    <span className="font-bold text-lg font-headline text-primary">
+                     <Image src="https://pulserasportalviviente.vercel.app/images/logo.png" alt="Astar Katar Logo" width={40} height={40} className="h-10 w-auto" />
+                    <span className="font-bold text-lg font-headline text-primary sr-only">
                       Astar Katar
                     </span>
                   </Link>
