@@ -6,8 +6,9 @@ import Image from "next/image";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Clock, ShoppingCart, Star } from "lucide-react";
 import { useCart, type Product } from "@/context/CartContext";
+import Link from 'next/link';
 
-const meditations = [
+export const meditations = [
   { id: "med_001", title: "Meditación de Anclaje a Tierra", duration: "15 min", description: "Conecta con la energía de Gaia y encuentra tu centro.", imageId: "meditation-1", price: 40 },
   { id: "med_002", title: "Activación del Corazón Cristalino", duration: "25 min", description: "Abre tu corazón a la frecuencia del amor incondicional.", imageId: "meditation-2", price: 40 },
   { id: "med_003", title: "Viaje al Templo de Sanación", duration: "30 min", description: "Recibe sanación y guía de los maestros ascendidos.", imageId: "workshop-1", price: 40 },
@@ -99,23 +100,25 @@ export default function MeditacionesPage() {
           {meditations.map(meditation => {
             const image = PlaceHolderImages.find(p => p.id === meditation.imageId);
             return (
-              <Card key={meditation.title} className="overflow-hidden flex flex-col hover:shadow-xl transition-shadow duration-300">
-                <CardHeader className="p-0">
-                  {image && <Image src={image.imageUrl} alt={meditation.title} data-ai-hint="serene meditation" width={600} height={400} className="object-cover aspect-video" />}
-                </CardHeader>
-                <CardContent className="p-6 flex flex-col flex-grow">
-                  <CardTitle>{meditation.title}</CardTitle>
-                  <div className="flex items-center text-muted-foreground text-sm mt-2">
-                    <Clock className="h-4 w-4 mr-2" />
-                    <span>{meditation.duration}</span>
-                  </div>
-                  <CardDescription className="mt-2 flex-grow">{meditation.description}</CardDescription>
-                  <div className="mt-4 text-2xl font-bold text-primary">
-                    ${meditation.price.toFixed(2)} MXN
-                  </div>
-                </CardContent>
+              <Card key={meditation.id} className="overflow-hidden flex flex-col hover:shadow-xl transition-shadow duration-300">
+                <Link href={`/meditaciones/${meditation.id}`} className="flex flex-col flex-grow">
+                  <CardHeader className="p-0">
+                    {image && <Image src={image.imageUrl} alt={meditation.title} data-ai-hint="serene meditation" width={600} height={400} className="object-cover aspect-video" />}
+                  </CardHeader>
+                  <CardContent className="p-6 flex flex-col flex-grow">
+                    <CardTitle>{meditation.title}</CardTitle>
+                    <div className="flex items-center text-muted-foreground text-sm mt-2">
+                      <Clock className="h-4 w-4 mr-2" />
+                      <span>{meditation.duration}</span>
+                    </div>
+                    <CardDescription className="mt-2 flex-grow">{meditation.description}</CardDescription>
+                    <div className="mt-4 text-2xl font-bold text-primary">
+                      ${meditation.price.toFixed(2)} MXN
+                    </div>
+                  </CardContent>
+                </Link>
                 <CardFooter className="p-6 pt-0">
-                  <Button className="w-full mt-4" onClick={() => handleAddToCart(meditation)}>
+                  <Button className="w-full" onClick={() => handleAddToCart(meditation)}>
                     <ShoppingCart className="mr-2 h-4 w-4" /> Comprar Grabación
                   </Button>
                 </CardFooter>
