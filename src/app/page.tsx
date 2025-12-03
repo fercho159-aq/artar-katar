@@ -41,7 +41,7 @@ export default function Home() {
         </section>
 
         {/* Features Overview */}
-        <section id="explorar" className="py-16 md:py-24">
+        <section id="explorar" className="py-16 md:py-24 bg-background">
           <div className="container px-4 md:px-6">
             <div className="grid gap-12 sm:grid-cols-1 md:grid-cols-3">
               <div className="flex flex-col items-center text-center p-6 rounded-lg hover:bg-card transition-colors">
@@ -123,7 +123,7 @@ export default function Home() {
         </section>
         
         {/* Tienda Section */}
-        <section id="tienda" className="py-16 md:py-24">
+        <section id="tienda" className="py-16 md:py-24 bg-background">
            <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
