@@ -17,7 +17,7 @@ export default function Home() {
         {/* Hero Section */}
         <section className="relative w-full h-[60vh] md:h-[80vh] flex items-center justify-center text-center text-white">
           <Image
-            src="https://cdn.pixabay.com/photo/2022/12/29/21/29/passage-7685853_1280.jpg"
+            src="/images/passage-7685853_1280.webp"
             alt="A mystical archway opening to a starry sky"
             data-ai-hint="mystical archway"
             fill
