@@ -26,9 +26,9 @@ export default function RootLayout({
       <body className="font-body antialiased">
         <AuthProvider>
           <CartProvider>
-            <div className="relative flex min-h-dvh flex-col bg-background">
+            <div className="relative flex min-h-dvh flex-col">
               <Header />
-              <main className="flex-1">{children}</main>
+              <main className="flex-1 bg-background">{children}</main>
               <Footer />
             </div>
             <Toaster />
