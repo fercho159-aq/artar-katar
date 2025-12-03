@@ -107,7 +107,8 @@ export default function TiendaPage() {
                     key={product.id}
                     className="flex flex-col overflow-hidden group hover:shadow-xl transition-shadow duration-300 border-primary/20"
                   >
-                    <Link href={`/tienda/${product.id}`} className="block p-0 relative overflow-hidden">
+                    <Link href={`/tienda/${product.id}`} className="flex flex-col flex-grow">
+                      <div className="p-0 relative overflow-hidden">
                        <Image
                         src={
                           product.image_url ||
@@ -120,35 +121,36 @@ export default function TiendaPage() {
                         height={500}
                         className="object-cover aspect-square"
                       />
-                    </Link>
-                    <CardContent className="p-6 flex flex-col flex-grow text-foreground/80">
-                      <h3 className="text-xl font-bold font-headline text-center uppercase text-foreground mb-2">
-                        <Link href={`/tienda/${product.id}`}>{product.name}</Link>
-                      </h3>
-                      <p className="text-sm text-center text-muted-foreground mb-4">
-                        Cargadas para potenciar tu energía
-                      </p>
-                      
-                      <div className="space-y-2 mb-4 text-sm flex-grow">
-                        {benefits.slice(0, 3).map((benefit, i) => ( // Show first 3 benefits
-                            <div key={i} className="flex items-center gap-2">
-                                <CheckCircle className="h-4 w-4 text-primary" />
-                                <span>{benefit}</span>
-                            </div>
-                        ))}
-                         {benefits.length > 3 && <p className="text-sm text-muted-foreground">y más...</p>}
                       </div>
+                      <CardContent className="p-6 flex flex-col flex-grow text-foreground/80">
+                        <h3 className="text-xl font-bold font-headline text-center uppercase text-foreground mb-2">
+                          {product.name}
+                        </h3>
+                        <p className="text-sm text-center text-muted-foreground mb-4">
+                          Cargadas para potenciar tu energía
+                        </p>
+                        
+                        <div className="space-y-2 mb-4 text-sm flex-grow">
+                          {benefits.slice(0, 3).map((benefit, i) => ( // Show first 3 benefits
+                              <div key={i} className="flex items-center gap-2">
+                                  <CheckCircle className="h-4 w-4 text-primary" />
+                                  <span>{benefit}</span>
+                              </div>
+                          ))}
+                           {benefits.length > 3 && <p className="text-sm text-muted-foreground">y más...</p>}
+                        </div>
 
-                      {material && (
-                         <p className="text-sm mb-4">
-                            <span className="font-semibold">Material:</span> {material}
-                         </p>
-                      )}
+                        {material && (
+                           <p className="text-sm mb-4">
+                              <span className="font-semibold">Material:</span> {material}
+                           </p>
+                        )}
 
-                      <p className="text-3xl font-bold text-center text-primary mb-4">
-                        ${priceAsNumber.toFixed(0)} MXN
-                      </p>
-                    </CardContent>
+                        <p className="text-3xl font-bold text-center text-primary mb-4">
+                          ${priceAsNumber.toFixed(0)} MXN
+                        </p>
+                      </CardContent>
+                    </Link>
                     <CardFooter className="p-6 pt-0">
                        <Button className="w-full" onClick={() => handleAddToCart(product)}>
                           <ShoppingCart className="mr-2 h-4 w-4" />
