@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import en from '@/locales/en.json';
 import es from '@/locales/es.json';
@@ -20,14 +20,16 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [translations, setTranslations] = useState<Translations>(es);
 
   useEffect(() => {
-    const browserLang = navigator.language.split('-')[0];
     const storedLang = localStorage.getItem('language');
     if (storedLang === 'en' || storedLang === 'es') {
       setLanguage(storedLang);
-    } else if (browserLang === 'en') {
-      setLanguage('en');
     } else {
-      setLanguage('es');
+      const browserLang = navigator.language.split('-')[0];
+      if (browserLang === 'en') {
+        setLanguage('en');
+      } else {
+        setLanguage('es');
+      }
     }
   }, []);
 
@@ -35,7 +37,9 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     setLanguageState(lang);
     setTranslations(translationsMap[lang]);
     localStorage.setItem('language', lang);
-    document.documentElement.lang = lang;
+    if (typeof document !== 'undefined') {
+        document.documentElement.lang = lang;
+    }
   };
 
   return (
