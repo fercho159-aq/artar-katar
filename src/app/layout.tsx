@@ -5,6 +5,7 @@ import { Footer } from '@/components/layout/footer';
 import { Toaster } from '@/components/ui/toaster';
 import { CartProvider } from '@/context/CartContext';
 import { AuthProvider } from '@/context/AuthContext';
+import { LanguageProvider } from '@/context/LanguageContext';
 
 export const metadata: Metadata = {
   title: 'Astar Katar',
@@ -24,16 +25,18 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body antialiased">
-        <AuthProvider>
-          <CartProvider>
-            <div className="relative flex min-h-dvh flex-col">
-              <Header />
-              <main className="flex-1">{children}</main>
-              <Footer />
-            </div>
-            <Toaster />
-          </CartProvider>
-        </AuthProvider>
+        <LanguageProvider>
+          <AuthProvider>
+            <CartProvider>
+                <div className="relative flex min-h-dvh flex-col">
+                  <Header />
+                  <main className="flex-1">{children}</main>
+                  <Footer />
+                </div>
+                <Toaster />
+            </CartProvider>
+          </AuthProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

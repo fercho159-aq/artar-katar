@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Menu, Sparkles, ShoppingCart, User, LogOut, LayoutDashboard } from 'lucide-react';
+import { Menu, Sparkles, ShoppingCart, User, LogOut, LayoutDashboard, Globe } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
@@ -14,22 +14,21 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { useLanguage } from '@/context/LanguageContext';
 
-const navLinks = [
-  { href: '/talleres', label: 'Talleres' },
-  { href: '/tienda', label: 'Tienda' },
-  { href: '/meditaciones', label: 'Meditaciones' },
-];
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { cart } = useCart();
   const { user, logout } = useAuth();
   const router = useRouter();
+  const { language, setLanguage, translations } = useLanguage();
 
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
@@ -41,6 +40,12 @@ export function Header() {
   const getInitials = (name = '') => {
     return name.split(' ').map(n => n[0]).join('').toUpperCase();
   }
+
+  const navLinks = [
+    { href: '/talleres', label: translations.header.workshops },
+    { href: '/tienda', label: translations.header.shop },
+    { href: '/meditaciones', label: translations.header.meditations },
+  ];
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -106,24 +111,39 @@ export function Header() {
                   <DropdownMenuItem asChild>
                      <Link href="/mis-compras">
                         <LayoutDashboard className="mr-2 h-4 w-4" />
-                        <span>Mis Compras</span>
+                        <span>{translations.header.myPurchases}</span>
                      </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={handleLogout}>
                     <LogOut className="mr-2 h-4 w-4" />
-                    <span>Cerrar Sesión</span>
+                    <span>{translations.header.logout}</span>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <Button asChild variant="ghost" size="icon">
+               <Button asChild variant="ghost" size="icon">
                 <Link href="/login">
                   <User className="h-5 w-5" />
-                  <span className="sr-only">Iniciar Sesión</span>
+                  <span className="sr-only">{translations.header.login}</span>
                 </Link>
               </Button>
             )}
+
+             <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon">
+                    <Globe className="h-5 w-5" />
+                    <span className="sr-only">Change language</span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuRadioGroup value={language} onValueChange={setLanguage}>
+                    <DropdownMenuRadioItem value="es">Español</DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="en">English</DropdownMenuRadioItem>
+                  </DropdownMenuRadioGroup>
+                </DropdownMenuContent>
+              </DropdownMenu>
 
             <div className="md:hidden">
               <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>

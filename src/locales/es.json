@@ -1,0 +1,105 @@
+{
+    "header": {
+        "workshops": "Talleres",
+        "shop": "Tienda",
+        "meditations": "Meditaciones",
+        "login": "Iniciar Sesión",
+        "myPurchases": "Mis Compras",
+        "logout": "Cerrar Sesión"
+    },
+    "footer": {
+        "description": "Conectando con la sabiduría cósmica y la expansión de la conciencia.",
+        "subscribeTitle": "Suscríbete a nuestro boletín",
+        "subscribeDescription": "Recibe las últimas noticias sobre talleres, meditaciones y activaciones directamente en tu WhatsApp.",
+        "nameLabel": "Nombre",
+        "namePlaceholder": "Tu Nombre",
+        "whatsappPlaceholder": "Tu WhatsApp (ej. +123456789)",
+        "subscribeButton": "Suscribirse",
+        "rights": "Todos los derechos reservados."
+    },
+    "home": {
+        "hero": {
+            "title": "Conéctate con las Dimensiones de Luz",
+            "subtitle": "Atrévete a cruzar el umbral. Más allá de la realidad tridimensional existe un tejido vivo de luz, habitado por civilizaciones estelares, consciencias superiores y dimensiones donde tu alma recuerda quién es realmente. Este portal existe para ti."
+        },
+        "intro": {
+            "text": "Si sientes el llamado de los mundos estelares… si anhelas transformar tu vida, recibir guía, inspiración y participar conscientemente en la manifestación de tu nueva realidad de abundancia, bienestar y salud… aquí encontrarás herramientas que te acompañarán en un crecimiento multidimensional sin límites. Es el camino hacia la vida plena que siempre has intuido."
+        },
+        "astar": {
+            "title": "¿Quién es Astar Katar?",
+            "p1": "Astar Katar es un ser cósmico creador de mundos, nacido de las altas dimensiones de luz. Su esencia se manifiesta en distintos aspectos, dependiendo de la frecuencia dimensional en la que actúa. Su servicio es hacia la Fuente misma, canalizando su energía en los mundos donde interviene.",
+            "p2": "En esta época de transición planetaria, Astar Katar acompaña a las almas y semillas cósmicas con resonancia hacia su vibración para:",
+            "l1": "Recordar su identidad multidimensional.",
+            "l2": "Abrirse al contacto con sus fractales (otras encarnaciones en diferentes dimensiones, estrellas y líneas de tiempo).",
+            "l3": "Romper los paradigmas limitantes de la conciencia humana 3D.",
+            "l4": "Alcanzar una autorrealización más elevada en esta encarnación."
+        },
+        "frank": {
+            "title": "Frank Alexander: el Walk-In de Astar Katar",
+            "p1": "Astar Katar se manifiesta en la Tierra mediante su walk-in, Frank Alexander.",
+            "p2": "Un walk-in es un acuerdo sagrado entre almas hecho en planos superiores antes del nacimiento. En este pacto, un alma cósmica de alta frecuencia toma el lugar de otra alma encarnada, que entrega su cuerpo voluntariamente para que una misión mayor pueda manifestarse en la Tierra. Así, Frank Alexander se convierte en el vehículo consciente mediante el cual Astar Katar irradia su presencia.",
+            "p3": "A través de él se abre un portal interdimensional hacia las dimensiones de luz, hacia civilizaciones cósmicas dedicadas a la evolución universal y hacia consciencias arcangelicales y maestros ascendidos.",
+            "p4": "Frank Alexander dirige este portal mediante intención consciente. Su voz es una llave vibratoria: al escucharla, entras en resonancia automática con el campo energético de Astar Katar."
+        },
+        "allies": {
+            "title": "El Portal Interdimensional y sus Aliados de Luz",
+            "p1": "Al activarse el portal, múltiples seres colaboran:",
+            "c1": {
+                "title": "Razas estelares de luz",
+                "subtitle": "Sirianos, Pleyadianos, Arcturianos, Andromedanos, Felinos y otras civilizaciones benevolentes."
+            },
+            "c2": {
+                "title": "Jerarquías arcangelicales",
+                "subtitle": "Miguel, Metatrón, Rafael, Uriel, Jofiel, Zadkiel, Chamuel y Sandalfon."
+            },
+            "c3": {
+                "title": "Maestros cósmicos y ascendidos",
+                "subtitle": "Saint Germain, Yashua, María de Mágdala, Buda, Kwan Yin y otros."
+            },
+            "p2": "Cada activación se realiza en perfecta armonía con tu Ser Superior, tus guías y tus ángeles personales."
+        },
+        "workshops": {
+            "title": "Talleres y Ciclos de Activación Intensiva Cósmica",
+            "p1": "Dos veces al mes, puedes acceder a este portal mediante los Ciclos de Activación Intensiva Nocturna, un programa a distancia de siete noches guiadas e inspiradas por Astar Katar y sus aliados estelares.",
+            "p2": "En estos ciclos podrás:",
+            "l1": "Recibir activaciones profundas alineadas con las influencias cósmicas del momento.",
+            "l2": "Acceder en cuerpos sutiles a cámaras cuánticas de sanación arcturianas, sirianas o pleyadianas.",
+            "l3": "Vivir experiencias de transformación ilimitada según tu intención personal.",
+            "l4": "Ser acompañado por seres estelares, arcángeles y maestros ascendidos.",
+            "p3": "Puedes participar desde cualquier parte del mundo, solo necesitas registrarte previamente."
+        },
+        "bracelets": {
+            "title": "Pulseras Activadas Multidimensionalmente",
+            "p1": "Dentro del portal interdimensional, diversas jerarquías cósmicas colaboran para inspirar, activar y energizar pulseras y cristales que funcionan como antenas multidimensionales.",
+            "p2": "Cada pulsera:",
+            "l1": "Lleva una intención específica canalizada por seres estelares y maestros cósmicos.",
+            "l2": "Actúa profundamente bajo la guía de tu Yo Superior.",
+            "l3": "Eleva tu vibración.",
+            "l4": "Disuelve bloqueos subconscientes.",
+            "l5": "Implanta impulsos evolutivos que aceleran tu maestría personal.",
+            "p3": "Pueden ser usadas por adultos, niños y adolescentes, adaptándose a las necesidades de su etapa actual de vida."
+        },
+        "meditations": {
+            "title": "Meditaciones de Activación Cósmica",
+            "p1": "Para quienes desean conectarse diariamente con el portal de Astar Katar, existe una colección creciente de meditaciones guiadas, disponibles en el Club de Activación Personal.",
+            "p2": "Allí encontrarás:",
+            "l1": "Meditaciones canalizadas mes a mes por seres estelares de luz.",
+            "l2": "Acceso ilimitado a todas las activaciones.",
+            "l3": "Contenido grabado con la voz y la consciencia de Frank Alexander (Astar Katar).",
+            "p3": "Puedes adquirir meditaciones individuales o suscribirte al programa mensual completo."
+        },
+        "quickAccess": {
+            "workshops": "Ciclos y talleres de activación multidimensional",
+            "bracelets": "Pulseras de activación multidimensional",
+            "meditations": "Club de activación personal"
+        },
+        "subscribe": {
+            "title": "Mantente Conectado",
+            "subtitle": "Deseo recibir información sobre nuevos talleres y productos.",
+            "nameLabel": "Nombre",
+            "namePlaceholder": "Tu Nombre",
+            "whatsappPlaceholder": "Tu WhatsApp (ej. +123456789)",
+            "buttonText": "Suscribirse"
+        }
+    }
+}

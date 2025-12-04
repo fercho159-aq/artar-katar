@@ -1,0 +1,105 @@
+{
+  "header": {
+    "workshops": "Workshops",
+    "shop": "Shop",
+    "meditations": "Meditations",
+    "login": "Login",
+    "myPurchases": "My Purchases",
+    "logout": "Log Out"
+  },
+  "footer": {
+    "description": "Connecting with cosmic wisdom and consciousness expansion.",
+    "subscribeTitle": "Subscribe to our newsletter",
+    "subscribeDescription": "Receive the latest news about workshops, meditations, and activations directly on your WhatsApp.",
+    "nameLabel": "Name",
+    "namePlaceholder": "Your Name",
+    "whatsappPlaceholder": "Your WhatsApp (e.g., +123456789)",
+    "subscribeButton": "Subscribe",
+    "rights": "All rights reserved."
+  },
+  "home": {
+    "hero": {
+      "title": "Connect with the Dimensions of Light",
+      "subtitle": "Dare to cross the threshold. Beyond the three-dimensional reality exists a living fabric of light, inhabited by star civilizations, higher consciousnesses, and dimensions where your soul remembers who it truly is. This portal exists for you."
+    },
+    "intro": {
+      "text": "If you feel the call of the star worlds... if you long to transform your life, receive guidance, inspiration, and consciously participate in manifesting your new reality of abundance, well-being, and health... here you will find tools that will accompany you in unlimited multidimensional growth. It is the path to the full life you have always sensed."
+    },
+    "astar": {
+      "title": "Who is Astar Katar?",
+      "p1": "Astar Katar is a cosmic being, a creator of worlds, born from the high dimensions of light. His essence manifests in different aspects, depending on the dimensional frequency in which he acts. His service is to the Source itself, channeling his energy into the worlds where he intervenes.",
+      "p2": "In this time of planetary transition, Astar Katar accompanies the souls and cosmic seeds that resonate with his vibration to:",
+      "l1": "Remember their multidimensional identity.",
+      "l2": "Open up to contact with their fractals (other incarnations in different dimensions, stars, and timelines).",
+      "l3": "Break the limiting paradigms of 3D human consciousness.",
+      "l4": "Achieve a higher self-realization in this incarnation."
+    },
+    "frank": {
+      "title": "Frank Alexander: The Walk-In of Astar Katar",
+      "p1": "Astar Katar manifests on Earth through his walk-in, Frank Alexander.",
+      "p2": "A walk-in is a sacred agreement between souls made in higher planes before birth. In this pact, a high-frequency cosmic soul takes the place of another incarnated soul, who voluntarily gives up their body so that a greater mission can manifest on Earth. Thus, Frank Alexander becomes the conscious vehicle through which Astar Katar radiates his presence.",
+      "p3": "Through him, an interdimensional portal opens to the dimensions of light, to cosmic civilizations dedicated to universal evolution, and to archangelic consciousnesses and ascended masters.",
+      "p4": "Frank Alexander directs this portal through conscious intention. His voice is a vibrational key: by listening to it, you automatically resonate with the energy field of Astar Katar."
+    },
+    "allies": {
+      "title": "The Interdimensional Portal and its Allies of Light",
+      "p1": "When the portal is activated, multiple beings collaborate:",
+      "c1": {
+        "title": "Star Races of Light",
+        "subtitle": "Sirians, Pleiadians, Arcturians, Andromedans, Felines, and other benevolent civilizations."
+      },
+      "c2": {
+        "title": "Archangelic Hierarchies",
+        "subtitle": "Michael, Metatron, Raphael, Uriel, Jophiel, Zadkiel, Chamuel, and Sandalphon."
+      },
+      "c3": {
+        "title": "Cosmic and Ascended Masters",
+        "subtitle": "Saint Germain, Yeshua, Mary Magdalene, Buddha, Kwan Yin, and others."
+      },
+      "p2": "Each activation is carried out in perfect harmony with your Higher Self, your guides, and your personal angels."
+    },
+    "workshops": {
+      "title": "Workshops and Cosmic Intensive Activation Cycles",
+      "p1": "Twice a month, you can access this portal through the Nightly Intensive Activation Cycles, a remote seven-night program guided and inspired by Astar Katar and his stellar allies.",
+      "p2": "In these cycles, you can:",
+      "l1": "Receive deep activations aligned with the cosmic influences of the moment.",
+      "l2": "Access Arcturian, Sirian, or Pleiadian quantum healing chambers in subtle bodies.",
+      "l3": "Live experiences of unlimited transformation according to your personal intention.",
+      "l4": "Be accompanied by star beings, archangels, and ascended masters.",
+      "p3": "You can participate from anywhere in the world, you just need to register beforehand."
+    },
+    "bracelets": {
+      "title": "Multidimensionally Activated Bracelets",
+      "p1": "Within the interdimensional portal, various cosmic hierarchies collaborate to inspire, activate, and energize bracelets and crystals that function as multidimensional antennas.",
+      "p2": "Each bracelet:",
+      "l1": "Carries a specific intention channeled by star beings and cosmic masters.",
+      "l2": "Acts deeply under the guidance of your Higher Self.",
+      "l3": "Raises your vibration.",
+      "l4": "Dissolves subconscious blocks.",
+      "l5": "Implants evolutionary impulses that accelerate your personal mastery.",
+      "p3": "They can be used by adults, children, and teenagers, adapting to the needs of their current stage of life."
+    },
+    "meditations": {
+      "title": "Cosmic Activation Meditations",
+      "p1": "For those who wish to connect daily with the Astar Katar portal, there is a growing collection of guided meditations available in the Personal Activation Club.",
+      "p2": "There you will find:",
+      "l1": "Meditations channeled month by month by star beings of light.",
+      "l2": "Unlimited access to all activations.",
+      "l3": "Content recorded with the voice and consciousness of Frank Alexander (Astar Katar).",
+      "p3": "You can purchase individual meditations or subscribe to the full monthly program."
+    },
+    "quickAccess": {
+        "workshops": "Cosmic Activation Cycles and Workshops",
+        "bracelets": "Multidimensional Activation Bracelets",
+        "meditations": "Personal Activation Club"
+    },
+    "subscribe": {
+        "title": "Stay Connected",
+        "subtitle": "I want to receive information about new workshops and products.",
+        "nameLabel": "Name",
+        "namePlaceholder": "Your Name",
+        "whatsappPlaceholder": "Your WhatsApp (e.g. +123456789)",
+        "buttonText": "Subscribe"
+    }
+  }
+}

@@ -17,6 +17,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { Label } from "../ui/label";
 import Image from 'next/image';
+import { useLanguage } from "@/context/LanguageContext";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "El nombre debe tener al menos 2 caracteres." }),
@@ -25,6 +26,8 @@ const formSchema = z.object({
 
 export function Footer() {
   const { toast } = useToast();
+  const { translations } = useLanguage();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -53,12 +56,12 @@ export function Footer() {
               Astar Katar
             </span>
           </Link>
-          <p className="text-muted-foreground">Conectando con la sabiduría cósmica y la expansión de la conciencia.</p>
+          <p className="text-muted-foreground">{translations.footer.description}</p>
         </div>
         
         <div className="lg:col-span-2">
-          <h3 className="font-headline text-xl font-semibold mb-4 text-foreground">Suscríbete a nuestro boletín</h3>
-          <p className="text-muted-foreground mb-6">Recibe las últimas noticias sobre talleres, meditaciones y activaciones directamente en tu WhatsApp.</p>
+          <h3 className="font-headline text-xl font-semibold mb-4 text-foreground">{translations.footer.subscribeTitle}</h3>
+          <p className="text-muted-foreground mb-6">{translations.footer.subscribeDescription}</p>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col sm:flex-row items-start gap-4">
               <FormField
@@ -66,9 +69,9 @@ export function Footer() {
                 name="name"
                 render={({ field }) => (
                   <FormItem className="flex-1 w-full">
-                    <Label className="sr-only">Nombre</Label>
+                    <Label className="sr-only">{translations.footer.nameLabel}</Label>
                     <FormControl>
-                      <Input placeholder="Tu Nombre" {...field} />
+                      <Input placeholder={translations.footer.namePlaceholder} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -81,20 +84,20 @@ export function Footer() {
                   <FormItem className="flex-1 w-full">
                     <Label className="sr-only">WhatsApp</Label>
                     <FormControl>
-                      <Input placeholder="Tu WhatsApp (ej. +123456789)" {...field} />
+                      <Input placeholder={translations.footer.whatsappPlaceholder} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full sm:w-auto">Suscribirse</Button>
+              <Button type="submit" className="w-full sm:w-auto">{translations.footer.subscribeButton}</Button>
             </form>
           </Form>
         </div>
       </div>
       <div className="border-t">
         <div className="container flex flex-col sm:flex-row items-center justify-between py-6 text-sm text-muted-foreground gap-4">
-          <p>&copy; {new Date().getFullYear()} Astar Katar. Todos los derechos reservados.</p>
+          <p>&copy; {new Date().getFullYear()} Astar Katar. {translations.footer.rights}</p>
           <div className="flex space-x-4">
             <Link href="#" className="hover:text-primary transition-colors">Instagram</Link>
             <Link href="#" className="hover:text-primary transition-colors">YouTube</Link>

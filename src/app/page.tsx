@@ -1,3 +1,5 @@
+'use client'
+
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -5,8 +7,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, Dna, Gem, MicVocal } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { useLanguage } from "@/context/LanguageContext";
+
 
 export default function Home() {
+    const { translations } = useLanguage();
   return (
     <>
       {/* Hero Section */}
@@ -22,10 +27,10 @@ export default function Home() {
         <div className="absolute inset-0 bg-black/40 -z-10" />
         <div className="container px-4 md:px-6 animate-fade-in-up [animation-fill-mode:forwards] [animation-delay:0.3s]">
           <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl font-headline [text-shadow:0_3px_6px_rgba(0,0,0,0.7)]">
-            Conéctate con las Dimensiones de Luz
+            {translations.home.hero.title}
           </h1>
           <p className="mx-auto max-w-[800px] text-gray-200 md:text-xl my-6 [text-shadow:0_2px_4px_rgba(0,0,0,0.7)]">
-            Atrévete a cruzar el umbral. Más allá de la realidad tridimensional existe un tejido vivo de luz, habitado por civilizaciones estelares y consciencias superiores donde tu alma recuerda quién es realmente. Este portal existe para ti.
+            {translations.home.hero.subtitle}
           </p>
         </div>
       </section>
@@ -34,7 +39,7 @@ export default function Home() {
       <section className="py-16 md:py-24 bg-background">
         <div className="container text-center max-w-4xl">
            <p className="text-lg md:text-xl text-foreground/80">
-            Si sientes el llamado de los mundos estelares… si anhelas transformar tu vida, recibir guía, inspiración y participar conscientemente en la manifestación de tu nueva realidad de abundancia, bienestar y salud… aquí encontrarás herramientas que te acompañarán en un crecimiento multidimensional sin límites. Es el camino hacia la vida plena que siempre has intuido.
+            {translations.home.intro.text}
           </p>
         </div>
       </section>
@@ -43,27 +48,33 @@ export default function Home() {
       <section className="py-16 md:py-24 bg-card">
         <div className="container grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline text-primary">¿Quién es Astar Katar?</h2>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline text-primary">{translations.home.astar.title}</h2>
             <p className="text-muted-foreground">
-              Astar Katar es un ser cósmico creador de mundos, nacido de las altas dimensiones de luz. Su esencia se manifiesta en distintos aspectos, dependiendo de la frecuencia dimensional en la que actúa. Su servicio es hacia la Fuente misma, canalizando su energía en los mundos donde interviene.
+              {translations.home.astar.p1}
             </p>
             <p className="text-muted-foreground">
-              En esta época de transición planetaria, Astar Katar acompaña a las almas y semillas cósmicas con resonancia hacia su vibración para:
+              {translations.home.astar.p2}
             </p>
             <ul className="list-disc list-inside text-muted-foreground space-y-2">
-              <li>Recordar su identidad multidimensional.</li>
-              <li>Abrirse al contacto con sus fractales (otras encarnaciones en diferentes dimensiones, estrellas y líneas de tiempo).</li>
-              <li>Romper los paradigmas limitantes de la conciencia humana 3D.</li>
-              <li>Alcanzar una autorrealización más elevada en esta encarnación.</li>
+              <li>{translations.home.astar.l1}</li>
+              <li>{translations.home.astar.l2}</li>
+              <li>{translations.home.astar.l3}</li>
+              <li>{translations.home.astar.l4}</li>
             </ul>
           </div>
           <div className="space-y-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline text-primary">Frank Alexander: el Walk-In de Astar Katar</h2>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline text-primary">{translations.home.frank.title}</h2>
             <p className="text-muted-foreground">
-              Astar Katar se manifiesta en la Tierra mediante su walk-in, Frank Alexander. Un walk-in es un acuerdo sagrado entre almas hecho en planos superiores antes del nacimiento. En este pacto, un alma cósmica de alta frecuencia toma el lugar de otra alma encarnada, que entrega su cuerpo voluntariamente para que una misión mayor pueda manifestarse en la Tierra.
+              {translations.home.frank.p1}
             </p>
              <p className="text-muted-foreground">
-              Así, Frank Alexander se convierte en el vehículo consciente mediante el cual Astar Katar irradia su presencia. A través de él se abre un portal interdimensional. Su voz es una llave vibratoria: al escucharla, entras en resonancia automática con el campo energético de Astar Katar.
+              {translations.home.frank.p2}
+            </p>
+             <p className="text-muted-foreground">
+              {translations.home.frank.p3}
+            </p>
+             <p className="text-muted-foreground">
+              {translations.home.frank.p4}
             </p>
           </div>
         </div>
@@ -72,24 +83,27 @@ export default function Home() {
       {/* Allies of Light Section */}
       <section className="py-16 md:py-24 bg-background">
           <div className="container max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline">El Portal Interdimensional y sus Aliados de Luz</h2>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline">{translations.home.allies.title}</h2>
             <p className="mt-4 text-muted-foreground md:text-lg">
-                Al activarse el portal, múltiples seres colaboran en perfecta armonía con tu Ser Superior, tus guías y tus ángeles personales.
+                {translations.home.allies.p1}
             </p>
             <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-6 text-sm text-foreground">
                 <Card className="p-4 bg-card">
-                    <p className="font-semibold">Razas Estelares</p>
-                    <p className="text-xs text-muted-foreground">Sirianos, Pleyadianos, Arcturianos, Andromedanos, Felinos y más.</p>
+                    <p className="font-semibold">{translations.home.allies.c1.title}</p>
+                    <p className="text-xs text-muted-foreground">{translations.home.allies.c1.subtitle}</p>
                 </Card>
                 <Card className="p-4 bg-card">
-                    <p className="font-semibold">Jerarquías Arcangelicales</p>
-                    <p className="text-xs text-muted-foreground">Miguel, Metatrón, Rafael, Uriel, Jofiel, Zadkiel, Chamuel y Sandalfon.</p>
+                    <p className="font-semibold">{translations.home.allies.c2.title}</p>
+                    <p className="text-xs text-muted-foreground">{translations.home.allies.c2.subtitle}</p>
                 </Card>
                  <Card className="p-4 bg-card col-span-2 sm:col-span-1">
-                    <p className="font-semibold">Maestros Cósmicos</p>
-                    <p className="text-xs text-muted-foreground">Saint Germain, Yashua, María de Mágdala, Buda, Kwan Yin y otros.</p>
+                    <p className="font-semibold">{translations.home.allies.c3.title}</p>
+                    <p className="text-xs text-muted-foreground">{translations.home.allies.c3.subtitle}</p>
                 </Card>
             </div>
+             <p className="mt-8 text-muted-foreground text-sm">
+                {translations.home.allies.p2}
+            </p>
           </div>
       </section>
 
@@ -99,19 +113,25 @@ export default function Home() {
             {/* Workshops */}
             <div className="grid md:grid-cols-2 gap-8 items-center">
                 <div>
-                    <h3 className="text-3xl font-bold font-headline text-primary mb-4">Talleres y Ciclos de Activación Intensiva Cósmica</h3>
+                    <h3 className="text-3xl font-bold font-headline text-primary mb-4">{translations.home.workshops.title}</h3>
                     <p className="text-muted-foreground mb-4">
-                       Dos veces al mes, puedes acceder a este portal mediante los Ciclos de Activación Intensiva Nocturna, un programa a distancia de siete noches guiadas e inspiradas por Astar Katar y sus aliados estelares. Puedes participar desde cualquier parte del mundo.
+                       {translations.home.workshops.p1}
+                    </p>
+                    <p className="text-muted-foreground mb-4 font-semibold">
+                       {translations.home.workshops.p2}
                     </p>
                     <ul className="list-disc list-inside text-muted-foreground space-y-2 mb-6">
-                        <li>Recibir activaciones profundas alineadas con las influencias cósmicas.</li>
-                        <li>Acceder en cuerpos sutiles a cámaras cuánticas de sanación.</li>
-                        <li>Vivir experiencias de transformación ilimitada.</li>
-                        <li>Ser acompañado por seres estelares, arcángeles y maestros ascendidos.</li>
+                        <li>{translations.home.workshops.l1}</li>
+                        <li>{translations.home.workshops.l2}</li>
+                        <li>{translations.home.workshops.l3}</li>
+                        <li>{translations.home.workshops.l4}</li>
                     </ul>
+                     <p className="text-muted-foreground mb-6">
+                       {translations.home.workshops.p3}
+                    </p>
                     <Button asChild>
                         <Link href="/talleres">
-                            <Dna className="mr-2"/> Ciclos y talleres de activación multidimensional
+                            <Dna className="mr-2"/> {translations.home.quickAccess.workshops}
                         </Link>
                     </Button>
                 </div>
@@ -121,19 +141,26 @@ export default function Home() {
              <div className="grid md:grid-cols-2 gap-8 items-center">
                  <Image src="https://images.unsplash.com/photo-1743127671067-62af70aa67c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjcnlzdGFsJTIwYnJhY2VsZXR8ZW58MHx8fHwxNzY0NjkyMTM5fDA&ixlib=rb-4.1.0&q=80&w=1080" alt="Pulsera de cuarzo" data-ai-hint="crystal bracelet" width={600} height={400} className="rounded-lg object-cover aspect-video md:order-2" />
                 <div className="md:order-1">
-                    <h3 className="text-3xl font-bold font-headline text-primary mb-4">Pulseras Activadas Multidimensionalmente</h3>
+                    <h3 className="text-3xl font-bold font-headline text-primary mb-4">{translations.home.bracelets.title}</h3>
                     <p className="text-muted-foreground mb-4">
-                       Dentro del portal, jerarquías cósmicas inspiran, activan y energizan pulseras y cristales que funcionan como antenas multidimensionales para adultos, niños y adolescentes.
+                       {translations.home.bracelets.p1}
+                    </p>
+                    <p className="text-muted-foreground mb-4 font-semibold">
+                       {translations.home.bracelets.p2}
                     </p>
                     <ul className="list-disc list-inside text-muted-foreground space-y-2 mb-6">
-                        <li>Lleva una intención específica canalizada por seres estelares.</li>
-                        <li>Actúa profundamente bajo la guía de tu Yo Superior.</li>
-                        <li>Eleva tu vibración y disuelve bloqueos subconscientes.</li>
-                        <li>Implanta impulsos evolutivos que aceleran tu maestría personal.</li>
+                        <li>{translations.home.bracelets.l1}</li>
+                        <li>{translations.home.bracelets.l2}</li>
+                        <li>{translations.home.bracelets.l3}</li>
+                        <li>{translations.home.bracelets.l4}</li>
+                        <li>{translations.home.bracelets.l5}</li>
                     </ul>
+                     <p className="text-muted-foreground mb-6">
+                       {translations.home.bracelets.p3}
+                    </p>
                     <Button asChild>
                         <Link href="/tienda">
-                           <Gem className="mr-2"/> Pulseras de activación multidimensional
+                           <Gem className="mr-2"/> {translations.home.quickAccess.bracelets}
                         </Link>
                     </Button>
                 </div>
@@ -141,18 +168,24 @@ export default function Home() {
              {/* Meditations */}
             <div className="grid md:grid-cols-2 gap-8 items-center">
                 <div>
-                    <h3 className="text-3xl font-bold font-headline text-primary mb-4">Meditaciones de Activación Cósmica</h3>
+                    <h3 className="text-3xl font-bold font-headline text-primary mb-4">{translations.home.meditations.title}</h3>
                     <p className="text-muted-foreground mb-4">
-                       Para quienes desean conectarse diariamente con el portal, existe una colección creciente de meditaciones guiadas, disponibles en el Club de Activación Personal.
+                       {translations.home.meditations.p1}
+                    </p>
+                     <p className="text-muted-foreground mb-4 font-semibold">
+                       {translations.home.meditations.p2}
                     </p>
                     <ul className="list-disc list-inside text-muted-foreground space-y-2 mb-6">
-                        <li>Meditaciones canalizadas mes a mes por seres estelares de luz.</li>
-                        <li>Acceso ilimitado a todas las activaciones con tu suscripción.</li>
-                        <li>Contenido grabado con la voz y la consciencia de Frank Alexander.</li>
+                        <li>{translations.home.meditations.l1}</li>
+                        <li>{translations.home.meditations.l2}</li>
+                        <li>{translations.home.meditations.l3}</li>
                     </ul>
+                     <p className="text-muted-foreground mb-6">
+                       {translations.home.meditations.p3}
+                    </p>
                     <Button asChild>
                         <Link href="/meditaciones">
-                           <MicVocal className="mr-2"/> Club de activación personal
+                           <MicVocal className="mr-2"/> {translations.home.quickAccess.meditations}
                         </Link>
                     </Button>
                 </div>
@@ -166,20 +199,20 @@ export default function Home() {
           <div className="container max-w-3xl mx-auto">
              <Card className="p-6 md:p-8">
                  <div className="text-center">
-                    <h3 className="text-2xl font-bold font-headline text-primary">Mantente Conectado</h3>
-                    <p className="text-muted-foreground mt-2 mb-6">Deseo recibir información sobre nuevos talleres y productos.</p>
+                    <h3 className="text-2xl font-bold font-headline text-primary">{translations.home.subscribe.title}</h3>
+                    <p className="text-muted-foreground mt-2 mb-6">{translations.home.subscribe.subtitle}</p>
                  </div>
                 <form className="flex flex-col sm:flex-row items-start gap-4">
                     <div className="w-full space-y-2">
-                        <Label htmlFor="name-sub">Nombre</Label>
-                        <Input id="name-sub" placeholder="Tu Nombre"/>
+                        <Label htmlFor="name-sub">{translations.home.subscribe.nameLabel}</Label>
+                        <Input id="name-sub" placeholder={translations.home.subscribe.namePlaceholder}/>
                     </div>
                      <div className="w-full space-y-2">
                         <Label htmlFor="whatsapp-sub">WhatsApp</Label>
-                        <Input id="whatsapp-sub" placeholder="Tu WhatsApp (ej. +123456789)"/>
+                        <Input id="whatsapp-sub" placeholder={translations.home.subscribe.whatsappPlaceholder}/>
                     </div>
                     <div className="w-full sm:w-auto self-end">
-                        <Button type="submit" className="w-full sm:w-auto">Suscribirse</Button>
+                        <Button type="submit" className="w-full sm:w-auto">{translations.home.subscribe.buttonText}</Button>
                     </div>
                 </form>
              </Card>
