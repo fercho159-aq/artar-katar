@@ -42,6 +42,9 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  env: {
+    CLIP_API_KEY: process.env.CLIP_API_KEY,
+  }
 };
 
 export default nextConfig;

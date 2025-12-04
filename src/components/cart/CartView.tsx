@@ -46,8 +46,18 @@ export function CartView() {
     }
 
     setIsProcessing(true);
+    
+    // TODO: Implement full Clip payment integration
+    // For now, we simulate a successful payment and create the order.
+    // The public API key is available via process.env.CLIP_API_KEY
+    console.log("Initiating payment with Clip API Key:", process.env.CLIP_API_KEY);
+
 
     try {
+      // Here you would typically redirect to Clip's checkout or use their JS library.
+      // After a successful payment confirmation from Clip (e.g., via webhook),
+      // you would then proceed to create the order in your database.
+      
       const response = await fetch('/api/orders', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
