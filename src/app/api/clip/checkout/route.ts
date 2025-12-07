@@ -36,7 +36,7 @@ export async function POST(request: Request) {
 
         // Clip uses the same production URL for both test and live credentials
         // Test credentials start with 'test_'
-        const clipBaseUrl = 'https://api.clip.mx';
+        const clipBaseUrl = 'https://api.payclip.com';
 
         console.log('Creating Clip checkout session:', {
             amount: validatedData.amount,
