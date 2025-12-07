@@ -6,6 +6,18 @@ import crypto from 'crypto';
  * Clip enviará notificaciones a esta URL para eventos como pagos completados.
  * URL a configurar en el dashboard de Clip: https://www.astar-katar.com/api/webhooks/clip
  */
+
+/**
+ * GET handler - Returns info about the webhook endpoint
+ * This prevents 405 errors when someone visits the URL directly
+ */
+export async function GET() {
+  return NextResponse.json({
+    status: 'active',
+    message: 'Clip Webhook Endpoint - Este endpoint solo acepta solicitudes POST de Clip.',
+    endpoint: '/api/webhooks/clip',
+  });
+}
 export async function POST(request: Request) {
   try {
     const rawBody = await request.text();
