@@ -9,6 +9,7 @@ import { useCart, type Product } from "@/context/CartContext";
 import Link from 'next/link';
 
 export const meditations = [
+  { id: "med_test_001", title: "🧪 Meditación de Prueba", duration: "1 min", description: "Producto de prueba para verificar pagos - $1 MXN", imageId: "meditation-1", price: 1 },
   { id: "med_001", title: "Meditación de Anclaje a Tierra", duration: "15 min", description: "Conecta con la energía de Gaia y encuentra tu centro.", imageId: "meditation-1", price: 40 },
   { id: "med_002", title: "Activación del Corazón Cristalino", duration: "25 min", description: "Abre tu corazón a la frecuencia del amor incondicional.", imageId: "meditation-2", price: 40 },
   { id: "med_003", title: "Viaje al Templo de Sanación", duration: "30 min", description: "Recibe sanación y guía de los maestros ascendidos.", imageId: "workshop-1", price: 40 },
@@ -39,7 +40,7 @@ export default function MeditacionesPage() {
     };
     addToCart(product);
   };
-  
+
   const handleSubscribe = () => {
     addToCart(subscriptionProduct);
   };
@@ -58,7 +59,7 @@ export default function MeditacionesPage() {
         <div className="mb-16">
           <Card className="relative overflow-hidden w-full max-w-4xl mx-auto">
             <div className="absolute inset-0">
-               {subscriptionImage && (
+              {subscriptionImage && (
                 <Image
                   src={subscriptionImage.imageUrl}
                   alt={subscriptionImage.description}
