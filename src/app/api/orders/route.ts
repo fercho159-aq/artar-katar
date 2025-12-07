@@ -2,7 +2,6 @@ import 'dotenv/config';
 import { NextResponse } from 'next/server';
 import pool from '@/lib/db';
 import { z } from 'zod';
-import { CartItem } from '@/context/CartContext';
 
 const orderItemSchema = z.object({
   product: z.object({
@@ -14,10 +13,25 @@ const orderItemSchema = z.object({
   quantity: z.number().min(1),
 });
 
+const shippingAddressSchema = z.object({
+  name: z.string().min(1, 'Nombre requerido'),
+  phone: z.string().min(10, 'Teléfono inválido'),
+  street: z.string().min(1, 'Calle requerida'),
+  city: z.string().min(1, 'Ciudad requerida'),
+  state: z.string().min(1, 'Estado requerido'),
+  postalCode: z.string().min(5, 'Código postal inválido'),
+  country: z.string().default('México'),
+  notes: z.string().optional(),
+});
+
 const orderSchema = z.object({
   userId: z.string(), // This is the public uid
   items: z.array(orderItemSchema),
   totalAmount: z.number(),
+  paymentReference: z.string().optional(),
+  paymentStatus: z.string().optional(),
+  shippingAddress: shippingAddressSchema.optional(), // Optional for digital products
+  requiresShipping: z.boolean().default(false),
 });
 
 
@@ -31,7 +45,12 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: 'Entrada inválida', errors: validation.error.flatten().fieldErrors }, { status: 400 });
     }
 
-    const { userId, items, totalAmount } = validation.data;
+    const { userId, items, totalAmount, paymentReference, paymentStatus, shippingAddress, requiresShipping } = validation.data;
+
+    // Validate shipping address is provided for physical products
+    if (requiresShipping && !shippingAddress) {
+      return NextResponse.json({ message: 'Se requiere dirección de envío para productos físicos.' }, { status: 400 });
+    }
 
     // Start a transaction
     await client.query('BEGIN');
@@ -44,30 +63,69 @@ export async function POST(request: Request) {
     }
     const internalUserId = userResult.rows[0].id;
 
-    // 2. Create the order in the `orders` table
+    // 2. Create the order in the `orders` table with shipping info
     const orderInsertResult = await client.query(
-      'INSERT INTO orders (user_id, total_amount, status) VALUES ($1, $2, $3) RETURNING id',
-      [internalUserId, totalAmount, 'Completado']
+      `INSERT INTO orders (
+        user_id, 
+        total_amount, 
+        status,
+        payment_reference,
+        shipping_name,
+        shipping_phone,
+        shipping_street,
+        shipping_city,
+        shipping_state,
+        shipping_postal_code,
+        shipping_country,
+        shipping_notes
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING id`,
+      [
+        internalUserId,
+        totalAmount,
+        paymentStatus || 'Completado',
+        paymentReference || null,
+        shippingAddress?.name || null,
+        shippingAddress?.phone || null,
+        shippingAddress?.street || null,
+        shippingAddress?.city || null,
+        shippingAddress?.state || null,
+        shippingAddress?.postalCode || null,
+        shippingAddress?.country || 'México',
+        shippingAddress?.notes || null,
+      ]
     );
     const orderId = orderInsertResult.rows[0].id;
 
     // 3. For each item in the cart, create a record in the `order_items` table
     for (const item of items) {
-      // Find the internal product ID from its SKU
-      const productResult = await client.query('SELECT id FROM products WHERE product_sku = $1', [item.product.id]);
-      if (productResult.rows.length === 0) {
-        // If a product is not found, rollback the transaction
-        await client.query('ROLLBACK');
-        return NextResponse.json({ message: `Producto con SKU ${item.product.id} no encontrado.` }, { status: 400 });
-      }
-      const productId = productResult.rows[0].id;
+      // Check if it's a digital product (meditation, workshop, subscription)
+      const isDigitalProduct = item.product.id.startsWith('med_') ||
+        item.product.id.startsWith('wshop_') ||
+        item.product.id.startsWith('sub_');
 
-      await client.query(
-        'INSERT INTO order_items (order_id, product_id, quantity, price_at_purchase) VALUES ($1, $2, $3, $4)',
-        [orderId, productId, item.quantity, item.product.price]
-      );
+      if (isDigitalProduct) {
+        // For digital products, just store the item info without product lookup
+        await client.query(
+          'INSERT INTO order_items (order_id, product_id, quantity, price_at_purchase) VALUES ($1, $2, $3, $4)',
+          [orderId, null, item.quantity, item.product.price]
+        );
+      } else {
+        // Find the internal product ID from its SKU (physical products)
+        const productResult = await client.query('SELECT id FROM products WHERE product_sku = $1', [item.product.id]);
+        if (productResult.rows.length === 0) {
+          // If a product is not found, rollback the transaction
+          await client.query('ROLLBACK');
+          return NextResponse.json({ message: `Producto con SKU ${item.product.id} no encontrado.` }, { status: 400 });
+        }
+        const productId = productResult.rows[0].id;
+
+        await client.query(
+          'INSERT INTO order_items (order_id, product_id, quantity, price_at_purchase) VALUES ($1, $2, $3, $4)',
+          [orderId, productId, item.quantity, item.product.price]
+        );
+      }
     }
-    
+
     // Commit the transaction
     await client.query('COMMIT');
 

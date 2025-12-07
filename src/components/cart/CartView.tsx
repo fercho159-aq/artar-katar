@@ -12,12 +12,18 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { Minus, Plus, Trash2, ShoppingCart } from 'lucide-react';
+import { Minus, Plus, Trash2, ShoppingCart, Package, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import {
+  ShippingAddressForm,
+  ShippingAddress,
+  emptyShippingAddress,
+  isShippingAddressValid
+} from './ShippingAddressForm';
 
 export function CartView() {
   const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
@@ -25,13 +31,22 @@ export function CartView() {
   const { user } = useAuth();
   const router = useRouter();
   const [isProcessing, setIsProcessing] = useState(false);
+  const [shippingAddress, setShippingAddress] = useState<ShippingAddress>(emptyShippingAddress);
+
+  // Check if there are physical products that require shipping
+  const hasPhysicalProducts = cart.some(item =>
+    !item.product.id.startsWith('med_') &&
+    !item.product.id.startsWith('wshop_') &&
+    !item.product.id.startsWith('sub_')
+  );
 
   const subtotal = cart.reduce(
     (sum, item) => sum + item.product.price * item.quantity,
     0
   );
-  // Simulación de envío, podría ser 0 para productos digitales
-  const shipping = cart.some(item => !item.product.id.startsWith('med_') && !item.product.id.startsWith('wshop_')) ? 10.0 : 0;
+
+  // Shipping cost only for physical products
+  const shipping = hasPhysicalProducts ? 150.0 : 0;
   const total = subtotal + shipping;
 
   const handleCheckout = async () => {
@@ -42,6 +57,16 @@ export function CartView() {
         description: 'Debes iniciar sesión para poder realizar la compra.',
       });
       router.push('/login');
+      return;
+    }
+
+    // Validate shipping address for physical products
+    if (hasPhysicalProducts && !isShippingAddressValid(shippingAddress)) {
+      toast({
+        variant: 'destructive',
+        title: 'Dirección incompleta',
+        description: 'Por favor completa todos los campos de la dirección de envío.',
+      });
       return;
     }
 
@@ -95,6 +120,8 @@ export function CartView() {
         userId: user.uid,
         items: cart,
         totalAmount: total,
+        requiresShipping: hasPhysicalProducts,
+        shippingAddress: hasPhysicalProducts ? shippingAddress : null,
       }));
 
       // Redirect to Clip's checkout page
@@ -109,7 +136,6 @@ export function CartView() {
       });
       setIsProcessing(false);
     }
-    // Note: we don't set isProcessing to false on success because we're redirecting
   };
 
   if (cart.length === 0) {
@@ -128,73 +154,104 @@ export function CartView() {
   }
 
   return (
-    <div className="grid md:grid-cols-3 gap-12">
-      <div className="md:col-span-2">
-        <h1 className="text-3xl font-bold font-headline mb-8">Tu Carrito</h1>
-        <div className="space-y-6">
-          {cart.map((item) => (
-            <div key={item.product.id} className="flex items-start gap-4">
-              <Image
-                src={item.product.image || '/placeholder.svg'}
-                alt={item.product.name}
-                width={120}
-                height={120}
-                className="rounded-lg object-cover aspect-square"
-              />
-              <div className="flex-grow">
-                <h3 className="font-semibold text-lg">{item.product.name}</h3>
-                <p className="text-primary font-bold text-md">
-                  ${item.product.price.toFixed(2)}
-                </p>
-                <div className="flex items-center gap-2 mt-2">
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className="h-8 w-8"
-                    onClick={() =>
-                      updateQuantity(item.product.id, item.quantity - 1)
-                    }
-                    disabled={isProcessing}
-                  >
-                    <Minus className="h-4 w-4" />
-                  </Button>
-                  <Input
-                    type="number"
-                    value={item.quantity}
-                    onChange={(e) =>
-                      updateQuantity(
-                        item.product.id,
-                        parseInt(e.target.value) || 1
-                      )
-                    }
-                    className="w-16 h-8 text-center"
-                    readOnly
-                    disabled={isProcessing}
+    <div className="grid md:grid-cols-3 gap-8">
+      <div className="md:col-span-2 space-y-8">
+        <div>
+          <h1 className="text-3xl font-bold font-headline mb-6">Tu Carrito</h1>
+          <div className="space-y-4">
+            {cart.map((item) => {
+              const isDigital = item.product.id.startsWith('med_') ||
+                item.product.id.startsWith('wshop_') ||
+                item.product.id.startsWith('sub_');
+              return (
+                <div key={item.product.id} className="flex items-start gap-4 p-4 bg-card rounded-lg border">
+                  <Image
+                    src={item.product.image || '/placeholder.svg'}
+                    alt={item.product.name}
+                    width={100}
+                    height={100}
+                    className="rounded-lg object-cover aspect-square"
                   />
+                  <div className="flex-grow">
+                    <div className="flex items-center gap-2">
+                      <h3 className="font-semibold text-lg">{item.product.name}</h3>
+                      {isDigital ? (
+                        <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full flex items-center gap-1">
+                          <Sparkles className="h-3 w-3" /> Digital
+                        </span>
+                      ) : (
+                        <span className="text-xs bg-secondary text-secondary-foreground px-2 py-0.5 rounded-full flex items-center gap-1">
+                          <Package className="h-3 w-3" /> Físico
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-primary font-bold text-md mt-1">
+                      ${item.product.price.toFixed(2)} MXN
+                    </p>
+                    <div className="flex items-center gap-2 mt-2">
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="h-8 w-8"
+                        onClick={() =>
+                          updateQuantity(item.product.id, item.quantity - 1)
+                        }
+                        disabled={isProcessing}
+                      >
+                        <Minus className="h-4 w-4" />
+                      </Button>
+                      <Input
+                        type="number"
+                        value={item.quantity}
+                        onChange={(e) =>
+                          updateQuantity(
+                            item.product.id,
+                            parseInt(e.target.value) || 1
+                          )
+                        }
+                        className="w-16 h-8 text-center"
+                        readOnly
+                        disabled={isProcessing}
+                      />
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="h-8 w-8"
+                        onClick={() =>
+                          updateQuantity(item.product.id, item.quantity + 1)
+                        }
+                        disabled={isProcessing}
+                      >
+                        <Plus className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
                   <Button
-                    variant="outline"
+                    variant="ghost"
                     size="icon"
-                    className="h-8 w-8"
-                    onClick={() =>
-                      updateQuantity(item.product.id, item.quantity + 1)
-                    }
+                    onClick={() => removeFromCart(item.product.id)}
                     disabled={isProcessing}
                   >
-                    <Plus className="h-4 w-4" />
+                    <Trash2 className="h-5 w-5 text-muted-foreground" />
                   </Button>
                 </div>
-              </div>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => removeFromCart(item.product.id)}
-                disabled={isProcessing}
-              >
-                <Trash2 className="h-5 w-5 text-muted-foreground" />
-              </Button>
-            </div>
-          ))}
+              );
+            })}
+          </div>
         </div>
+
+        {/* Shipping Address Form - Only shown for physical products */}
+        {hasPhysicalProducts && (
+          <Card>
+            <CardContent className="pt-6">
+              <ShippingAddressForm
+                address={shippingAddress}
+                onChange={setShippingAddress}
+                disabled={isProcessing}
+              />
+            </CardContent>
+          </Card>
+        )}
       </div>
 
       <Card className="md:col-span-1 h-fit sticky top-24">
@@ -204,23 +261,35 @@ export function CartView() {
         <CardContent className="space-y-4">
           <div className="flex justify-between">
             <span>Subtotal</span>
-            <span>${subtotal.toFixed(2)}</span>
+            <span>${subtotal.toFixed(2)} MXN</span>
           </div>
           <div className="flex justify-between">
             <span>Envío</span>
-            <span>${shipping.toFixed(2)}</span>
+            <span>
+              {hasPhysicalProducts ? (
+                `$${shipping.toFixed(2)} MXN`
+              ) : (
+                <span className="text-green-600">Gratis (Digital)</span>
+              )}
+            </span>
           </div>
           <Separator />
           <div className="flex justify-between font-bold text-lg">
             <span>Total</span>
-            <span>${total.toFixed(2)}</span>
+            <span>${total.toFixed(2)} MXN</span>
           </div>
+
+          {hasPhysicalProducts && !isShippingAddressValid(shippingAddress) && (
+            <p className="text-sm text-muted-foreground">
+              * Completa la dirección de envío para continuar
+            </p>
+          )}
         </CardContent>
         <CardFooter>
           <Button
             className="w-full"
             onClick={handleCheckout}
-            disabled={isProcessing || cart.length === 0}
+            disabled={isProcessing || cart.length === 0 || (hasPhysicalProducts && !isShippingAddressValid(shippingAddress))}
           >
             {isProcessing ? "Procesando..." : (user ? 'Proceder al Pago' : 'Inicia sesión para pagar')}
           </Button>

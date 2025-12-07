@@ -73,7 +73,9 @@ function CheckoutSuccessContent() {
                         items: pendingOrder.items,
                         totalAmount: pendingOrder.totalAmount,
                         paymentReference: reference,
-                        paymentStatus: 'completed',
+                        paymentStatus: 'Completado',
+                        requiresShipping: pendingOrder.requiresShipping || false,
+                        shippingAddress: pendingOrder.shippingAddress || null,
                     }),
                 });
 
