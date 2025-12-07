@@ -46,40 +46,59 @@ export function CartView() {
     }
 
     setIsProcessing(true);
-    
-    // TODO: Implement full Clip payment integration
-    // For now, we simulate a successful payment and create the order.
-    // The public API key is available via process.env.CLIP_API_KEY
-    console.log("Initiating payment with Clip API Key:", process.env.CLIP_API_KEY);
-
 
     try {
-      // Here you would typically redirect to Clip's checkout or use their JS library.
-      // After a successful payment confirmation from Clip (e.g., via webhook),
-      // you would then proceed to create the order in your database.
-      
-      const response = await fetch('/api/orders', {
+      // Generate a unique reference for this order
+      const orderReference = `ORDER-${user.uid}-${Date.now()}`;
+
+      // Get the base URL for redirects
+      const baseUrl = window.location.origin;
+
+      // Create descriptions for the purchase
+      const itemDescriptions = cart.map(item =>
+        `${item.product.name} x${item.quantity}`
+      ).join(', ');
+
+      // Create Clip checkout session
+      const clipResponse = await fetch('/api/clip/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          userId: user.uid,
-          items: cart,
-          totalAmount: total,
+          amount: total,
+          currency: 'MXN',
+          purchase_description: `Compra Astar Katar: ${itemDescriptions}`.substring(0, 250),
+          reference: orderReference,
+          return_url: `${baseUrl}/checkout/success?reference=${orderReference}`,
+          webhook_url: `${baseUrl}/api/webhooks/clip`,
+          metadata: {
+            user_id: user.uid,
+            user_email: user.email || '',
+            items: JSON.stringify(cart.map(item => ({
+              id: item.product.id,
+              name: item.product.name,
+              quantity: item.quantity,
+              price: item.product.price,
+            }))),
+          },
         }),
       });
-      
-      const result = await response.json();
 
-      if (!response.ok) {
-        throw new Error(result.message || 'Error al procesar el pedido.');
+      const clipResult = await clipResponse.json();
+
+      if (!clipResponse.ok) {
+        throw new Error(clipResult.message || 'Error al crear sesión de pago.');
       }
 
-      toast({
-        title: '¡Gracias por tu compra!',
-        description: 'Hemos recibido tu pedido.',
-      });
-      clearCart();
-      router.push('/mis-compras');
+      // Store order info in localStorage before redirecting
+      localStorage.setItem('pendingOrder', JSON.stringify({
+        reference: orderReference,
+        userId: user.uid,
+        items: cart,
+        totalAmount: total,
+      }));
+
+      // Redirect to Clip's checkout page
+      window.location.href = clipResult.payment_url;
 
     } catch (error) {
       console.error("Checkout error:", error);
@@ -88,9 +107,9 @@ export function CartView() {
         title: "Error en la compra",
         description: (error as Error).message || "No se pudo completar el pedido.",
       });
-    } finally {
       setIsProcessing(false);
     }
+    // Note: we don't set isProcessing to false on success because we're redirecting
   };
 
   if (cart.length === 0) {
