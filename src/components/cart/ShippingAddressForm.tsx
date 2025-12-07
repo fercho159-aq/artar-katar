@@ -64,12 +64,12 @@ export function ShippingAddressForm({ address, onChange, disabled }: ShippingAdd
                     <Label htmlFor="shipping-phone">Teléfono *</Label>
                     <Input
                         id="shipping-phone"
-                        placeholder="10 dígitos"
+                        placeholder="Ej: 5512345678"
                         value={address.phone}
                         onChange={(e) => updateField('phone', e.target.value)}
                         disabled={disabled}
                         required
-                        maxLength={10}
+                        maxLength={15}
                     />
                 </div>
             </div>
@@ -162,7 +162,7 @@ export const emptyShippingAddress: ShippingAddress = {
 export function isShippingAddressValid(address: ShippingAddress): boolean {
     return !!(
         address.name.trim() &&
-        address.phone.trim().length >= 10 &&
+        address.phone.trim().length >= 8 &&
         address.street.trim() &&
         address.city.trim() &&
         address.state.trim() &&
