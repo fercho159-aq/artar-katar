@@ -1,4 +1,3 @@
-'use server';
 import { NextResponse } from 'next/server';
 import crypto from 'crypto';
 
@@ -16,12 +15,12 @@ export async function POST(request: Request) {
       console.warn('Webhook de Clip recibido sin firma.');
       return NextResponse.json({ message: 'Firma no proporcionada.' }, { status: 400 });
     }
-    
+
     // La clave secreta debe estar en tus variables de entorno
     const secretKey = process.env.CLIP_SECRET_KEY;
     if (!secretKey) {
-        console.error('La clave secreta de Clip no está configurada en las variables de entorno.');
-        return NextResponse.json({ message: 'Error interno del servidor.' }, { status: 500 });
+      console.error('La clave secreta de Clip no está configurada en las variables de entorno.');
+      return NextResponse.json({ message: 'Error interno del servidor.' }, { status: 500 });
     }
 
     // Verificar la firma para asegurar que el webhook es legítimo
@@ -47,20 +46,20 @@ export async function POST(request: Request) {
     // y la marcarías como "pagada".
 
     switch (event.event) {
-        case 'payment.created':
-            // Lógica para cuando se crea un pago
-            break;
-        case 'transaction.succeeded':
-            // Lógica para cuando una transacción es exitosa.
-            // Este es usualmente el evento más importante para confirmar una compra.
-            // const paymentId = event.data.object.id;
-            // const orderId = event.data.object.reference; // Suponiendo que la referencia es el ID de tu pedido
-            // await updateOrderStatus(orderId, 'paid');
-            break;
-        case 'transaction.failed':
-             // Lógica para cuando una transacción falla.
-            break;
-        // Añadir más casos para otros eventos que te interesen...
+      case 'payment.created':
+        // Lógica para cuando se crea un pago
+        break;
+      case 'transaction.succeeded':
+        // Lógica para cuando una transacción es exitosa.
+        // Este es usualmente el evento más importante para confirmar una compra.
+        // const paymentId = event.data.object.id;
+        // const orderId = event.data.object.reference; // Suponiendo que la referencia es el ID de tu pedido
+        // await updateOrderStatus(orderId, 'paid');
+        break;
+      case 'transaction.failed':
+        // Lógica para cuando una transacción falla.
+        break;
+      // Añadir más casos para otros eventos que te interesen...
     }
 
 
