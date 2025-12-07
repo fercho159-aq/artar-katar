@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Menu, Sparkles, ShoppingCart, User, LogOut, LayoutDashboard, Globe } from 'lucide-react';
+import { Menu, Sparkles, ShoppingCart, User, LogOut, LayoutDashboard, Globe, Package } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
@@ -36,7 +36,7 @@ export function Header() {
     logout();
     router.push('/');
   };
-  
+
   const getInitials = (name = '') => {
     return name.split(' ').map(n => n[0]).join('').toUpperCase();
   }
@@ -87,13 +87,13 @@ export function Header() {
                 <span className="sr-only">Carrito de compras</span>
               </Link>
             </Button>
-            
+
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" className="relative h-8 w-8 rounded-full">
                     <Avatar className="h-8 w-8">
-                       <AvatarImage src={user.photoURL || ''} alt={user.name || ''} />
+                      <AvatarImage src={user.photoURL || ''} alt={user.name || ''} />
                       <AvatarFallback>{getInitials(user.name)}</AvatarFallback>
                     </Avatar>
                   </Button>
@@ -109,11 +109,22 @@ export function Header() {
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
-                     <Link href="/mis-compras">
-                        <LayoutDashboard className="mr-2 h-4 w-4" />
-                        <span>{translations.header.myPurchases}</span>
-                     </Link>
+                    <Link href="/mis-compras">
+                      <LayoutDashboard className="mr-2 h-4 w-4" />
+                      <span>{translations.header.myPurchases}</span>
+                    </Link>
                   </DropdownMenuItem>
+                  {user.is_admin && (
+                    <>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem asChild>
+                        <Link href="/admin/orders">
+                          <Package className="mr-2 h-4 w-4" />
+                          <span>Panel de Órdenes</span>
+                        </Link>
+                      </DropdownMenuItem>
+                    </>
+                  )}
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={handleLogout}>
                     <LogOut className="mr-2 h-4 w-4" />
@@ -122,7 +133,7 @@ export function Header() {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-               <Button asChild variant="ghost" size="icon">
+              <Button asChild variant="ghost" size="icon">
                 <Link href="/login">
                   <User className="h-5 w-5" />
                   <span className="sr-only">{translations.header.login}</span>
@@ -130,20 +141,20 @@ export function Header() {
               </Button>
             )}
 
-             <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon">
-                    <Globe className="h-5 w-5" />
-                    <span className="sr-only">Change language</span>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuRadioGroup value={language} onValueChange={setLanguage}>
-                    <DropdownMenuRadioItem value="es">Español</DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="en">English</DropdownMenuRadioItem>
-                  </DropdownMenuRadioGroup>
-                </DropdownMenuContent>
-              </DropdownMenu>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Globe className="h-5 w-5" />
+                  <span className="sr-only">Change language</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuRadioGroup value={language} onValueChange={setLanguage}>
+                  <DropdownMenuRadioItem value="es">Español</DropdownMenuRadioItem>
+                  <DropdownMenuRadioItem value="en">English</DropdownMenuRadioItem>
+                </DropdownMenuRadioGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
 
             <div className="md:hidden">
               <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
@@ -162,7 +173,7 @@ export function Header() {
                     className="mr-6 flex items-center space-x-2"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                     <Image src="/images/logo.png" alt="Astar Katar Logo" width={40} height={40} className="h-10 w-auto" />
+                    <Image src="/images/logo.png" alt="Astar Katar Logo" width={40} height={40} className="h-10 w-auto" />
                     <span className="font-bold text-lg font-headline text-primary sr-only">
                       Astar Katar
                     </span>
