@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 import { CheckCircle2, XCircle, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 
-export default function CheckoutSuccessPage() {
+function CheckoutSuccessContent() {
     const searchParams = useSearchParams();
     const router = useRouter();
     const { clearCart } = useCart();
@@ -147,5 +147,26 @@ export default function CheckoutSuccessPage() {
                 </CardContent>
             </Card>
         </div>
+    );
+}
+
+function LoadingFallback() {
+    return (
+        <div className="container py-16 md:py-24 flex justify-center">
+            <Card className="max-w-md w-full text-center">
+                <CardHeader>
+                    <Loader2 className="h-16 w-16 text-primary mx-auto mb-4 animate-spin" />
+                    <CardTitle>Cargando...</CardTitle>
+                </CardHeader>
+            </Card>
+        </div>
+    );
+}
+
+export default function CheckoutSuccessPage() {
+    return (
+        <Suspense fallback={<LoadingFallback />}>
+            <CheckoutSuccessContent />
+        </Suspense>
     );
 }
