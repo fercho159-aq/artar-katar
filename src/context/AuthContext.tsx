@@ -1,8 +1,10 @@
 'use client';
 
 import { CartItem } from './CartContext';
-import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useEffect, useCallback } from 'react';
 import type { Subscription } from '@/lib/types';
+
+const USER_STORAGE_KEY = 'astar_katar_user';
 
 type User = {
   uid: string;
@@ -13,17 +15,17 @@ type User = {
 };
 
 export type ApiOrder = {
-    order_id: string;
-    order_date: string;
-    total_amount: number;
-    status: string;
-    items: {
-        product_id: string; // Corresponds to product_sku
-        name: string;
-        quantity: number;
-        price_at_purchase: number;
-        image_url: string;
-    }[];
+  order_id: string;
+  order_date: string;
+  total_amount: number;
+  status: string;
+  items: {
+    product_id: string; // Corresponds to product_sku
+    name: string;
+    quantity: number;
+    price_at_purchase: number;
+    image_url: string;
+  }[];
 }
 
 type Order = {
@@ -51,26 +53,25 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [subscription, setSubscription] = useState<Subscription | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-
-  const fetchUserData = async (userId: string) => {
+  const fetchUserData = useCallback(async (userId: string) => {
     // Fetch Orders
     try {
       const ordersResponse = await fetch(`/api/orders/${userId}`);
       if (ordersResponse.ok) {
         const apiOrders: ApiOrder[] = await ordersResponse.json();
         const formattedOrders: Order[] = apiOrders.map(apiOrder => ({
-            id: apiOrder.order_id.toString(),
-            date: new Date(apiOrder.order_date).toLocaleDateString('es-ES'),
-            total: parseFloat(apiOrder.total_amount as any),
-            items: apiOrder.items.map(item => ({
-                quantity: item.quantity,
-                product: {
-                    id: item.product_id, // product_sku
-                    name: item.name,
-                    price: parseFloat(item.price_at_purchase as any),
-                    image: item.image_url || '', 
-                }
-            }))
+          id: apiOrder.order_id.toString(),
+          date: new Date(apiOrder.order_date).toLocaleDateString('es-ES'),
+          total: parseFloat(apiOrder.total_amount as any),
+          items: apiOrder.items.map(item => ({
+            quantity: item.quantity,
+            product: {
+              id: item.product_id, // product_sku
+              name: item.name,
+              price: parseFloat(item.price_at_purchase as any),
+              image: item.image_url || '',
+            }
+          }))
         }));
         setOrders(formattedOrders);
       } else {
@@ -94,14 +95,40 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       console.error("Failed to fetch subscription:", error);
       setSubscription(null);
     }
-  };
-  
-  useEffect(() => {
-    // Aquí podrías implementar la lógica para recuperar la sesión del usuario
-    // Por ejemplo, desde localStorage o una cookie de sesión.
-    // Por ahora, simplemente terminamos la carga.
-    setIsLoading(false);
   }, []);
+
+  // Load user from localStorage on mount
+  useEffect(() => {
+    const loadStoredUser = async () => {
+      try {
+        const storedUser = localStorage.getItem(USER_STORAGE_KEY);
+        if (storedUser) {
+          const parsedUser: User = JSON.parse(storedUser);
+          setUser(parsedUser);
+          // Fetch user data in the background
+          fetchUserData(parsedUser.uid);
+        }
+      } catch (error) {
+        console.error('Error loading stored user:', error);
+        localStorage.removeItem(USER_STORAGE_KEY);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadStoredUser();
+  }, [fetchUserData]);
+
+  // Save user to localStorage whenever it changes
+  useEffect(() => {
+    if (user) {
+      try {
+        localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
+      } catch (error) {
+        console.error('Error saving user to localStorage:', error);
+      }
+    }
+  }, [user]);
 
   const login = async (email: string, password: string): Promise<void> => {
     setIsLoading(true);
@@ -117,38 +144,43 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setIsLoading(false);
       throw new Error(data.message || 'Error al iniciar sesión.');
     }
-    
+
     setUser(data);
     await fetchUserData(data.uid);
     setIsLoading(false);
   };
 
   const signup = async (name: string, email: string, password: string): Promise<void> => {
-     setIsLoading(true);
-     const response = await fetch('/api/users', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password }),
-     });
+    setIsLoading(true);
+    const response = await fetch('/api/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, password }),
+    });
 
-     const data = await response.json();
+    const data = await response.json();
 
-     if (!response.ok) {
-        setIsLoading(false);
-        throw new Error(data.message || 'Error al registrarse.');
-     }
+    if (!response.ok) {
+      setIsLoading(false);
+      throw new Error(data.message || 'Error al registrarse.');
+    }
 
-     setUser(data);
-     setOrders([]);
-     setSubscription(null);
-     setIsLoading(false);
+    setUser(data);
+    setOrders([]);
+    setSubscription(null);
+    setIsLoading(false);
   };
 
   const logout = () => {
     setUser(null);
     setOrders([]);
     setSubscription(null);
-    // Aquí también podrías limpiar la sesión de localStorage/cookie
+    // Clear from localStorage
+    try {
+      localStorage.removeItem(USER_STORAGE_KEY);
+    } catch (error) {
+      console.error('Error removing user from localStorage:', error);
+    }
   };
 
   return (
