@@ -1,10 +1,8 @@
 'use client';
 
-import { Suspense, useEffect, useState } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { Suspense, useEffect, useState, useRef } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
-import { useAuth } from '@/context/AuthContext';
-import { useToast } from '@/hooks/use-toast';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { CheckCircle2, XCircle, Loader2 } from 'lucide-react';
@@ -12,10 +10,8 @@ import Link from 'next/link';
 
 function CheckoutSuccessContent() {
     const searchParams = useSearchParams();
-    const router = useRouter();
     const { clearCart } = useCart();
-    const { user } = useAuth();
-    const { toast } = useToast();
+    const hasProcessed = useRef(false);
 
     const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
     const [message, setMessage] = useState('');
@@ -24,6 +20,10 @@ function CheckoutSuccessContent() {
     const error = searchParams.get('error');
 
     useEffect(() => {
+        // Prevent double processing
+        if (hasProcessed.current) return;
+        hasProcessed.current = true;
+
         const processPayment = async () => {
             // Check if there was an error from Clip
             if (error) {
@@ -33,7 +33,6 @@ function CheckoutSuccessContent() {
             }
 
             // If we have a reference and no error, the payment was successful
-            // Even if localStorage is cleared, CLIP has confirmed the payment
             if (!reference) {
                 setStatus('error');
                 setMessage('No se encontró referencia de pago.');
@@ -41,19 +40,24 @@ function CheckoutSuccessContent() {
             }
 
             // Try to get pending order from localStorage
-            const pendingOrderStr = localStorage.getItem('pendingOrder');
+            let pendingOrderStr: string | null = null;
+            try {
+                pendingOrderStr = localStorage.getItem('pendingOrder');
+            } catch (e) {
+                // localStorage might not be available
+                console.warn('Could not access localStorage:', e);
+            }
 
             // If we don't have localStorage data but payment was successful,
             // still show success - the webhook will handle order creation
             if (!pendingOrderStr) {
-                // Payment was successful (no error param), show success message
-                clearCart();
+                try {
+                    clearCart();
+                } catch (e) {
+                    console.warn('Could not clear cart:', e);
+                }
                 setStatus('success');
                 setMessage('¡Tu pago ha sido procesado exitosamente! Tu pedido será confirmado en breve.');
-                toast({
-                    title: '¡Gracias por tu compra!',
-                    description: 'Recibirás una confirmación pronto.',
-                });
                 return;
             }
 
@@ -73,36 +77,37 @@ function CheckoutSuccessContent() {
                     }),
                 });
 
-                const result = await response.json();
-
                 if (!response.ok) {
-                    // Even if order creation fails, payment was successful
+                    const result = await response.json();
                     console.error('Order creation failed:', result);
                 }
 
                 // Clear the cart and pending order
-                clearCart();
-                localStorage.removeItem('pendingOrder');
+                try {
+                    clearCart();
+                    localStorage.removeItem('pendingOrder');
+                } catch (e) {
+                    console.warn('Could not clear cart/localStorage:', e);
+                }
 
                 setStatus('success');
                 setMessage('¡Tu pago ha sido recibido! Tu pedido está siendo procesado.');
 
-                toast({
-                    title: '¡Gracias por tu compra!',
-                    description: 'Hemos recibido tu pedido correctamente.',
-                });
-
             } catch (err) {
                 console.error('Error processing payment:', err);
                 // Still show success since payment went through
-                clearCart();
+                try {
+                    clearCart();
+                } catch (e) {
+                    console.warn('Could not clear cart:', e);
+                }
                 setStatus('success');
                 setMessage('¡Tu pago ha sido procesado! Tu pedido será confirmado en breve.');
             }
         };
 
         processPayment();
-    }, [reference, error, clearCart, toast]);
+    }, [reference, error]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div className="container py-16 md:py-24 flex justify-center">
