@@ -34,11 +34,15 @@ export async function POST(request: Request) {
         // Create the Basic Auth token
         const authToken = Buffer.from(`${clipApiKey}:${clipSecretKey}`).toString('base64');
 
-        // For test environment, use sandbox URL
-        const isTestMode = clipApiKey.startsWith('test_');
-        const clipBaseUrl = isTestMode
-            ? 'https://api-gw.sandbox.payclip.com'
-            : 'https://api-gw.payclip.com';
+        // Clip uses the same production URL for both test and live credentials
+        // Test credentials start with 'test_'
+        const clipBaseUrl = 'https://api.clip.mx';
+
+        console.log('Creating Clip checkout session:', {
+            amount: validatedData.amount,
+            reference: validatedData.reference,
+            isTestMode: clipApiKey.startsWith('test_'),
+        });
 
         // Create checkout session with Clip API
         const clipResponse = await fetch(`${clipBaseUrl}/v2/checkout`, {
@@ -59,18 +63,18 @@ export async function POST(request: Request) {
                 webhook_url: validatedData.webhook_url,
                 reference: validatedData.reference,
                 metadata: validatedData.metadata || {},
-                override_settings: {
-                    payment_method: ['CARD'], // Accept card payments
-                },
             }),
         });
 
         const clipResult = await clipResponse.json();
 
+        console.log('Clip API response status:', clipResponse.status);
+        console.log('Clip API response:', JSON.stringify(clipResult, null, 2));
+
         if (!clipResponse.ok) {
             console.error('Clip API error:', clipResult);
             return NextResponse.json(
-                { message: clipResult.message || 'Error al crear sesión de pago.' },
+                { message: clipResult.message || clipResult.error || 'Error al crear sesión de pago.' },
                 { status: clipResponse.status }
             );
         }
