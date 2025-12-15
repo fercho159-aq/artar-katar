@@ -1,4 +1,4 @@
-import type {NextConfig} from 'next';
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -37,6 +37,18 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'cdn.pixabay.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.astar-katar.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'astar-katar.com',
         port: '',
         pathname: '/**',
       },
