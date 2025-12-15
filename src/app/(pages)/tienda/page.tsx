@@ -7,7 +7,7 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { useEffect, useState } from 'react';
 import { Product } from '@/lib/types';
 import { Skeleton } from '@/components/ui/skeleton';
-import { CheckCircle, ShoppingCart, Sparkles, Shield, Heart, Brain, Zap, Gem, ChevronDown, ChevronUp, Moon, Clock, Star } from 'lucide-react';
+import { CheckCircle, ShoppingCart, Sparkles, Shield, Heart, Brain, Zap, Gem, ChevronDown, ChevronUp, Moon, Clock, Star, Eye } from 'lucide-react';
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
 import {
@@ -344,8 +344,14 @@ export default function TiendaPage() {
                       </p>
                     </CardContent>
                   </Link>
-                  <CardFooter className="p-6 pt-0">
-                    <Button className="w-full" onClick={() => handleAddToCart(product)}>
+                  <CardFooter className="p-6 pt-0 flex flex-col gap-2">
+                    <Link href={`/tienda/${product.id}`} className="w-full">
+                      <Button variant="outline" className="w-full border-primary text-primary hover:bg-primary hover:text-white transition-colors">
+                        <Eye className="mr-2 h-4 w-4" />
+                        Ver Más
+                      </Button>
+                    </Link>
+                    <Button className="w-full" onClick={(e) => { e.preventDefault(); handleAddToCart(product); }}>
                       <ShoppingCart className="mr-2 h-4 w-4" />
                       Añadir al Carrito
                     </Button>
