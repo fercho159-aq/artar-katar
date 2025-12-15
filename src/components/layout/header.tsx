@@ -42,9 +42,10 @@ export function Header() {
   }
 
   const navLinks = [
-    { href: '/talleres', label: translations.header.workshops },
+    // Temporalmente desactivados:
+    // { href: '/talleres', label: translations.header.workshops },
     { href: '/tienda', label: translations.header.shop },
-    { href: '/meditaciones', label: translations.header.meditations },
+    // { href: '/meditaciones', label: translations.header.meditations },
   ];
 
   return (

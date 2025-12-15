@@ -44,8 +44,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Astar Katar & Frank Alexander Section */}
+      {/* Frank Alexander Image Section */}
       <section className="py-16 md:py-24 bg-card">
+        <div className="container flex justify-center">
+          <div className="relative w-full max-w-md">
+            <Image
+              src="/images/frank-alexander.jpg"
+              alt="Frank Alexander"
+              width={600}
+              height={800}
+              className="rounded-2xl shadow-2xl object-cover w-full"
+              priority
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Astar Katar & Frank Alexander Section */}
+      <section className="py-16 md:py-24 bg-background">
         <div className="container grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline text-primary">{translations.home.astar.title}</h2>
@@ -110,7 +126,8 @@ export default function Home() {
       {/* Product Sections */}
       <section className="py-16 md:py-24 bg-card">
         <div className="container space-y-16">
-          {/* Workshops */}
+          {/* Workshops - Temporalmente desactivado */}
+          {/*
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
               <h3 className="text-3xl font-bold font-headline text-primary mb-4">{translations.home.workshops.title}</h3>
@@ -137,6 +154,7 @@ export default function Home() {
             </div>
             <Image src="https://images.unsplash.com/photo-1532190795157-3f983fb7fa3b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxzcGlyaXR1YWwlMjBsZWFybmluZ3xlbnwwfHx8fDE3NjQ2OTIxNDB8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="Spiritual learning" data-ai-hint="spiritual learning" width={600} height={400} className="rounded-lg object-cover aspect-video" />
           </div>
+          */}
           {/* Bracelets */}
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <Image src="https://www.astar-katar.com/images/pulseras/2.png" alt="Pulsera de cuarzo" data-ai-hint="crystal bracelet" width={600} height={400} className="rounded-lg object-cover aspect-video md:order-2" />
@@ -165,7 +183,8 @@ export default function Home() {
               </Button>
             </div>
           </div>
-          {/* Meditations */}
+          {/* Meditations - Temporalmente desactivado */}
+          {/*
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
               <h3 className="text-3xl font-bold font-headline text-primary mb-4">{translations.home.meditations.title}</h3>
@@ -191,6 +210,7 @@ export default function Home() {
             </div>
             <Image src="https://images.unsplash.com/photo-1609718561976-d52836e625cd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxzZXJlbmUlMjBtZWRpdGF0aW9ufGVufDB8fHx8MTc2NDYzNzYxMnww&ixlib=rb-4.1.0&q=80&w=1080" alt="Meditación serena" data-ai-hint="serene meditation" width={600} height={400} className="rounded-lg object-cover aspect-video" />
           </div>
+          */}
         </div>
       </section>
 
