@@ -44,54 +44,59 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Frank Alexander Image Section */}
-      <section className="py-16 md:py-24 bg-card">
-        <div className="container flex justify-center">
-          <div className="relative w-full max-w-md">
-            <Image
-              src="/images/frank-alexander.jpg"
-              alt="Frank Alexander"
-              width={600}
-              height={800}
-              className="rounded-2xl shadow-2xl object-cover w-full"
-              priority
-            />
-          </div>
-        </div>
-      </section>
-
       {/* Astar Katar & Frank Alexander Section */}
-      <section className="py-16 md:py-24 bg-background">
-        <div className="container grid md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline text-primary">{translations.home.astar.title}</h2>
-            <p className="text-muted-foreground">
-              {translations.home.astar.p1}
-            </p>
-            <p className="text-muted-foreground">
-              {translations.home.astar.p2}
-            </p>
-            <ul className="list-disc list-inside text-muted-foreground space-y-2">
-              <li>{translations.home.astar.l1}</li>
-              <li>{translations.home.astar.l2}</li>
-              <li>{translations.home.astar.l3}</li>
-              <li>{translations.home.astar.l4}</li>
-            </ul>
-          </div>
-          <div className="space-y-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline text-primary">{translations.home.frank.title}</h2>
-            <p className="text-muted-foreground">
-              {translations.home.frank.p1}
-            </p>
-            <p className="text-muted-foreground">
-              {translations.home.frank.p2}
-            </p>
-            <p className="text-muted-foreground">
-              {translations.home.frank.p3}
-            </p>
-            <p className="text-muted-foreground">
-              {translations.home.frank.p4}
-            </p>
+      <section className="py-16 md:py-24 bg-card">
+        <div className="container">
+          {/* Layout con imagen central */}
+          <div className="grid lg:grid-cols-3 gap-8 lg:gap-12 items-start">
+            {/* Columna izquierda - ¿Quién es Astar Katar? */}
+            <div className="space-y-6 order-2 lg:order-1">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline text-primary">{translations.home.astar.title}</h2>
+              <p className="text-muted-foreground">
+                {translations.home.astar.p1}
+              </p>
+              <p className="text-muted-foreground">
+                {translations.home.astar.p2}
+              </p>
+              <ul className="list-disc list-inside text-muted-foreground space-y-2">
+                <li>{translations.home.astar.l1}</li>
+                <li>{translations.home.astar.l2}</li>
+                <li>{translations.home.astar.l3}</li>
+                <li>{translations.home.astar.l4}</li>
+              </ul>
+            </div>
+
+            {/* Columna central - Imagen de Frank Alexander */}
+            <div className="flex justify-center order-1 lg:order-2">
+              <div className="relative w-full max-w-sm">
+                <Image
+                  src="/images/frank-alexander.jpg"
+                  alt="Frank Alexander"
+                  width={400}
+                  height={500}
+                  className="rounded-2xl shadow-2xl object-cover w-full"
+                  priority
+                />
+                <p className="text-center mt-4 text-sm text-muted-foreground font-medium">Frank Alexander</p>
+              </div>
+            </div>
+
+            {/* Columna derecha - Frank Alexander: el Walk-In */}
+            <div className="space-y-6 order-3">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline text-primary">{translations.home.frank.title}</h2>
+              <p className="text-muted-foreground">
+                {translations.home.frank.p1}
+              </p>
+              <p className="text-muted-foreground">
+                {translations.home.frank.p2}
+              </p>
+              <p className="text-muted-foreground">
+                {translations.home.frank.p3}
+              </p>
+              <p className="text-muted-foreground">
+                {translations.home.frank.p4}
+              </p>
+            </div>
           </div>
         </div>
       </section>
