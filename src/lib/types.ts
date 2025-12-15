@@ -15,6 +15,11 @@ export type Product = {
     type: 'MEDITATION' | 'WORKSHOP' | 'PHYSICAL_GOOD';
     name: string;
     description: string | null;
+    short_description: string | null;
+    activated_by: string | null;
+    stone: string | null;
+    learn_more: string | null;
+    category: string | null;
     price: number;
     image_url: string | null;
     workshop_date: string | null;

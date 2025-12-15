@@ -312,31 +312,44 @@ export default function TiendaPage() {
                         data-ai-hint={image?.imageHint}
                         width={500}
                         height={500}
-                        className="object-cover aspect-square"
+                        className="object-cover aspect-square group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
                     <CardContent className="p-6 flex flex-col flex-grow text-foreground/80">
                       <h3 className="text-xl font-bold font-headline text-center uppercase text-foreground mb-2">
                         {product.name}
                       </h3>
-                      <p className="text-sm text-center text-muted-foreground mb-4">
-                        Cargadas para potenciar tu energía
+
+                      {/* Short Description */}
+                      <p className="text-sm text-center text-muted-foreground mb-3">
+                        {product.short_description || 'Cargadas para potenciar tu energía'}
                       </p>
 
+                      {/* Activated By */}
+                      {product.activated_by && (
+                        <div className="flex items-center justify-center gap-2 mb-3 text-xs">
+                          <Sparkles className="h-3 w-3 text-primary" />
+                          <span className="text-muted-foreground">Activada por: <span className="text-foreground font-medium">{product.activated_by}</span></span>
+                        </div>
+                      )}
+
+                      {/* Benefits */}
                       <div className="space-y-2 mb-4 text-sm flex-grow">
                         {benefits.slice(0, 3).map((benefit, i) => ( // Show first 3 benefits
                           <div key={i} className="flex items-center gap-2">
-                            <CheckCircle className="h-4 w-4 text-primary" />
-                            <span>{benefit}</span>
+                            <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
+                            <span className="line-clamp-2">{benefit}</span>
                           </div>
                         ))}
                         {benefits.length > 3 && <p className="text-sm text-muted-foreground">y más...</p>}
                       </div>
 
-                      {material && (
-                        <p className="text-sm mb-4">
-                          <span className="font-semibold">Material:</span> {material}
-                        </p>
+                      {/* Stone/Material */}
+                      {(product.stone || material) && (
+                        <div className="flex items-center gap-2 mb-4 text-sm">
+                          <Gem className="h-4 w-4 text-primary" />
+                          <span><span className="font-semibold">Piedra:</span> {product.stone || material}</span>
+                        </div>
                       )}
 
                       <p className="text-3xl font-bold text-center text-primary mb-4">
