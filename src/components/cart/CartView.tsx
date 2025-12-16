@@ -46,7 +46,7 @@ export function CartView() {
   );
 
   // Shipping cost only for physical products
-  const shipping = hasPhysicalProducts ? 150.0 : 0;
+  const shipping = hasPhysicalProducts ? 200.0 : 0;
   const total = subtotal + shipping;
 
   const handleCheckout = async () => {
