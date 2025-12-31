@@ -60,12 +60,14 @@ export function CartView() {
       return;
     }
 
-    // Validate shipping address for physical products
-    if (hasPhysicalProducts && !isShippingAddressValid(shippingAddress)) {
+    // Validate contact/shipping address - always required
+    if (!isShippingAddressValid(shippingAddress)) {
       toast({
         variant: 'destructive',
-        title: 'Dirección incompleta',
-        description: 'Por favor completa todos los campos de la dirección de envío.',
+        title: hasPhysicalProducts ? 'Dirección incompleta' : 'Datos incompletos',
+        description: hasPhysicalProducts
+          ? 'Por favor completa todos los campos de la dirección de envío.'
+          : 'Por favor completa todos los campos de contacto.',
       });
       return;
     }
@@ -240,18 +242,17 @@ export function CartView() {
           </div>
         </div>
 
-        {/* Shipping Address Form - Only shown for physical products */}
-        {hasPhysicalProducts && (
-          <Card>
-            <CardContent className="pt-6">
-              <ShippingAddressForm
-                address={shippingAddress}
-                onChange={setShippingAddress}
-                disabled={isProcessing}
-              />
-            </CardContent>
-          </Card>
-        )}
+        {/* Contact/Shipping Address Form - Always shown */}
+        <Card>
+          <CardContent className="pt-6">
+            <ShippingAddressForm
+              address={shippingAddress}
+              onChange={setShippingAddress}
+              disabled={isProcessing}
+              title={hasPhysicalProducts ? "Dirección de Envío" : "Datos de Contacto"}
+            />
+          </CardContent>
+        </Card>
       </div>
 
       <Card className="md:col-span-1 h-fit sticky top-24">
@@ -279,9 +280,9 @@ export function CartView() {
             <span>${total.toFixed(2)} MXN</span>
           </div>
 
-          {hasPhysicalProducts && !isShippingAddressValid(shippingAddress) && (
+          {!isShippingAddressValid(shippingAddress) && (
             <p className="text-sm text-muted-foreground">
-              * Completa la dirección de envío para continuar
+              * Completa {hasPhysicalProducts ? 'la dirección de envío' : 'tus datos de contacto'} para continuar
             </p>
           )}
         </CardContent>
@@ -289,7 +290,7 @@ export function CartView() {
           <Button
             className="w-full"
             onClick={handleCheckout}
-            disabled={isProcessing || cart.length === 0 || (hasPhysicalProducts && !isShippingAddressValid(shippingAddress))}
+            disabled={isProcessing || cart.length === 0 || !isShippingAddressValid(shippingAddress)}
           >
             {isProcessing ? "Procesando..." : (user ? 'Proceder al Pago' : 'Inicia sesión para pagar')}
           </Button>

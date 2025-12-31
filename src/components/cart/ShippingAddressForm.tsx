@@ -36,16 +36,17 @@ interface ShippingAddressFormProps {
     address: ShippingAddress;
     onChange: (address: ShippingAddress) => void;
     disabled?: boolean;
+    title?: string;
 }
 
-export function ShippingAddressForm({ address, onChange, disabled }: ShippingAddressFormProps) {
+export function ShippingAddressForm({ address, onChange, disabled, title = "Dirección de Envío" }: ShippingAddressFormProps) {
     const updateField = (field: keyof ShippingAddress, value: string) => {
         onChange({ ...address, [field]: value });
     };
 
     return (
         <div className="space-y-4">
-            <h3 className="font-semibold text-lg">Dirección de Envío</h3>
+            <h3 className="font-semibold text-lg">{title}</h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
