@@ -21,6 +21,7 @@ export type Product = {
     learn_more: string | null;
     category: string | null;
     price: number;
+    couple_price: number | null;
     image_url: string | null;
     workshop_date: string | null;
     workshop_status: 'Abierto' | 'Próximamente' | 'Cerrado' | null;
