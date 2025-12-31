@@ -22,7 +22,7 @@ export default function WorkshopPurchaseOptions({ workshop, imageUrl }: Workshop
 
     const handleAddToCart = () => {
         const product: CartProduct = {
-            id: isCoupleOption ? `${workshop.id}-couple` : String(workshop.id),
+            id: isCoupleOption ? `wshop_${workshop.id}_couple` : `wshop_${workshop.id}`,
             name: isCoupleOption ? `${workshop.name} (Parejas)` : workshop.name,
             price: currentPrice,
             image: imageUrl,
