@@ -57,11 +57,11 @@ export default async function TalleresPage() {
                           <p><span className="font-semibold text-muted-foreground">Fecha:</span> {workshop.workshop_date}</p>
                         )}
                         <p className="font-bold text-primary text-lg mt-1">
-                          {workshop.workshop_status === 'Abierto' ? `$${workshop.price} USD` : 'Por anunciar'}
+                          {workshop.workshop_status === 'Abierto' ? `$${workshop.price.toLocaleString('es-MX')} MXN` : 'Por anunciar'}
                         </p>
                         {workshop.couple_price && workshop.workshop_status === 'Abierto' && (
-                          <p className="text-sm text-green-600 font-medium mt-1">
-                            💑 Parejas: ${workshop.couple_price} USD
+                          <p className="text-sm text-pink-600 font-medium mt-1">
+                            💑 Parejas: ${workshop.couple_price.toLocaleString('es-MX')} MXN
                           </p>
                         )}
                       </div>

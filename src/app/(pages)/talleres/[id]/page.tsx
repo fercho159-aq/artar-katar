@@ -68,7 +68,7 @@ export default async function TallerDetailPage({ params }: TallerDetailPageProps
               </div>
               <div className="flex items-center text-foreground">
                 <p className="font-semibold text-2xl text-primary">
-                  {workshop.workshop_status === 'Abierto' ? `$${workshop.price} USD` : 'Por anunciar'}
+                  {workshop.workshop_status === 'Abierto' ? `$${workshop.price.toLocaleString('es-MX')} MXN` : 'Por anunciar'}
                 </p>
               </div>
             </CardContent>
