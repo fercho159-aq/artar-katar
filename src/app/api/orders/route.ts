@@ -30,7 +30,7 @@ const orderSchema = z.object({
   totalAmount: z.number(),
   paymentReference: z.string().optional(),
   paymentStatus: z.string().optional(),
-  shippingAddress: shippingAddressSchema.optional(), // Optional for digital products
+  shippingAddress: shippingAddressSchema.optional().nullable(), // Optional for digital products, can be null or undefined
   requiresShipping: z.boolean().default(false),
 });
 
