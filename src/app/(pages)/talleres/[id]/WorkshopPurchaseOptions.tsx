@@ -21,8 +21,10 @@ export default function WorkshopPurchaseOptions({ workshop, imageUrl }: Workshop
     const currentPrice = isCoupleOption ? couplePrice : individualPrice;
 
     const handleAddToCart = () => {
+        // Usar el product_sku del taller para que coincida con la base de datos
+        const baseId = workshop.product_sku || `wshop_${workshop.id}`;
         const product: CartProduct = {
-            id: isCoupleOption ? `wshop_${workshop.id}_couple` : `wshop_${workshop.id}`,
+            id: isCoupleOption ? `${baseId}_couple` : baseId,
             name: isCoupleOption ? `${workshop.name} (Parejas)` : workshop.name,
             price: currentPrice,
             image: imageUrl,

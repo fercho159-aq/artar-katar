@@ -98,13 +98,20 @@ export async function POST(request: Request) {
 
     // 3. For each item in the cart, create a record in the `order_items` table
     for (const item of items) {
+      // Handle couple purchases by extracting the base SKU
+      // e.g., "wshop_001_couple" -> "wshop_001"
+      let productSku = item.product.id;
+      if (productSku.endsWith('_couple')) {
+        productSku = productSku.replace('_couple', '');
+      }
+
       // Find the internal product ID from its SKU (works for all product types)
-      const productResult = await client.query('SELECT id FROM products WHERE product_sku = $1', [item.product.id]);
-      
+      const productResult = await client.query('SELECT id FROM products WHERE product_sku = $1', [productSku]);
+
       if (productResult.rows.length === 0) {
         // If a product is not found, rollback the transaction
         await client.query('ROLLBACK');
-        return NextResponse.json({ message: `Producto con SKU ${item.product.id} no encontrado.` }, { status: 400 });
+        return NextResponse.json({ message: `Producto con SKU ${productSku} no encontrado.` }, { status: 400 });
       }
       const productId = productResult.rows[0].id;
 
