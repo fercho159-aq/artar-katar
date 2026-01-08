@@ -17,9 +17,9 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative w-full h-[70vh] md:h-[85vh] flex items-center justify-center text-center text-white">
         <Image
-          src="/images/passage-7685853_1280.webp"
-          alt="Portal multidimensional de Astar Katar"
-          data-ai-hint="mystical archway"
+          src="/manifiesta-5d.jpg"
+          alt="Manifiesta tu realidad desde la 5ta dimensión - Portal multidimensional"
+          data-ai-hint="cosmic spiral portal"
           fill
           className="object-cover -z-10 brightness-75"
           priority
