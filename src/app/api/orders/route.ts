@@ -98,32 +98,20 @@ export async function POST(request: Request) {
 
     // 3. For each item in the cart, create a record in the `order_items` table
     for (const item of items) {
-      // Check if it's a digital product (meditation, workshop, subscription)
-      const isDigitalProduct = item.product.id.startsWith('med_') ||
-        item.product.id.startsWith('wshop_') ||
-        item.product.id.startsWith('sub_');
-
-      if (isDigitalProduct) {
-        // For digital products, just store the item info without product lookup
-        await client.query(
-          'INSERT INTO order_items (order_id, product_id, quantity, price_at_purchase) VALUES ($1, $2, $3, $4)',
-          [orderId, null, item.quantity, item.product.price]
-        );
-      } else {
-        // Find the internal product ID from its SKU (physical products)
-        const productResult = await client.query('SELECT id FROM products WHERE product_sku = $1', [item.product.id]);
-        if (productResult.rows.length === 0) {
-          // If a product is not found, rollback the transaction
-          await client.query('ROLLBACK');
-          return NextResponse.json({ message: `Producto con SKU ${item.product.id} no encontrado.` }, { status: 400 });
-        }
-        const productId = productResult.rows[0].id;
-
-        await client.query(
-          'INSERT INTO order_items (order_id, product_id, quantity, price_at_purchase) VALUES ($1, $2, $3, $4)',
-          [orderId, productId, item.quantity, item.product.price]
-        );
+      // Find the internal product ID from its SKU (works for all product types)
+      const productResult = await client.query('SELECT id FROM products WHERE product_sku = $1', [item.product.id]);
+      
+      if (productResult.rows.length === 0) {
+        // If a product is not found, rollback the transaction
+        await client.query('ROLLBACK');
+        return NextResponse.json({ message: `Producto con SKU ${item.product.id} no encontrado.` }, { status: 400 });
       }
+      const productId = productResult.rows[0].id;
+
+      await client.query(
+        'INSERT INTO order_items (order_id, product_id, quantity, price_at_purchase) VALUES ($1, $2, $3, $4)',
+        [orderId, productId, item.quantity, item.product.price]
+      );
     }
 
     // Commit the transaction
