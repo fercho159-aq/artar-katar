@@ -104,6 +104,7 @@ export default function TiendaDetailPage() {
       name: product.name,
       price: Number(product.price),
       image: product.image_url || image?.imageUrl || '',
+      type: product.type, // PHYSICAL_GOOD, WORKSHOP, etc.
     });
   };
 

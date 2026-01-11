@@ -10,6 +10,7 @@ export type Product = {
   name: string;
   price: number;
   image: string;
+  type?: string; // PHYSICAL_GOOD, WORKSHOP, MEDITATION, SUBSCRIPTION
 };
 
 export type CartItem = {

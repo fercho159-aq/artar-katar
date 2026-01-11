@@ -28,6 +28,7 @@ export default function WorkshopPurchaseOptions({ workshop, imageUrl }: Workshop
             name: isCoupleOption ? `${workshop.name} (Parejas)` : workshop.name,
             price: currentPrice,
             image: imageUrl,
+            type: 'WORKSHOP', // Producto virtual, no requiere envío
         };
         addToCart(product);
     };

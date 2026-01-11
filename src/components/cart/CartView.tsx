@@ -34,10 +34,14 @@ export function CartView() {
   const [shippingAddress, setShippingAddress] = useState<ShippingAddress>(emptyShippingAddress);
 
   // Check if there are physical products that require shipping
+  // Only PHYSICAL_GOOD products require shipping. WORKSHOP, MEDITATION, SUBSCRIPTION are digital.
   const hasPhysicalProducts = cart.some(item =>
-    !item.product.id.startsWith('med_') &&
-    !item.product.id.startsWith('wshop_') &&
-    !item.product.id.startsWith('sub_')
+    item.product.type === 'PHYSICAL_GOOD' ||
+    // Fallback for items without type: check if NOT a digital product prefix
+    (!item.product.type &&
+      !item.product.id.startsWith('med_') &&
+      !item.product.id.startsWith('wshop_') &&
+      !item.product.id.startsWith('sub_'))
   );
 
   const subtotal = cart.reduce(
@@ -162,9 +166,15 @@ export function CartView() {
           <h1 className="text-3xl font-bold font-headline mb-6">Tu Carrito</h1>
           <div className="space-y-4">
             {cart.map((item) => {
-              const isDigital = item.product.id.startsWith('med_') ||
-                item.product.id.startsWith('wshop_') ||
-                item.product.id.startsWith('sub_');
+              // Check if product is digital based on type or fallback to ID prefix
+              const isDigital = item.product.type === 'WORKSHOP' ||
+                item.product.type === 'MEDITATION' ||
+                item.product.type === 'SUBSCRIPTION' ||
+                (!item.product.type && (
+                  item.product.id.startsWith('med_') ||
+                  item.product.id.startsWith('wshop_') ||
+                  item.product.id.startsWith('sub_')
+                ));
               return (
                 <div key={item.product.id} className="flex items-start gap-4 p-4 bg-card rounded-lg border">
                   <Image
