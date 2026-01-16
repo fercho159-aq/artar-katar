@@ -32,7 +32,10 @@ import {
     User,
     Mail,
     Loader2,
+    GraduationCap,
+    ShoppingBag,
 } from 'lucide-react';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 type OrderItem = {
     quantity: number;
@@ -78,6 +81,7 @@ export default function AdminOrdersPage() {
     const [orders, setOrders] = useState<Order[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [statusFilter, setStatusFilter] = useState('all');
+    const [productTypeFilter, setProductTypeFilter] = useState<'all' | 'workshops' | 'products'>('all');
     const [updatingOrderId, setUpdatingOrderId] = useState<number | null>(null);
 
     // Redirect if not admin
@@ -185,14 +189,46 @@ export default function AdminOrdersPage() {
         );
     }
 
+    // Filter orders by product type
+    const filteredOrders = orders.filter(order => {
+        if (productTypeFilter === 'all') return true;
+
+        const hasWorkshop = order.items.some(item => item.product_sku.startsWith('wshop_'));
+
+        if (productTypeFilter === 'workshops') {
+            return hasWorkshop;
+        } else { // 'products'
+            return !hasWorkshop;
+        }
+    });
+
     return (
         <div className="container py-8">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+            <div className="flex flex-col gap-4 mb-8">
                 <div>
                     <h1 className="text-3xl font-bold font-headline">Panel de Órdenes</h1>
                     <p className="text-muted-foreground">Gestiona las órdenes de tus clientes</p>
                 </div>
 
+                {/* Tabs for product type filtering */}
+                <Tabs value={productTypeFilter} onValueChange={(value) => setProductTypeFilter(value as typeof productTypeFilter)} className="w-full">
+                    <TabsList className="grid w-full md:w-[400px] grid-cols-3">
+                        <TabsTrigger value="all" className="flex items-center gap-2">
+                            <Package className="h-4 w-4" />
+                            Todas
+                        </TabsTrigger>
+                        <TabsTrigger value="workshops" className="flex items-center gap-2">
+                            <GraduationCap className="h-4 w-4" />
+                            Talleres
+                        </TabsTrigger>
+                        <TabsTrigger value="products" className="flex items-center gap-2">
+                            <ShoppingBag className="h-4 w-4" />
+                            Productos
+                        </TabsTrigger>
+                    </TabsList>
+                </Tabs>
+
+                {/* Filters row */}
                 <div className="flex items-center gap-4">
                     <Select value={statusFilter} onValueChange={setStatusFilter}>
                         <SelectTrigger className="w-48">
@@ -219,21 +255,23 @@ export default function AdminOrdersPage() {
                 <div className="flex justify-center py-16">
                     <Loader2 className="h-8 w-8 animate-spin text-primary" />
                 </div>
-            ) : orders.length === 0 ? (
+            ) : filteredOrders.length === 0 ? (
                 <Card>
                     <CardContent className="py-16 text-center">
                         <Package className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
                         <h3 className="text-xl font-semibold mb-2">No hay órdenes</h3>
                         <p className="text-muted-foreground">
-                            {statusFilter === 'all'
+                            {productTypeFilter === 'workshops' && 'No hay órdenes de talleres'}
+                            {productTypeFilter === 'products' && 'No hay órdenes de productos físicos'}
+                            {productTypeFilter === 'all' && (statusFilter === 'all'
                                 ? 'Aún no hay órdenes registradas'
-                                : `No hay órdenes con estado "${statusFilter}"`}
+                                : `No hay órdenes con estado "${statusFilter}"`)}
                         </p>
                     </CardContent>
                 </Card>
             ) : (
                 <div className="space-y-6">
-                    {orders.map(order => (
+                    {filteredOrders.map(order => (
                         <Card key={order.order_id}>
                             <CardHeader>
                                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">

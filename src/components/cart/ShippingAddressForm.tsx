@@ -163,7 +163,7 @@ export const emptyShippingAddress: ShippingAddress = {
 export function isShippingAddressValid(address: ShippingAddress): boolean {
     return !!(
         address.name.trim() &&
-        address.phone.trim().length >= 8 &&
+        address.phone.trim().length >= 10 &&
         address.street.trim() &&
         address.city.trim() &&
         address.state.trim() &&

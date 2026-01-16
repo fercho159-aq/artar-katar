@@ -82,6 +82,11 @@ function CheckoutSuccessContent() {
                 if (!response.ok) {
                     const result = await response.json();
                     console.error('Order creation failed:', result);
+
+                    // Show error to user if order creation failed
+                    setStatus('error');
+                    setMessage(result.message || 'No se pudo crear el pedido. Por favor, contacta a soporte con tu referencia de pago: ' + reference);
+                    return; // Stop here, don't show success
                 }
 
                 // Clear the cart and pending order
