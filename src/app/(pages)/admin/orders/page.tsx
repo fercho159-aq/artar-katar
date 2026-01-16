@@ -193,7 +193,7 @@ export default function AdminOrdersPage() {
     const filteredOrders = orders.filter(order => {
         if (productTypeFilter === 'all') return true;
 
-        const hasWorkshop = order.items.some(item => item.product_sku.startsWith('wshop_'));
+        const hasWorkshop = order.items.some(item => item.product_sku.startsWith('taller_'));
 
         if (productTypeFilter === 'workshops') {
             return hasWorkshop;
