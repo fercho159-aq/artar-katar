@@ -127,7 +127,7 @@ export function CartView() {
         items: cart,
         totalAmount: total,
         requiresShipping: hasPhysicalProducts,
-        shippingAddress: hasPhysicalProducts ? shippingAddress : null,
+        shippingAddress: shippingAddress,
       }));
 
       // Redirect to Clip's checkout page
