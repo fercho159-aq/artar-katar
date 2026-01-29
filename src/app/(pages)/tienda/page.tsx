@@ -7,7 +7,7 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { useEffect, useState } from 'react';
 import { Product } from '@/lib/types';
 import { Skeleton } from '@/components/ui/skeleton';
-import { CheckCircle, ShoppingCart, Sparkles, Shield, Heart, Brain, Zap, Gem, ChevronDown, ChevronUp, Moon, Clock, Star, Eye } from 'lucide-react';
+import { CheckCircle, ShoppingCart, Sparkles, Shield, Heart, Brain, Flame, Gem, ChevronDown, ChevronUp, Moon, Clock, Star, Eye } from 'lucide-react';
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
 import {
@@ -39,7 +39,7 @@ const parseDescription = (description: string | null) => {
 // Categorías de productos
 const productCategories = [
   { id: 'all', label: 'Todos', icon: Sparkles },
-  { id: 'kundalini', label: 'Kundalini', icon: Zap, keywords: ['kundalini', 'sexualidad'] },
+  { id: 'kundalini', label: 'Sexualidad', icon: Flame, keywords: ['kundalini', 'sexualidad'] },
   { id: 'intelecto', label: 'Intelecto', icon: Brain, keywords: ['einstein', 'intelecto'] },
   { id: 'abundancia', label: 'Abundancia', icon: Star, keywords: ['abundancia', 'millonario', 'adn'] },
   { id: 'proposito', label: 'Propósito', icon: Heart, keywords: ['dones', 'propósito', 'alma'] },
