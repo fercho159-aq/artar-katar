@@ -27,6 +27,7 @@ export type Product = {
     workshop_status: 'Abierto' | 'Próximamente' | 'Cerrado' | null;
     meditation_duration: string | null;
     is_active: boolean;
+    seo_keywords: string | null;
 };
 
 export type Subscription = {

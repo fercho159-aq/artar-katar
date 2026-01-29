@@ -8,8 +8,22 @@ import { AuthProvider } from '@/context/AuthContext';
 import { LanguageProvider } from '@/context/LanguageContext';
 
 export const metadata: Metadata = {
-  title: 'Astar Katar',
-  description: 'Portal Multidimensional de Astar Katar por Frank Alexander',
+  title: 'Astar Katar - Pulseras Energéticas y Activaciones Multidimensionales',
+  description: 'Portal Multidimensional de Astar Katar por Frank Alexander. Pulseras energéticas activadas multidimensionalmente: abundancia, protección energética, sexualidad, sanación cósmica e intelecto.',
+  keywords: [
+    'Pulseras Energéticas', 'Sanación Energética', 'Protección Energética', 'Abundancia Universal',
+    'Cristales Energéticos', 'Manifestar Abundancia', 'Espiritualidad Consciente', 'Bienestar Holístico',
+    'México Espiritual', 'Vibración Alta', 'Ley de la Atracción', 'Conciencia Universal',
+    'Sexualidad Consciente', 'Sanación Cósmica', 'Seres Estelares', 'Activación Multidimensional',
+    'Geometría Sagrada', 'Energía Vital', 'Expansión de Conciencia', 'Claridad Mental',
+  ],
+  openGraph: {
+    title: 'Astar Katar - Pulseras Energéticas y Activaciones Multidimensionales',
+    description: 'Pulseras activadas multidimensionalmente en el portal de Astar Katar. Geometría sagrada cargada con energía vital para tu evolución espiritual.',
+    type: 'website',
+    locale: 'es_MX',
+    siteName: 'Astar Katar',
+  },
 };
 
 export default function RootLayout({
