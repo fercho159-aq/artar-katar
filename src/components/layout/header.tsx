@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Menu, Sparkles, ShoppingCart, User, LogOut, LayoutDashboard, Globe, Package } from 'lucide-react';
+import { Menu, Sparkles, ShoppingCart, User, LogOut, LayoutDashboard, Globe, Package, Users } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
@@ -121,6 +121,12 @@ export function Header() {
                         <Link href="/admin/orders">
                           <Package className="mr-2 h-4 w-4" />
                           <span>Panel de Órdenes</span>
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem asChild>
+                        <Link href="/admin/clientes">
+                          <Users className="mr-2 h-4 w-4" />
+                          <span>Clientes por Evento</span>
                         </Link>
                       </DropdownMenuItem>
                     </>
