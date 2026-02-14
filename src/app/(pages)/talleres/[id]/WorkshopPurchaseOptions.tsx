@@ -82,7 +82,7 @@ export default function WorkshopPurchaseOptions({ workshop, imageUrl }: Workshop
                         </p>
                         <p className="text-sm text-pink-700 dark:text-pink-400 mt-1">
                             ¡Inscríbanse juntos y ahorren! El precio de <strong>${couplePrice.toLocaleString('es-MX')} MXN</strong> incluye
-                            la inscripción para <strong>2 personas</strong>. El precio individual es de ${individualPrice.toLocaleString('es-MX')} MXN por persona.
+                            la inscripción para <strong>parejas sentimentales</strong> &quot;incluye armonización de su relación&quot;. El precio individual es de ${individualPrice.toLocaleString('es-MX')} MXN por persona.
                         </p>
                     </div>
                 </div>

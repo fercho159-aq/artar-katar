@@ -53,7 +53,7 @@ Horarios internacionales:
     '7 noches consecutivas: del 16 al 22 de febrero, 10 pm (hora México-centro)',
     'Abierto',
     TRUE,
-    'https://images.unsplash.com/photo-1532190795157-3f983fb7fa3b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxzcGlyaXR1YWwlMjBsZWFybmluZ3xlbnwwfHx8fDE3NjQ2OTIxNDB8MA&ixlib=rb-4.1.0&q=80&w=1080'
+    '/images/talleres/taller_ciclo_nocturno.jpeg'
 );
 
 -- PASO 3: Verificar cambios
