@@ -35,9 +35,9 @@ export default async function TalleresPage() {
                         <Image
                           src={workshop.image_url}
                           alt={workshop.name}
-                          width={600}
-                          height={400}
-                          className="rounded-t-lg object-cover aspect-video"
+                          width={1080}
+                          height={1350}
+                          className="rounded-t-lg object-cover aspect-[4/5]"
                         />
                       )}
                       <Badge

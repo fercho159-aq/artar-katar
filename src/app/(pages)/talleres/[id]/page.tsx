@@ -32,9 +32,9 @@ export default async function TallerDetailPage({ params }: TallerDetailPageProps
             <Image
               src={workshop.image_url}
               alt={workshop.name}
-              width={800}
-              height={800}
-              className="rounded-xl shadow-lg object-cover aspect-square"
+              width={1080}
+              height={1350}
+              className="rounded-xl shadow-lg object-cover aspect-[4/5]"
             />
           )}
         </div>
