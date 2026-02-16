@@ -16,10 +16,10 @@ const orderItemSchema = z.object({
 const shippingAddressSchema = z.object({
   name: z.string().min(1, 'Nombre requerido'),
   phone: z.string().min(10, 'Teléfono inválido'),
-  street: z.string().min(1, 'Calle requerida'),
-  city: z.string().min(1, 'Ciudad requerida'),
-  state: z.string().min(1, 'Estado requerido'),
-  postalCode: z.string().min(5, 'Código postal inválido'),
+  street: z.string().optional().default(''),
+  city: z.string().optional().default(''),
+  state: z.string().optional().default(''),
+  postalCode: z.string().optional().default(''),
   country: z.string().default('México'),
   notes: z.string().optional(),
 });

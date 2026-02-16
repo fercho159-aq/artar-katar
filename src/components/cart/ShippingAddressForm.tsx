@@ -37,9 +37,10 @@ interface ShippingAddressFormProps {
     onChange: (address: ShippingAddress) => void;
     disabled?: boolean;
     title?: string;
+    digitalOnly?: boolean;
 }
 
-export function ShippingAddressForm({ address, onChange, disabled, title = "Dirección de Envío" }: ShippingAddressFormProps) {
+export function ShippingAddressForm({ address, onChange, disabled, title = "Dirección de Envío", digitalOnly = false }: ShippingAddressFormProps) {
     const updateField = (field: keyof ShippingAddress, value: string) => {
         onChange({ ...address, [field]: value });
     };
@@ -47,6 +48,11 @@ export function ShippingAddressForm({ address, onChange, disabled, title = "Dire
     return (
         <div className="space-y-4">
             <h3 className="font-semibold text-lg">{title}</h3>
+            {digitalOnly && (
+                <p className="text-sm text-muted-foreground">
+                    Solo necesitamos tu nombre y teléfono para confirmar tu inscripción.
+                </p>
+            )}
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
@@ -75,76 +81,80 @@ export function ShippingAddressForm({ address, onChange, disabled, title = "Dire
                 </div>
             </div>
 
-            <div className="space-y-2">
-                <Label htmlFor="shipping-street">Calle, número y colonia *</Label>
-                <Input
-                    id="shipping-street"
-                    placeholder="Ej: Av. Reforma 123, Col. Centro"
-                    value={address.street}
-                    onChange={(e) => updateField('street', e.target.value)}
-                    disabled={disabled}
-                    required
-                />
-            </div>
+            {!digitalOnly && (
+                <>
+                    <div className="space-y-2">
+                        <Label htmlFor="shipping-street">Calle, número y colonia *</Label>
+                        <Input
+                            id="shipping-street"
+                            placeholder="Ej: Av. Reforma 123, Col. Centro"
+                            value={address.street}
+                            onChange={(e) => updateField('street', e.target.value)}
+                            disabled={disabled}
+                            required
+                        />
+                    </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="space-y-2">
-                    <Label htmlFor="shipping-city">Ciudad *</Label>
-                    <Input
-                        id="shipping-city"
-                        placeholder="Ciudad"
-                        value={address.city}
-                        onChange={(e) => updateField('city', e.target.value)}
-                        disabled={disabled}
-                        required
-                    />
-                </div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div className="space-y-2">
+                            <Label htmlFor="shipping-city">Ciudad *</Label>
+                            <Input
+                                id="shipping-city"
+                                placeholder="Ciudad"
+                                value={address.city}
+                                onChange={(e) => updateField('city', e.target.value)}
+                                disabled={disabled}
+                                required
+                            />
+                        </div>
 
-                <div className="space-y-2">
-                    <Label htmlFor="shipping-state">Estado *</Label>
-                    <Select
-                        value={address.state}
-                        onValueChange={(value) => updateField('state', value)}
-                        disabled={disabled}
-                    >
-                        <SelectTrigger id="shipping-state">
-                            <SelectValue placeholder="Seleccionar estado" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            {MEXICAN_STATES.map((state) => (
-                                <SelectItem key={state} value={state}>
-                                    {state}
-                                </SelectItem>
-                            ))}
-                        </SelectContent>
-                    </Select>
-                </div>
+                        <div className="space-y-2">
+                            <Label htmlFor="shipping-state">Estado *</Label>
+                            <Select
+                                value={address.state}
+                                onValueChange={(value) => updateField('state', value)}
+                                disabled={disabled}
+                            >
+                                <SelectTrigger id="shipping-state">
+                                    <SelectValue placeholder="Seleccionar estado" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {MEXICAN_STATES.map((state) => (
+                                        <SelectItem key={state} value={state}>
+                                            {state}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
 
-                <div className="space-y-2">
-                    <Label htmlFor="shipping-postal">Código Postal *</Label>
-                    <Input
-                        id="shipping-postal"
-                        placeholder="C.P."
-                        value={address.postalCode}
-                        onChange={(e) => updateField('postalCode', e.target.value)}
-                        disabled={disabled}
-                        required
-                        maxLength={5}
-                    />
-                </div>
-            </div>
+                        <div className="space-y-2">
+                            <Label htmlFor="shipping-postal">Código Postal *</Label>
+                            <Input
+                                id="shipping-postal"
+                                placeholder="C.P."
+                                value={address.postalCode}
+                                onChange={(e) => updateField('postalCode', e.target.value)}
+                                disabled={disabled}
+                                required
+                                maxLength={5}
+                            />
+                        </div>
+                    </div>
 
-            <div className="space-y-2">
-                <Label htmlFor="shipping-notes">Notas de envío (opcional)</Label>
-                <Textarea
-                    id="shipping-notes"
-                    placeholder="Referencias adicionales, instrucciones de entrega..."
-                    value={address.notes}
-                    onChange={(e) => updateField('notes', e.target.value)}
-                    disabled={disabled}
-                    rows={2}
-                />
-            </div>
+                    <div className="space-y-2">
+                        <Label htmlFor="shipping-notes">Notas de envío (opcional)</Label>
+                        <Textarea
+                            id="shipping-notes"
+                            placeholder="Referencias adicionales, instrucciones de entrega..."
+                            value={address.notes}
+                            onChange={(e) => updateField('notes', e.target.value)}
+                            disabled={disabled}
+                            rows={2}
+                        />
+                    </div>
+                </>
+            )}
         </div>
     );
 }
@@ -160,10 +170,17 @@ export const emptyShippingAddress: ShippingAddress = {
     notes: '',
 };
 
-export function isShippingAddressValid(address: ShippingAddress): boolean {
-    return !!(
+export function isShippingAddressValid(address: ShippingAddress, digitalOnly: boolean = false): boolean {
+    const baseValid = !!(
         address.name.trim() &&
-        address.phone.trim().length >= 10 &&
+        address.phone.trim().length >= 10
+    );
+
+    if (digitalOnly) {
+        return baseValid;
+    }
+
+    return baseValid && !!(
         address.street.trim() &&
         address.city.trim() &&
         address.state.trim() &&

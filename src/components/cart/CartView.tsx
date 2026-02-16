@@ -65,7 +65,7 @@ export function CartView() {
     }
 
     // Validate contact/shipping address - always required
-    if (!isShippingAddressValid(shippingAddress)) {
+    if (!isShippingAddressValid(shippingAddress, !hasPhysicalProducts)) {
       toast({
         variant: 'destructive',
         title: hasPhysicalProducts ? 'Dirección incompleta' : 'Datos incompletos',
@@ -260,6 +260,7 @@ export function CartView() {
               onChange={setShippingAddress}
               disabled={isProcessing}
               title={hasPhysicalProducts ? "Dirección de Envío" : "Datos de Contacto"}
+              digitalOnly={!hasPhysicalProducts}
             />
           </CardContent>
         </Card>
@@ -290,7 +291,7 @@ export function CartView() {
             <span>${total.toFixed(2)} MXN</span>
           </div>
 
-          {!isShippingAddressValid(shippingAddress) && (
+          {!isShippingAddressValid(shippingAddress, !hasPhysicalProducts) && (
             <p className="text-sm text-muted-foreground">
               * Completa {hasPhysicalProducts ? 'la dirección de envío' : 'tus datos de contacto'} para continuar
             </p>
@@ -300,7 +301,7 @@ export function CartView() {
           <Button
             className="w-full"
             onClick={handleCheckout}
-            disabled={isProcessing || cart.length === 0 || !isShippingAddressValid(shippingAddress)}
+            disabled={isProcessing || cart.length === 0 || !isShippingAddressValid(shippingAddress, !hasPhysicalProducts)}
           >
             {isProcessing ? "Procesando..." : (user ? 'Proceder al Pago' : 'Inicia sesión para pagar')}
           </Button>
