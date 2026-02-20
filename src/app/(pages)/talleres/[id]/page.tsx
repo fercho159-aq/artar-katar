@@ -1,3 +1,5 @@
+export const revalidate = 0;
+
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
