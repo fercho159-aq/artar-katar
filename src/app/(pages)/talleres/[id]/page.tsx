@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Calendar, MessageSquare } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import Link from 'next/link';
-import { getWorkshopById } from '@/lib/workshops';
+import { getWorkshopById, getWorkshopRegisteredCount } from '@/lib/workshops';
 import { notFound } from 'next/navigation';
 import WorkshopPurchaseOptions from './WorkshopPurchaseOptions';
 
@@ -21,6 +21,14 @@ export default async function TallerDetailPage({ params }: TallerDetailPageProps
   if (!workshop) {
     notFound();
   }
+
+  // Calcular lugares disponibles si el taller tiene cupo máximo
+  let spotsLeft: number | null = null;
+  if (workshop.max_capacity !== null) {
+    const registeredCount = await getWorkshopRegisteredCount(workshop.product_sku);
+    spotsLeft = workshop.max_capacity - registeredCount;
+  }
+  const isSoldOut = spotsLeft !== null && spotsLeft <= 0;
 
   const whatsappNumber = "528181139378";
   const whatsappMessage = encodeURIComponent(`Hola, me gustaría recibir más información sobre el taller: "${workshop.name}"`);
@@ -41,12 +49,19 @@ export default async function TallerDetailPage({ params }: TallerDetailPageProps
           )}
         </div>
         <div className="flex flex-col justify-center">
-          <Badge
-            className="w-fit mb-2"
-            variant={workshop.workshop_status === 'Abierto' ? 'default' : 'secondary'}
-          >
-            {workshop.workshop_status}
-          </Badge>
+          <div className="flex items-center gap-2 mb-2">
+            <Badge
+              className="w-fit"
+              variant={isSoldOut ? 'destructive' : workshop.workshop_status === 'Abierto' ? 'default' : 'secondary'}
+            >
+              {isSoldOut ? 'Agotado' : workshop.workshop_status}
+            </Badge>
+            {spotsLeft !== null && !isSoldOut && (
+              <Badge variant="outline" className="w-fit">
+                {spotsLeft} {spotsLeft === 1 ? 'lugar disponible' : 'lugares disponibles'}
+              </Badge>
+            )}
+          </div>
           <h1 className="text-4xl lg:text-5xl font-bold font-headline mb-4">
             {workshop.name}
           </h1>
@@ -55,11 +70,22 @@ export default async function TallerDetailPage({ params }: TallerDetailPageProps
           </p>
 
           {/* Opciones de compra con precio para parejas */}
-          {workshop.workshop_status === 'Abierto' && (
+          {workshop.workshop_status === 'Abierto' && !isSoldOut && (
             <WorkshopPurchaseOptions
               workshop={workshop}
               imageUrl={workshop.image_url || ''}
             />
+          )}
+
+          {isSoldOut && (
+            <div className="bg-destructive/10 border border-destructive/30 rounded-lg p-4 mb-6">
+              <p className="text-destructive font-semibold text-center">
+                Este taller ha alcanzado su cupo máximo de {workshop.max_capacity} personas.
+              </p>
+              <p className="text-sm text-muted-foreground text-center mt-1">
+                Contáctanos por WhatsApp para estar en la lista de espera.
+              </p>
+            </div>
           )}
 
           <Card className="bg-muted/50 mb-6">

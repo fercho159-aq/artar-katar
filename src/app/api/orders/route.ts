@@ -101,12 +101,13 @@ export async function POST(request: Request) {
       // Handle couple purchases by extracting the base SKU
       // e.g., "wshop_001_couple" -> "wshop_001"
       let productSku = item.product.id;
-      if (productSku.endsWith('_couple')) {
+      const isCouple = productSku.endsWith('_couple');
+      if (isCouple) {
         productSku = productSku.replace('_couple', '');
       }
 
       // Find the internal product ID from its SKU (works for all product types)
-      const productResult = await client.query('SELECT id FROM products WHERE product_sku = $1', [productSku]);
+      const productResult = await client.query('SELECT id, max_capacity, type FROM products WHERE product_sku = $1', [productSku]);
 
       if (productResult.rows.length === 0) {
         // If a product is not found, rollback the transaction
@@ -114,6 +115,29 @@ export async function POST(request: Request) {
         return NextResponse.json({ message: `Producto con SKU ${productSku} no encontrado.` }, { status: 400 });
       }
       const productId = productResult.rows[0].id;
+      const maxCapacity = productResult.rows[0].max_capacity;
+      const productType = productResult.rows[0].type;
+
+      // Check capacity for workshops with a limit
+      if (productType === 'WORKSHOP' && maxCapacity !== null) {
+        const countResult = await client.query(
+          `SELECT COALESCE(SUM(oi.quantity), 0) as total
+           FROM order_items oi
+           JOIN orders o ON o.id = oi.order_id
+           WHERE oi.product_id = $1 AND o.status != 'Cancelado'`,
+          [productId]
+        );
+        const currentCount = parseInt(countResult.rows[0].total || '0', 10);
+        const spotsNeeded = item.quantity;
+
+        if (currentCount + spotsNeeded > maxCapacity) {
+          await client.query('ROLLBACK');
+          const spotsLeft = maxCapacity - currentCount;
+          return NextResponse.json({
+            message: `Lo sentimos, solo quedan ${spotsLeft} lugar(es) disponible(s) para este taller.`,
+          }, { status: 409 });
+        }
+      }
 
       await client.query(
         'INSERT INTO order_items (order_id, product_id, quantity, price_at_purchase) VALUES ($1, $2, $3, $4)',

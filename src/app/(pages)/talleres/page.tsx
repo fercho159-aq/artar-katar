@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { getWorkshops } from "@/lib/workshops";
+import { getWorkshops, getWorkshopRegisteredCount } from "@/lib/workshops";
 
 export default async function TalleresPage() {
   const workshops = await getWorkshops();
@@ -28,7 +28,14 @@ export default async function TalleresPage() {
           </div>
         ) : (
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {workshops.map(workshop => {
+            {await Promise.all(workshops.map(async (workshop) => {
+              let spotsLeft: number | null = null;
+              if (workshop.max_capacity !== null) {
+                const registeredCount = await getWorkshopRegisteredCount(workshop.product_sku);
+                spotsLeft = workshop.max_capacity - registeredCount;
+              }
+              const isSoldOut = spotsLeft !== null && spotsLeft <= 0;
+
               return (
                 <Card key={workshop.id} className="flex flex-col overflow-hidden hover:shadow-xl transition-shadow duration-300">
                   <Link href={`/talleres/${workshop.id}`} className="flex flex-col flex-grow">
@@ -42,12 +49,18 @@ export default async function TalleresPage() {
                           className="rounded-t-lg object-cover aspect-[4/5]"
                         />
                       )}
-                      <Badge
-                        className="absolute top-2 right-2"
-                        variant={workshop.workshop_status === "Abierto" ? "default" : "secondary"}
-                      >
-                        {workshop.workshop_status}
-                      </Badge>
+                      <div className="absolute top-2 right-2 flex gap-1">
+                        <Badge
+                          variant={isSoldOut ? 'destructive' : workshop.workshop_status === "Abierto" ? "default" : "secondary"}
+                        >
+                          {isSoldOut ? 'Agotado' : workshop.workshop_status}
+                        </Badge>
+                      </div>
+                      {spotsLeft !== null && !isSoldOut && (
+                        <Badge variant="outline" className="absolute top-2 left-2 bg-background/80">
+                          {spotsLeft} {spotsLeft === 1 ? 'lugar' : 'lugares'}
+                        </Badge>
+                      )}
                     </CardHeader>
                     <CardContent className="p-6 flex-grow flex flex-col">
                       <CardTitle>{workshop.name}</CardTitle>
@@ -63,22 +76,22 @@ export default async function TalleresPage() {
                         </p>
                         {workshop.couple_price && workshop.workshop_status === 'Abierto' && (
                           <p className="text-sm text-pink-600 font-medium mt-1">
-                            💑 Parejas: ${workshop.couple_price.toLocaleString('es-MX')} MXN
+                            Parejas: ${workshop.couple_price.toLocaleString('es-MX')} MXN
                           </p>
                         )}
                       </div>
                     </CardContent>
                   </Link>
                   <CardFooter className="p-6 pt-0">
-                    <Button className="w-full" asChild>
+                    <Button className="w-full" asChild disabled={isSoldOut}>
                       <Link href={`/talleres/${workshop.id}`}>
-                        Más Información <ArrowRight className="ml-2" />
+                        {isSoldOut ? 'Agotado' : 'Más Información'} <ArrowRight className="ml-2" />
                       </Link>
                     </Button>
                   </CardFooter>
                 </Card>
               );
-            })}
+            }))}
           </div>
         )}
       </div>

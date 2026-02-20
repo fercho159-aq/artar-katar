@@ -28,6 +28,7 @@ export type Product = {
     meditation_duration: string | null;
     is_active: boolean;
     seo_keywords: string | null;
+    max_capacity: number | null;
 };
 
 export type Subscription = {
