@@ -3,13 +3,9 @@
 -- Sábado 7 de marzo, 2026
 -- ============================================
 
--- PASO 1: Desactivar el taller anterior que ya pasó
--- ID del wshop_004: Ciclo de Activación Intensiva Nocturna (Feb 16-22)
-UPDATE products
-SET is_active = FALSE
-WHERE product_sku = 'wshop_004';
+-- NOTA: wshop_004 (Ciclo Nocturno) se mantiene activo junto con este nuevo taller
 
--- PASO 2: Insertar el nuevo taller
+-- PASO 1: Insertar el nuevo taller
 INSERT INTO products (
     product_sku,
     type,
