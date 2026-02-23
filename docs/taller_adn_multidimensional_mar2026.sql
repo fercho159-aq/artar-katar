@@ -33,7 +33,16 @@ Recibirás 4 meditaciones canalizadas y activadas multidimensionalmente por Asta
 
 Experimentarás el taller de acuerdo con tu sensibilidad personal. Muchos tendrán vívidos recuerdos de sus experiencias nocturnas, otros retendrán imágenes furtivas mientras que otros quedarán profundamente dormidos. Sin embargo, TODOS serán trabajados y recibirán los beneficios correspondientes.
 
-En familia: hijos acompañados hasta 21 años participan gratis.
+Fechas: 7 sesiones, del 2 al 8 de marzo
+A partir de 22:00 hrs, hora México-centro (ver horarios internacionales al final)
+
+Costo:
+• Individual: $1,000 MXN (aprox 60 USD)
+• En pareja: $1,500 MXN (aprox 90 USD)
+• En familia: hijos acompañados hasta 21 años participan gratis
+
+Aparta tu lugar: en nuestro sitio web www.astar-katar.com/talleres
+Info: WhatsApp (+52) 81.8113.9378
 
 Horarios internacionales:
 8 pm — EE.UU. Pacífico
@@ -54,3 +63,33 @@ España: sesión especial, 22:00 hrs, hora local',
 SELECT id, product_sku, name, price, couple_price, workshop_date, workshop_status, is_active
 FROM products
 WHERE type = 'WORKSHOP';
+
+-- ============================================
+-- PASO 4: UPDATE (si el registro ya fue insertado y necesita actualizarse)
+-- ============================================
+UPDATE products
+SET description = 'A través del portal interdimensional de Astar Katar trabajaremos en las cámaras cuánticas de sanación sirianas, con el rayo dorado de arcángel Jofiel, y la activación de tu ADN multidimensional. Facilitado por arcángel Gabriel, serás preparado para recibir un mensaje personal multidimensional de la Fuente para tu evolución de alma. Será una semana de intenso trabajo personal.
+
+Recibirás 4 meditaciones canalizadas y activadas multidimensionalmente por Astar Katar para el taller, con las cuales iniciaremos el trabajo nocturno. Cada noche Astar Katar y los seres cósmicos de luz te visitarán y te llevarán en cuerpos sutiles a las naves, para trabajar contigo de acuerdo con tus necesidades personales.
+
+Experimentarás el taller de acuerdo con tu sensibilidad personal. Muchos tendrán vívidos recuerdos de sus experiencias nocturnas, otros retendrán imágenes furtivas mientras que otros quedarán profundamente dormidos. Sin embargo, TODOS serán trabajados y recibirán los beneficios correspondientes.
+
+Fechas: 7 sesiones, del 2 al 8 de marzo
+A partir de 22:00 hrs, hora México-centro (ver horarios internacionales al final)
+
+Costo:
+• Individual: $1,000 MXN (aprox 60 USD)
+• En pareja: $1,500 MXN (aprox 90 USD)
+• En familia: hijos acompañados hasta 21 años participan gratis
+
+Aparta tu lugar: en nuestro sitio web www.astar-katar.com/talleres
+Info: WhatsApp (+52) 81.8113.9378
+
+Horarios internacionales:
+8 pm — EE.UU. Pacífico
+9 pm — EE.UU. Montaña
+10 pm — México Centro, EE.UU. Centro, Centroamérica
+11 pm — Colombia, Perú, EE.UU. Este
+1 am — Argentina, Chile
+España: sesión especial, 22:00 hrs, hora local'
+WHERE product_sku = 'wshop_006';
