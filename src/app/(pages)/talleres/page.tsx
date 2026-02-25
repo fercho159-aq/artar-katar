@@ -35,6 +35,8 @@ export default async function TalleresPage() {
                 spotsLeft = workshop.max_capacity - registeredCount;
               }
               const isSoldOut = spotsLeft !== null && spotsLeft <= 0;
+              // Mostrar máximo 10 lugares para crear urgencia, sin revelar el cupo total
+              const displaySpots = spotsLeft !== null ? Math.min(spotsLeft, 10) : null;
 
               return (
                 <Card key={workshop.id} className="flex flex-col overflow-hidden hover:shadow-xl transition-shadow duration-300">
@@ -56,9 +58,9 @@ export default async function TalleresPage() {
                           {isSoldOut ? 'Agotado' : workshop.workshop_status}
                         </Badge>
                       </div>
-                      {spotsLeft !== null && !isSoldOut && (
+                      {displaySpots !== null && !isSoldOut && (
                         <Badge variant="outline" className="absolute top-2 left-2 bg-background/80">
-                          {spotsLeft} {spotsLeft === 1 ? 'lugar' : 'lugares'}
+                          {displaySpots} {displaySpots === 1 ? 'lugar' : 'lugares'}
                         </Badge>
                       )}
                     </CardHeader>

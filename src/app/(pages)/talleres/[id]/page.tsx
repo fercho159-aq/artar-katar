@@ -29,6 +29,8 @@ export default async function TallerDetailPage({ params }: TallerDetailPageProps
     spotsLeft = workshop.max_capacity - registeredCount;
   }
   const isSoldOut = spotsLeft !== null && spotsLeft <= 0;
+  // Mostrar máximo 10 lugares para crear urgencia, sin revelar el cupo total
+  const displaySpots = spotsLeft !== null ? Math.min(spotsLeft, 10) : null;
 
   const whatsappNumber = "528181139378";
   const whatsappMessage = encodeURIComponent(`Hola, me gustaría recibir más información sobre el taller: "${workshop.name}"`);
@@ -56,9 +58,9 @@ export default async function TallerDetailPage({ params }: TallerDetailPageProps
             >
               {isSoldOut ? 'Agotado' : workshop.workshop_status}
             </Badge>
-            {spotsLeft !== null && !isSoldOut && (
+            {displaySpots !== null && !isSoldOut && (
               <Badge variant="outline" className="w-fit">
-                {spotsLeft} {spotsLeft === 1 ? 'lugar disponible' : 'lugares disponibles'}
+                {displaySpots} {displaySpots === 1 ? 'lugar disponible' : 'lugares disponibles'}
               </Badge>
             )}
           </div>
