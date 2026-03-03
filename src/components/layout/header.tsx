@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Menu, Sparkles, ShoppingCart, User, LogOut, LayoutDashboard, Globe, Package, Users } from 'lucide-react';
+import { Menu, Sparkles, ShoppingCart, User, LogOut, LayoutDashboard, Globe, Package, Users, HelpCircle } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
@@ -74,6 +74,40 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center gap-1 transition-colors hover:text-primary cursor-pointer">
+                <HelpCircle className="h-4 w-4" />
+                {language === 'es' ? 'Cómo Comprar' : 'How to Buy'}
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-72" align="center">
+                <DropdownMenuLabel className="text-base font-semibold">
+                  {language === 'es' ? 'Paso a paso' : 'Step by step'}
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <div className="px-2 py-3 space-y-3 text-sm">
+                  <div className="flex gap-3 items-start">
+                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold">1</span>
+                    <p>{language === 'es' ? 'Elige tus productos o talleres en la tienda' : 'Choose your products or workshops in the shop'}</p>
+                  </div>
+                  <div className="flex gap-3 items-start">
+                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold">2</span>
+                    <p>{language === 'es' ? 'Agrégalos al carrito de compras' : 'Add them to your shopping cart'}</p>
+                  </div>
+                  <div className="flex gap-3 items-start">
+                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold">3</span>
+                    <p>{language === 'es' ? 'Llena tus datos de contacto y envío (no necesitas cuenta)' : 'Fill in your contact and shipping info (no account needed)'}</p>
+                  </div>
+                  <div className="flex gap-3 items-start">
+                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold">4</span>
+                    <p>{language === 'es' ? 'Paga de forma segura con tarjeta' : 'Pay securely with your card'}</p>
+                  </div>
+                  <div className="flex gap-3 items-start">
+                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold">5</span>
+                    <p>{language === 'es' ? 'Recibe la confirmación de tu compra' : 'Receive your purchase confirmation'}</p>
+                  </div>
+                </div>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </nav>
           <div className="flex items-center gap-2">
             <Button asChild variant="ghost" size="icon" className="relative">
@@ -195,6 +229,19 @@ export function Header() {
                         {link.label}
                       </Link>
                     ))}
+                    <div className="pt-4 border-t">
+                      <p className="text-lg font-medium flex items-center gap-2 mb-3">
+                        <HelpCircle className="h-5 w-5 text-primary" />
+                        {language === 'es' ? 'Cómo Comprar' : 'How to Buy'}
+                      </p>
+                      <div className="space-y-2 text-sm text-muted-foreground pl-1">
+                        <p>1. {language === 'es' ? 'Elige tus productos o talleres' : 'Choose your products or workshops'}</p>
+                        <p>2. {language === 'es' ? 'Agrégalos al carrito' : 'Add them to your cart'}</p>
+                        <p>3. {language === 'es' ? 'Llena tus datos (no necesitas cuenta)' : 'Fill in your info (no account needed)'}</p>
+                        <p>4. {language === 'es' ? 'Paga con tarjeta de forma segura' : 'Pay securely with your card'}</p>
+                        <p>5. {language === 'es' ? 'Recibe tu confirmación' : 'Receive your confirmation'}</p>
+                      </div>
+                    </div>
                   </div>
                 </SheetContent>
               </Sheet>

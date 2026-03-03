@@ -54,16 +54,6 @@ export function CartView() {
   const total = subtotal + shipping;
 
   const handleCheckout = async () => {
-    if (!user) {
-      toast({
-        variant: 'destructive',
-        title: 'Inicia sesión para continuar',
-        description: 'Debes iniciar sesión para poder realizar la compra.',
-      });
-      router.push('/login');
-      return;
-    }
-
     // Validate contact/shipping address - always required
     if (!isShippingAddressValid(shippingAddress, !hasPhysicalProducts)) {
       toast({
@@ -80,7 +70,7 @@ export function CartView() {
 
     try {
       // Generate a unique reference for this order
-      const orderReference = `ORDER-${user.uid}-${Date.now()}`;
+      const orderReference = user ? `ORDER-${user.uid}-${Date.now()}` : `GUEST-${Date.now()}`;
 
       // Get the base URL for redirects
       const baseUrl = window.location.origin;
@@ -102,8 +92,8 @@ export function CartView() {
           return_url: `${baseUrl}/checkout/success?reference=${orderReference}`,
           webhook_url: `${baseUrl}/api/webhooks/clip`,
           metadata: {
-            user_id: user.uid,
-            user_email: user.email || '',
+            user_id: user?.uid || 'guest',
+            user_email: user?.email || shippingAddress.email,
             items: JSON.stringify(cart.map(item => ({
               id: item.product.id,
               name: item.product.name,
@@ -123,7 +113,7 @@ export function CartView() {
       // Store order info in localStorage before redirecting
       localStorage.setItem('pendingOrder', JSON.stringify({
         reference: orderReference,
-        userId: user.uid,
+        userId: user?.uid || null,
         items: cart,
         totalAmount: total,
         requiresShipping: hasPhysicalProducts,
@@ -303,7 +293,7 @@ export function CartView() {
             onClick={handleCheckout}
             disabled={isProcessing || cart.length === 0 || !isShippingAddressValid(shippingAddress, !hasPhysicalProducts)}
           >
-            {isProcessing ? "Procesando..." : (user ? 'Proceder al Pago' : 'Inicia sesión para pagar')}
+            {isProcessing ? "Procesando..." : "Proceder al Pago"}
           </Button>
         </CardFooter>
       </Card>

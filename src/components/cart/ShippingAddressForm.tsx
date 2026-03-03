@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/select';
 
 export interface ShippingAddress {
+    email: string;
     name: string;
     phone: string;
     street: string;
@@ -53,6 +54,19 @@ export function ShippingAddressForm({ address, onChange, disabled, title = "Dire
                     Solo necesitamos tu nombre y teléfono para confirmar tu inscripción.
                 </p>
             )}
+
+            <div className="space-y-2">
+                <Label htmlFor="shipping-email">Correo electrónico *</Label>
+                <Input
+                    id="shipping-email"
+                    type="email"
+                    placeholder="tu@email.com"
+                    value={address.email}
+                    onChange={(e) => updateField('email', e.target.value)}
+                    disabled={disabled}
+                    required
+                />
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
@@ -160,6 +174,7 @@ export function ShippingAddressForm({ address, onChange, disabled, title = "Dire
 }
 
 export const emptyShippingAddress: ShippingAddress = {
+    email: '',
     name: '',
     phone: '',
     street: '',
@@ -171,7 +186,9 @@ export const emptyShippingAddress: ShippingAddress = {
 };
 
 export function isShippingAddressValid(address: ShippingAddress, digitalOnly: boolean = false): boolean {
+    const emailValid = address.email.includes('@') && address.email.includes('.');
     const baseValid = !!(
+        emailValid &&
         address.name.trim() &&
         address.phone.trim().length >= 10
     );

@@ -15,6 +15,7 @@ function CheckoutSuccessContent() {
 
     const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
     const [message, setMessage] = useState('');
+    const [isGuest, setIsGuest] = useState(false);
 
     const reference = searchParams.get('reference');
     const error = searchParams.get('error');
@@ -63,13 +64,15 @@ function CheckoutSuccessContent() {
 
             try {
                 const pendingOrder = JSON.parse(pendingOrderStr);
+                const guestOrder = !pendingOrder.userId;
+                setIsGuest(guestOrder);
 
                 // Create the order in the database
                 const response = await fetch('/api/orders', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        userId: pendingOrder.userId,
+                        userId: pendingOrder.userId || null,
                         items: pendingOrder.items,
                         totalAmount: pendingOrder.totalAmount,
                         paymentReference: reference,
@@ -144,12 +147,20 @@ function CheckoutSuccessContent() {
 
                     {status === 'success' && (
                         <div className="space-y-3">
-                            <Button asChild className="w-full">
-                                <Link href="/mis-compras">Ver Mis Compras</Link>
-                            </Button>
-                            <Button asChild variant="outline" className="w-full">
-                                <Link href="/tienda">Seguir Comprando</Link>
-                            </Button>
+                            {isGuest ? (
+                                <Button asChild className="w-full">
+                                    <Link href="/tienda">Seguir Comprando</Link>
+                                </Button>
+                            ) : (
+                                <>
+                                    <Button asChild className="w-full">
+                                        <Link href="/mis-compras">Ver Mis Compras</Link>
+                                    </Button>
+                                    <Button asChild variant="outline" className="w-full">
+                                        <Link href="/tienda">Seguir Comprando</Link>
+                                    </Button>
+                                </>
+                            )}
                         </div>
                     )}
 

@@ -14,6 +14,7 @@ const orderItemSchema = z.object({
 });
 
 const shippingAddressSchema = z.object({
+  email: z.string().email().optional().default(''),
   name: z.string().min(1, 'Nombre requerido'),
   phone: z.string().min(10, 'Teléfono inválido'),
   street: z.string().optional().default(''),
@@ -25,7 +26,7 @@ const shippingAddressSchema = z.object({
 });
 
 const orderSchema = z.object({
-  userId: z.string(), // This is the public uid
+  userId: z.string().optional().nullable(), // This is the public uid, null for guest checkout
   items: z.array(orderItemSchema),
   totalAmount: z.number(),
   paymentReference: z.string().optional(),
@@ -55,19 +56,22 @@ export async function POST(request: Request) {
     // Start a transaction
     await client.query('BEGIN');
 
-    // 1. Get the internal user ID from the public UID
-    const userResult = await client.query('SELECT id FROM users WHERE uid = $1', [userId]);
-    if (userResult.rows.length === 0) {
-      await client.query('ROLLBACK');
-      return NextResponse.json({ message: 'Usuario no encontrado.' }, { status: 404 });
+    // 1. Get the internal user ID from the public UID (null for guest checkout)
+    let internalUserId: number | null = null;
+    if (userId) {
+      const userResult = await client.query('SELECT id FROM users WHERE uid = $1', [userId]);
+      if (userResult.rows.length === 0) {
+        await client.query('ROLLBACK');
+        return NextResponse.json({ message: 'Usuario no encontrado.' }, { status: 404 });
+      }
+      internalUserId = userResult.rows[0].id;
     }
-    const internalUserId = userResult.rows[0].id;
 
     // 2. Create the order in the `orders` table with shipping info
     const orderInsertResult = await client.query(
       `INSERT INTO orders (
-        user_id, 
-        total_amount, 
+        user_id,
+        total_amount,
         status,
         payment_reference,
         shipping_name,
@@ -77,8 +81,9 @@ export async function POST(request: Request) {
         shipping_state,
         shipping_postal_code,
         shipping_country,
-        shipping_notes
-      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING id`,
+        shipping_notes,
+        shipping_email
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING id`,
       [
         internalUserId,
         totalAmount,
@@ -92,6 +97,7 @@ export async function POST(request: Request) {
         shippingAddress?.postalCode || null,
         shippingAddress?.country || 'México',
         shippingAddress?.notes || null,
+        shippingAddress?.email || null,
       ]
     );
     const orderId = orderInsertResult.rows[0].id;
