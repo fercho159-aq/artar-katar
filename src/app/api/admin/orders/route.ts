@@ -31,7 +31,7 @@ export async function GET(request: Request) {
 
         // Build query based on status filter
         let query = `
-      SELECT 
+      SELECT
         o.id as order_id,
         o.order_date,
         o.total_amount,
@@ -39,15 +39,16 @@ export async function GET(request: Request) {
         o.payment_reference,
         o.shipping_name,
         o.shipping_phone,
+        o.shipping_email,
         o.shipping_street,
         o.shipping_city,
         o.shipping_state,
         o.shipping_postal_code,
         o.shipping_country,
         o.shipping_notes,
-        u.name as customer_name,
-        u.email as customer_email,
-        u.uid as customer_uid
+        COALESCE(u.name, o.shipping_name, 'Invitado') as customer_name,
+        COALESCE(u.email, o.shipping_email, '') as customer_email,
+        COALESCE(u.uid, '') as customer_uid
       FROM orders o
       LEFT JOIN users u ON o.user_id = u.id
     `;

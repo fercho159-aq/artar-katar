@@ -59,6 +59,7 @@ type Order = {
     shipping_postal_code: string | null;
     shipping_country: string | null;
     shipping_notes: string | null;
+    shipping_email: string | null;
     customer_name: string;
     customer_email: string;
     customer_uid: string;
@@ -322,10 +323,15 @@ export default function AdminOrdersPage() {
                                             <User className="h-4 w-4" /> Cliente
                                         </h4>
                                         <div className="text-sm space-y-1">
-                                            <p>{order.customer_name}</p>
+                                            <p>{order.customer_name || order.shipping_name || 'Invitado'}</p>
                                             <p className="flex items-center gap-1 text-muted-foreground">
-                                                <Mail className="h-3 w-3" /> {order.customer_email}
+                                                <Mail className="h-3 w-3" /> {order.customer_email || order.shipping_email || 'Sin email'}
                                             </p>
+                                            {(order.shipping_phone) && (
+                                                <p className="flex items-center gap-1 text-muted-foreground">
+                                                    <Phone className="h-3 w-3" /> {order.shipping_phone}
+                                                </p>
+                                            )}
                                         </div>
                                     </div>
 
