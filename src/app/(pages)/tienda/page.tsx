@@ -1,13 +1,13 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { useEffect, useState } from 'react';
 import { Product } from '@/lib/types';
 import { Skeleton } from '@/components/ui/skeleton';
-import { CheckCircle, ShoppingCart, Sparkles, Shield, Heart, Brain, Flame, Gem, ChevronDown, ChevronUp, Moon, Clock, Star, Eye } from 'lucide-react';
+import { CheckCircle, ShoppingCart, Sparkles, Shield, Heart, Brain, Flame, Gem, ChevronDown, ChevronUp, Moon, Clock, Star, Eye, Zap } from 'lucide-react';
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
 import {
@@ -27,7 +27,6 @@ const getImageIdForProduct = (product: Product): string => {
   return 'shop-crystal';
 };
 
-// Helper to parse description into benefits and material
 const parseDescription = (description: string | null) => {
   if (!description) return { benefits: [], material: '' };
   const parts = description.split('Material:');
@@ -36,31 +35,83 @@ const parseDescription = (description: string | null) => {
   return { benefits, material };
 }
 
-// Categorías de productos
-const productCategories = [
-  { id: 'all', label: 'Todos', icon: Sparkles },
-  { id: 'kundalini', label: 'Sexualidad', icon: Flame, keywords: ['kundalini', 'sexualidad'] },
-  { id: 'intelecto', label: 'Intelecto', icon: Brain, keywords: ['einstein', 'intelecto'] },
-  { id: 'abundancia', label: 'Abundancia', icon: Star, keywords: ['abundancia', 'millonario', 'adn'] },
-  { id: 'proposito', label: 'Propósito', icon: Heart, keywords: ['dones', 'propósito', 'alma'] },
-  { id: 'sanacion', label: 'Sanación', icon: Gem, keywords: ['sanador', 'sanación'] },
-  { id: 'proteccion', label: 'Protección', icon: Shield, keywords: ['protección', 'anclas'] },
+// Grupos de categorías con su orden visual
+const categoryGroups = [
+  {
+    id: 'abundancia',
+    label: 'Abundancia',
+    subtitle: 'Abundancia & ADN Millonario - 12 modelos',
+    icon: Star,
+    color: 'from-amber-500/20 to-yellow-500/10',
+    borderColor: 'border-amber-500/30',
+    textColor: 'text-amber-500',
+    keywords: ['abundancia'],
+  },
+  {
+    id: 'sexualidad',
+    label: 'Sexualidad',
+    subtitle: 'Kundalini & Sexualidad: Hombres, Mujeres y Parejas',
+    icon: Flame,
+    color: 'from-red-500/20 to-pink-500/10',
+    borderColor: 'border-red-500/30',
+    textColor: 'text-red-500',
+    keywords: ['sexualidad'],
+  },
+  {
+    id: 'conexion-arcturiana',
+    label: 'Conexión Arcturiana',
+    subtitle: 'Energía ascensional de la 7a y 9a dimensión',
+    icon: Brain,
+    color: 'from-pink-400/20 to-rose-400/10',
+    borderColor: 'border-pink-400/30',
+    textColor: 'text-pink-400',
+    keywords: ['conexion arcturiana', 'conexión arcturiana'],
+  },
+  {
+    id: 'proposito',
+    label: 'Propósito',
+    subtitle: 'Dones y Potencial del Alma',
+    icon: Heart,
+    color: 'from-orange-500/20 to-red-500/10',
+    borderColor: 'border-orange-500/30',
+    textColor: 'text-orange-500',
+    keywords: ['proposito', 'propósito'],
+  },
+  {
+    id: 'sanacion',
+    label: 'Sanación',
+    subtitle: 'Sanadores Cósmicos & Anclas de Sanadores Cósmicos',
+    icon: Gem,
+    color: 'from-emerald-500/20 to-teal-500/10',
+    borderColor: 'border-emerald-500/30',
+    textColor: 'text-emerald-500',
+    keywords: ['sanacion', 'sanación'],
+  },
+  {
+    id: 'proteccion',
+    label: 'Protección',
+    subtitle: 'Protección Energética, Extra-Fuerte & Anclas de Protección',
+    icon: Shield,
+    color: 'from-violet-500/20 to-purple-500/10',
+    borderColor: 'border-violet-500/30',
+    textColor: 'text-violet-500',
+    keywords: ['proteccion', 'protección'],
+  },
 ];
 
-const getCategory = (product: Product): string => {
-  const name = product.name.toLowerCase();
-  for (const cat of productCategories) {
-    if (cat.keywords?.some(kw => name.includes(kw))) {
-      return cat.id;
+const getGroupForProduct = (product: Product): string => {
+  const category = (product.category || '').toLowerCase();
+  for (const group of categoryGroups) {
+    if (group.keywords.some(kw => category.includes(kw))) {
+      return group.id;
     }
   }
-  return 'all';
+  return 'other';
 };
 
 export default function TiendaPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeCategory, setActiveCategory] = useState('all');
   const [showMethodology, setShowMethodology] = useState(false);
   const { addToCart } = useCart();
 
@@ -82,10 +133,6 @@ export default function TiendaPage() {
     fetchProducts();
   }, []);
 
-  const filteredProducts = activeCategory === 'all'
-    ? products
-    : products.filter(p => getCategory(p) === activeCategory);
-
   const handleAddToCart = (product: Product) => {
     const imageId = getImageIdForProduct(product);
     const image = PlaceHolderImages.find((p) => p.id === imageId);
@@ -97,6 +144,20 @@ export default function TiendaPage() {
       image: product.image_url || image?.imageUrl || '',
     });
   };
+
+  // Scroll to category group
+  const scrollToGroup = (groupId: string) => {
+    const el = document.getElementById(`group-${groupId}`);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  // Group products by category
+  const groupedProducts = categoryGroups.map(group => ({
+    ...group,
+    products: products.filter(p => getGroupForProduct(p) === group.id),
+  })).filter(g => g.products.length > 0);
 
   return (
     <div className="bg-background">
@@ -121,8 +182,8 @@ export default function TiendaPage() {
           {/* Methodology Section - Collapsible */}
           <div className="max-w-4xl mx-auto">
             <Card className="border-primary/20 bg-card/50 backdrop-blur-sm">
-              <CardHeader
-                className="cursor-pointer hover:bg-muted/30 transition-colors rounded-t-lg"
+              <div
+                className="cursor-pointer hover:bg-muted/30 transition-colors rounded-t-lg p-6"
                 onClick={() => setShowMethodology(!showMethodology)}
               >
                 <div className="flex items-center justify-between">
@@ -130,11 +191,11 @@ export default function TiendaPage() {
                     <div className="p-2 rounded-full bg-primary/10">
                       <Gem className="h-5 w-5 text-primary" />
                     </div>
-                    <CardTitle className="text-lg">¿Cómo trabajan las pulseras "ASTAR KATAR"?</CardTitle>
+                    <h3 className="text-lg font-semibold">¿Cómo trabajan las pulseras "ASTAR KATAR"?</h3>
                   </div>
                   {showMethodology ? <ChevronUp className="h-5 w-5 text-muted-foreground" /> : <ChevronDown className="h-5 w-5 text-muted-foreground" />}
                 </div>
-              </CardHeader>
+              </div>
               {showMethodology && (
                 <CardContent className="pt-0 space-y-6">
                   <p className="text-muted-foreground">
@@ -250,129 +311,157 @@ export default function TiendaPage() {
         </div>
       </div>
 
-      {/* Products Section */}
-      <div className="container pb-16 md:pb-24">
-        {/* Category Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-8">
-          {productCategories.map((cat) => {
-            const Icon = cat.icon;
-            return (
-              <Button
-                key={cat.id}
-                variant={activeCategory === cat.id ? "default" : "outline"}
-                size="sm"
-                onClick={() => setActiveCategory(cat.id)}
-                className="gap-2"
-              >
-                <Icon className="h-4 w-4" />
-                {cat.label}
-              </Button>
-            );
-          })}
+      {/* Quick Navigation */}
+      {!isLoading && groupedProducts.length > 0 && (
+        <div className="sticky top-0 z-20 bg-background/80 backdrop-blur-md border-b border-border">
+          <div className="container">
+            <div className="flex flex-wrap justify-center gap-2 py-3">
+              {groupedProducts.map((group) => {
+                const Icon = group.icon;
+                return (
+                  <Button
+                    key={group.id}
+                    variant="outline"
+                    size="sm"
+                    onClick={() => scrollToGroup(group.id)}
+                    className={`gap-2 ${group.borderColor} hover:bg-muted/50`}
+                  >
+                    <Icon className={`h-4 w-4 ${group.textColor}`} />
+                    {group.label}
+                    <span className="text-xs text-muted-foreground">({group.products.length})</span>
+                  </Button>
+                );
+              })}
+            </div>
+          </div>
         </div>
-        <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {isLoading
-            ? Array.from({ length: 3 }).map((_, index) => (
+      )}
+
+      {/* Products Section - Grouped by Category */}
+      <div className="container pb-16 md:pb-24 pt-8">
+        {isLoading ? (
+          <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            {Array.from({ length: 6 }).map((_, index) => (
               <Card key={index} className="flex flex-col overflow-hidden">
                 <Skeleton className="w-full aspect-square" />
                 <CardContent className="p-6 flex-grow space-y-4">
                   <Skeleton className="h-6 w-3/4" />
                   <Skeleton className="h-4 w-full" />
-                  <div className="space-y-2">
-                    <Skeleton className="h-4 w-5/6" />
-                    <Skeleton className="h-4 w-4/6" />
-                    <Skeleton className="h-4 w-5/6" />
-                  </div>
+                  <Skeleton className="h-4 w-5/6" />
                   <Skeleton className="h-5 w-1/2" />
-                  <Skeleton className="h-8 w-1/3" />
                   <Skeleton className="h-10 w-full" />
                 </CardContent>
               </Card>
-            ))
-            : filteredProducts.map((product) => {
-              const imageId = getImageIdForProduct(product);
-              const image = PlaceHolderImages.find((p) => p.id === imageId);
-              const priceAsNumber = Number(product.price);
-              const { benefits, material } = parseDescription(product.description);
-
+            ))}
+          </div>
+        ) : (
+          <div className="space-y-16">
+            {groupedProducts.map((group) => {
+              const Icon = group.icon;
               return (
-                <Card
-                  key={product.id}
-                  className="flex flex-col overflow-hidden group hover:shadow-xl transition-shadow duration-300 border-primary/20"
-                >
-                  <Link href={`/tienda/${product.id}`} className="flex flex-col flex-grow">
-                    <div className="p-0 relative overflow-hidden">
-                      <Image
-                        src={
-                          product.image_url ||
-                          image?.imageUrl ||
-                          '/placeholder.svg'
-                        }
-                        alt={product.name}
-                        data-ai-hint={image?.imageHint}
-                        width={500}
-                        height={500}
-                        className="object-cover aspect-square group-hover:scale-105 transition-transform duration-500"
-                      />
-                    </div>
-                    <CardContent className="p-6 flex flex-col flex-grow text-foreground/80">
-                      <h3 className="text-xl font-bold font-headline text-center uppercase text-foreground mb-2">
-                        {product.name}
-                      </h3>
-
-                      {/* Short Description */}
-                      <p className="text-sm text-center text-muted-foreground mb-3">
-                        {product.short_description || 'Cargadas para potenciar tu energía'}
-                      </p>
-
-                      {/* Activated By */}
-                      {product.activated_by && (
-                        <div className="flex items-center justify-center gap-2 mb-3 text-xs">
-                          <Sparkles className="h-3 w-3 text-primary" />
-                          <span className="text-muted-foreground">Activada por: <span className="text-foreground font-medium">{product.activated_by}</span></span>
-                        </div>
-                      )}
-
-                      {/* Benefits */}
-                      <div className="space-y-2 mb-4 text-sm flex-grow">
-                        {benefits.slice(0, 3).map((benefit, i) => ( // Show first 3 benefits
-                          <div key={i} className="flex items-center gap-2">
-                            <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
-                            <span className="line-clamp-2">{benefit}</span>
-                          </div>
-                        ))}
-                        {benefits.length > 3 && <p className="text-sm text-muted-foreground">y más...</p>}
+                <section key={group.id} id={`group-${group.id}`} className="scroll-mt-20">
+                  {/* Group Header */}
+                  <div className={`relative mb-8 p-6 rounded-2xl bg-gradient-to-r ${group.color} border ${group.borderColor}`}>
+                    <div className="flex items-center gap-4">
+                      <div className={`p-3 rounded-xl bg-background/80 shadow-sm`}>
+                        <Icon className={`h-7 w-7 ${group.textColor}`} />
                       </div>
+                      <div>
+                        <h2 className="text-2xl md:text-3xl font-bold font-headline text-foreground">
+                          {group.label}
+                        </h2>
+                        <p className="text-sm text-muted-foreground mt-1">{group.subtitle}</p>
+                      </div>
+                      <div className="ml-auto">
+                        <span className={`text-sm font-medium ${group.textColor}`}>
+                          {group.products.length} {group.products.length === 1 ? 'producto' : 'productos'}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
 
-                      {/* Stone/Material */}
-                      {(product.stone || material) && (
-                        <div className="flex items-center gap-2 mb-4 text-sm">
-                          <Gem className="h-4 w-4 text-primary" />
-                          <span><span className="font-semibold">Piedra:</span> {product.stone || material}</span>
-                        </div>
-                      )}
+                  {/* Product Grid */}
+                  <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                    {group.products.map((product) => {
+                      const imageId = getImageIdForProduct(product);
+                      const image = PlaceHolderImages.find((p) => p.id === imageId);
+                      const priceAsNumber = Number(product.price);
+                      const { benefits } = parseDescription(product.description);
 
-                      <p className="text-3xl font-bold text-center text-primary mb-4">
-                        ${priceAsNumber.toFixed(0)} MXN
-                      </p>
-                    </CardContent>
-                  </Link>
-                  <CardFooter className="p-6 pt-0 flex flex-col gap-2">
-                    <Link href={`/tienda/${product.id}`} className="w-full">
-                      <Button variant="outline" className="w-full border-primary text-primary hover:bg-primary hover:text-white transition-colors">
-                        <Eye className="mr-2 h-4 w-4" />
-                        Ver Más
-                      </Button>
-                    </Link>
-                    <Button className="w-full" onClick={(e) => { e.preventDefault(); handleAddToCart(product); }}>
-                      <ShoppingCart className="mr-2 h-4 w-4" />
-                      Añadir al Carrito
-                    </Button>
-                  </CardFooter>
-                </Card>
+                      return (
+                        <Card
+                          key={product.id}
+                          className={`flex flex-col overflow-hidden group hover:shadow-xl transition-shadow duration-300 ${group.borderColor}`}
+                        >
+                          <Link href={`/tienda/${product.id}`} className="flex flex-col flex-grow">
+                            <div className="p-0 relative overflow-hidden">
+                              <Image
+                                src={
+                                  product.image_url ||
+                                  image?.imageUrl ||
+                                  '/placeholder.svg'
+                                }
+                                alt={product.name}
+                                data-ai-hint={image?.imageHint}
+                                width={500}
+                                height={500}
+                                className="object-cover aspect-square group-hover:scale-105 transition-transform duration-500"
+                              />
+                            </div>
+                            <CardContent className="p-4 flex flex-col flex-grow text-foreground/80">
+                              <h3 className="text-sm font-bold font-headline text-center uppercase text-foreground mb-2 line-clamp-2">
+                                {product.name}
+                              </h3>
+
+                              {/* Short Description */}
+                              <p className="text-xs text-center text-muted-foreground mb-2 line-clamp-2">
+                                {product.short_description || 'Cargadas para potenciar tu energía'}
+                              </p>
+
+                              {/* First 2 Benefits */}
+                              <div className="space-y-1 mb-3 text-xs flex-grow">
+                                {benefits.slice(0, 2).map((benefit, i) => (
+                                  <div key={i} className="flex items-center gap-1.5">
+                                    <CheckCircle className={`h-3 w-3 ${group.textColor} flex-shrink-0`} />
+                                    <span className="line-clamp-1">{benefit}</span>
+                                  </div>
+                                ))}
+                              </div>
+
+                              {/* Stone */}
+                              {product.stone && (
+                                <div className="flex items-center gap-1.5 mb-3 text-xs">
+                                  <Gem className={`h-3 w-3 ${group.textColor}`} />
+                                  <span className="line-clamp-1">{product.stone}</span>
+                                </div>
+                              )}
+
+                              <p className="text-xl font-bold text-center text-primary">
+                                ${priceAsNumber.toFixed(0)} MXN
+                              </p>
+                            </CardContent>
+                          </Link>
+                          <CardFooter className="p-4 pt-0 flex flex-col gap-2">
+                            <Link href={`/tienda/${product.id}`} className="w-full">
+                              <Button variant="outline" size="sm" className={`w-full ${group.borderColor} ${group.textColor} hover:bg-muted/50 transition-colors`}>
+                                <Eye className="mr-2 h-3 w-3" />
+                                Ver Más
+                              </Button>
+                            </Link>
+                            <Button size="sm" className="w-full" onClick={(e) => { e.preventDefault(); handleAddToCart(product); }}>
+                              <ShoppingCart className="mr-2 h-3 w-3" />
+                              Añadir al Carrito
+                            </Button>
+                          </CardFooter>
+                        </Card>
+                      );
+                    })}
+                  </div>
+                </section>
               );
             })}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );
