@@ -218,7 +218,7 @@ const products = [
     description: 'Conecta con energía sanadora de Sirio A y B | Facilita la sanación integral cuerpo-mente-espíritu | Transmuta emociones negativas somatizadas',
     activated_by: 'Numo y Nikol, sanadores cósmicos de Sirio A y B',
     stone: 'Obsidiana', category: 'Sanación', price: 1200,
-    image_url: '/images/pulseras/1022-sanadores-cosmicos.jpeg',
+    image_url: '/images/pulseras/sanadores-cosmicos-2.png',
     learn_more: 'Tecnología Espiritual de Sirio: Numo y Nikol transmiten su energía y tecnología espiritual a través de estas pulseras. Es un anhelo profundo de estos seres ayudarles a sanar. Al usar estas pulseras, contactan con su verdadera esencia, la cual no es vivir con escasez ni enfermedad.'
   },
   {
@@ -238,7 +238,7 @@ const products = [
     description: 'Protección extra fuerte contra envidias y ataques energéticos | Limpieza del campo áurico | Escudo contra larvas energéticas y bajo astral',
     activated_by: 'Pachita (desde la 5ª densidad)',
     stone: 'Obsidiana Plateada', category: 'Protección', price: 1600,
-    image_url: '/images/pulseras/1023-proteccion-extra-fuerte.jpeg',
+    image_url: '/images/pulseras/proteccion-energetica-1.png',
     learn_more: 'El legado de Pachita: Pachita, eminente maestra chamánica multidimensional, activa estas piedras desde la 5ª densidad. Utiliza su energía específica y la de sus guías para brindar protección personal contra envidias, larvas energéticas y ataques del bajo astral.'
   },
   {
@@ -247,7 +247,7 @@ const products = [
     description: 'Genera un campo de energía protectora en tus espacios | Estabiliza y protege contra cambios de frecuencia | Crea vórtices de protección en forma de triángulo',
     activated_by: 'Pachita y María Sabina (desde la 5ª densidad)',
     stone: 'Opalita', category: 'Protección', price: 300,
-    image_url: '/images/pulseras/1024-ancla-proteccion-single.jpeg',
+    image_url: '/images/pulseras/proteccion-energetica-2.png',
     learn_more: 'Vórtices de Protección: Al colocar estas anclas en las esquinas, se genera una estructura de vórtices que crea un campo de energía protectora en tu realidad. Esto es vital dado que los cambios de frecuencia del planeta pueden provocar inquietud o estrés; estas anclas estabilizan y protegen el lugar y a ti.\n\nKit de 4 anclas: $1,100 MXN'
   },
 ];
