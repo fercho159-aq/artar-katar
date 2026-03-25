@@ -149,7 +149,7 @@ const products = [
     description: 'Armoniza la energía sagrada masculina y femenina | Potencia la conexión íntima de pareja | Despierta la kundalini compartida',
     activated_by: 'Sirianos, Lemurianos, Sekhmeth, María Magdala',
     stone: 'Cuarzo Cristal', category: 'Sexualidad', price: 3100,
-    image_url: '/images/pulseras/1021-sexualidad-parejas.jpeg',
+    image_url: '/images/pulseras/sexualidad-pareja-3.png',
     learn_more: 'El despertar de la Kundalini en pareja: La energía kundalini es el misterio más antiguo del ser humano. Cuando se activa en pareja, se genera una sinergia que potencia la conexión íntima y sagrada. La kundalini responde al amor, a la entrega y a la madurez interna. Utilicen estas pulseras con respeto para recibir su mayor beneficio.'
   },
 
