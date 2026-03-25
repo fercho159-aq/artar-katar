@@ -218,7 +218,7 @@ const products = [
     description: 'Conecta con energía sanadora de Sirio A y B | Facilita la sanación integral cuerpo-mente-espíritu | Transmuta emociones negativas somatizadas',
     activated_by: 'Numo y Nikol, sanadores cósmicos de Sirio A y B',
     stone: 'Obsidiana', category: 'Sanación', price: 1200,
-    image_url: '/images/pulseras/proteccion-energetica-1.png',
+    image_url: '/images/pulseras/sanadores-cosmicos-1.png',
     learn_more: 'Tecnología Espiritual de Sirio: Numo y Nikol transmiten su energía y tecnología espiritual a través de estas pulseras. Es un anhelo profundo de estos seres ayudarles a sanar. Al usar estas pulseras, contactan con su verdadera esencia, la cual no es vivir con escasez ni enfermedad.'
   },
   {
