@@ -218,7 +218,7 @@ const products = [
     description: 'Conecta con energía sanadora de Sirio A y B | Facilita la sanación integral cuerpo-mente-espíritu | Transmuta emociones negativas somatizadas',
     activated_by: 'Numo y Nikol, sanadores cósmicos de Sirio A y B',
     stone: 'Obsidiana', category: 'Sanación', price: 1200,
-    image_url: '/images/pulseras/sanadores-cosmicos-2.png',
+    image_url: '/images/pulseras/proteccion-energetica-1.png',
     learn_more: 'Tecnología Espiritual de Sirio: Numo y Nikol transmiten su energía y tecnología espiritual a través de estas pulseras. Es un anhelo profundo de estos seres ayudarles a sanar. Al usar estas pulseras, contactan con su verdadera esencia, la cual no es vivir con escasez ni enfermedad.'
   },
   {
@@ -227,7 +227,7 @@ const products = [
     description: 'Permiten atraer y anclar energías cósmicas sanadoras a un espacio | Un ancla crea espacio sanador de varios metros de radio',
     activated_by: 'Numo y Nikol, sanadores cósmicos de Sirio A y B',
     stone: null, category: 'Sanación', price: 300,
-    image_url: '/images/pulseras/1024-anclas-proteccion-kit.jpeg',
+    image_url: '/images/pulseras/sanadores-cosmicos-2.png',
     learn_more: 'Activadas por Numo y Nikol, sanadores cósmicos de Sirio A y B. Ubicadas en forma de triángulo crea un vórtice de energía sanadora cósmica al interior del triángulo. Ideal para habitaciones y casas.\n\nKit de 3 anclas: $800 MXN'
   },
 
