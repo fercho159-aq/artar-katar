@@ -57,7 +57,7 @@ const products = [
     description: 'Activa tu capacidad natural de manifestación sin límites | Reconecta tus filamentos de ADN millonario | Atrae abundancia económica desde la Fuente',
     activated_by: 'Astar Katar con la energía de la Fuente',
     stone: 'Cornalina Natural', category: 'Abundancia', price: 2900,
-    image_url: '/images/pulseras/1005-adn-millonario-5.jpeg',
+    image_url: '/images/pulseras/adn-millonario-5.png',
     learn_more: 'En esta 3ª densidad, la conexión consciente con el origen suele estar desconectada. El dinero es energía viva, es amor. Con la activación de estas pulseras, la Fuente (el Creador) activa tus filamentos de "ADN millonario" y tu capacidad natural de manifestación sin límites. Astar Katar canaliza esta energía desde la dimensión 33 para reconectar tu capacidad de atraer abundancia económica.'
   },
   {
@@ -66,7 +66,7 @@ const products = [
     description: 'Activa tu capacidad natural de manifestación sin límites | Reconecta tus filamentos de ADN millonario | Atrae abundancia económica desde la Fuente',
     activated_by: 'Astar Katar con la energía de la Fuente',
     stone: 'Cornalina Roja', category: 'Abundancia', price: 2900,
-    image_url: '/images/pulseras/1006-adn-millonario-6.jpeg',
+    image_url: '/images/pulseras/adn-millonario-6.png',
     learn_more: 'En esta 3ª densidad, la conexión consciente con el origen suele estar desconectada. El dinero es energía viva, es amor. Con la activación de estas pulseras, la Fuente (el Creador) activa tus filamentos de "ADN millonario" y tu capacidad natural de manifestación sin límites. Astar Katar canaliza esta energía desde la dimensión 33 para reconectar tu capacidad de atraer abundancia económica.'
   },
   {
@@ -75,7 +75,7 @@ const products = [
     description: 'Activa tu capacidad natural de manifestación sin límites | Reconecta tus filamentos de ADN millonario | Atrae abundancia económica desde la Fuente',
     activated_by: 'Astar Katar con la energía de la Fuente',
     stone: 'Ágata y Obsidiana', category: 'Abundancia', price: 2900,
-    image_url: '/images/pulseras/1007-adn-millonario-7.jpeg',
+    image_url: '/images/pulseras/adn-millonario-7.png',
     learn_more: 'En esta 3ª densidad, la conexión consciente con el origen suele estar desconectada. El dinero es energía viva, es amor. Con la activación de estas pulseras, la Fuente (el Creador) activa tus filamentos de "ADN millonario" y tu capacidad natural de manifestación sin límites. Astar Katar canaliza esta energía desde la dimensión 33 para reconectar tu capacidad de atraer abundancia económica.'
   },
   {
@@ -84,7 +84,7 @@ const products = [
     description: 'Activa tu capacidad natural de manifestación sin límites | Reconecta tus filamentos de ADN millonario | Atrae abundancia económica desde la Fuente',
     activated_by: 'Astar Katar con la energía de la Fuente',
     stone: 'Ágata Roja y Obsidiana', category: 'Abundancia', price: 2900,
-    image_url: '/images/pulseras/1008-adn-millonario-8.jpeg',
+    image_url: '/images/pulseras/adn-millonario-8.png',
     learn_more: 'En esta 3ª densidad, la conexión consciente con el origen suele estar desconectada. El dinero es energía viva, es amor. Con la activación de estas pulseras, la Fuente (el Creador) activa tus filamentos de "ADN millonario" y tu capacidad natural de manifestación sin límites. Astar Katar canaliza esta energía desde la dimensión 33 para reconectar tu capacidad de atraer abundancia económica.'
   },
   {
