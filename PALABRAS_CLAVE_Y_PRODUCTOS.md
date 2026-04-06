@@ -161,21 +161,20 @@
 
 ---
 
-#### 5. Pulsera ADN MILLONARIO
+#### 5. Pulsera ADN MILLONARIO MODELO 5
 | Campo | Valor |
 |-------|-------|
-| **SKU** | puls_adn_millonario |
-| **Precio** | $649.00 MXN |
-| **Piedra** | Ágata Naranja |
+| **SKU** | puls_1005 |
+| **Precio** | $2,900.00 MXN |
+| **Piedra** | Agatha Naranja |
 | **Categoría** | Abundancia |
-| **Descripción Corta** | Reconecta tus filamentos de ADN de abundancia y atrae riqueza financiera |
-| **Activado Por** | Astar Katar con la energía de la Fuente |
+| **Descripción Corta** | Asta katar & la Fuente |
+| **Activado Por** | Asta katar & la Fuente |
 
 **Beneficios:**
-- Fuerte impulso para atraer abundancia y riqueza financiera
-- Apoyo personal en área de trabajo y negocios
-- Ayuda a reconectar tus filamentos multidimensionales de ADN "de abundancia"
-- Efecto profundo y multidimensional
+- Reconecta tus filamentos multidimensionales de "de abundancia" y ayuda a atraer riqueza
+- Activa tu capacidad natural de manifestación sin límites...
+- Reconecta tus filamentos de ADN multidimensional de manifestación.
 
 ---
 
