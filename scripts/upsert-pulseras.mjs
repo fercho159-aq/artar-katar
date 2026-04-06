@@ -54,7 +54,7 @@ const products = [
   {
     sku: 'puls_1005', name: 'Pulsera ADN Millonario Modelo 5',
     short_description: 'Astar katar & la Fuente\nReconecta tus filamentos multidimensionales de "de abundancia" y ayuda a atraer riqueza',
-    description: 'Activa tu capacidad natural de manifestación sin límites | Reconecta tus filamentos de ADN millonario | Atrae abundancia económica desde la Fuente',
+    description: 'Activa tu capacidad natural de manifestación sin límites | Atrae abundancia económica desde la Fuente',
     activated_by: 'Astar katar & la Fuente',
     stone: 'Agatha Naranja', category: 'Abundancia', price: 2900,
     image_url: '/images/pulseras/adn-millonario-5.png',

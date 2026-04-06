@@ -154,7 +154,7 @@ export default function TiendaDetailPage() {
             </h1>
 
             {/* Short Description */}
-            <p className="text-lg text-muted-foreground mb-6">
+            <p className="text-lg text-muted-foreground mb-6 whitespace-pre-line">
               {product.short_description || 'Cargadas para potenciar tu energía y vibración.'}
             </p>
 

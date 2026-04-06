@@ -414,7 +414,7 @@ export default function TiendaPage() {
                               </h3>
 
                               {/* Short Description */}
-                              <p className="text-xs text-center text-muted-foreground mb-2 line-clamp-2">
+                              <p className="text-xs text-center text-muted-foreground mb-2 line-clamp-4 whitespace-pre-line">
                                 {product.short_description || 'Cargadas para potenciar tu energía'}
                               </p>
 
