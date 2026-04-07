@@ -157,7 +157,7 @@ const products = [
   {
     sku: 'puls_1017', name: 'Pulsera Conexión Arcturiana Fina',
     short_description: 'Activada por seres estelares arcturianos',
-    description: 'Transmite energía ascensional de la 7a y 9a dimensión | Facilita la apertura e integración de las dimensiones superiores de luz | Acelera tu proceso de ascensión personal | Mejora capacidad intelectual y cognitiva',
+    description: 'Energía ascensional 7ma y 9na dimensión | Apertura a las dimensiones superiores de la luz | Acelera tu proceso de ascensión personal | Mejora capacidad intelectual y cognitiva',
     activated_by: 'Seres estelares arcturianos',
     stone: 'Cuarzo Sandía de la India', category: 'Conexión Arcturiana', price: 2700,
     image_url: '/images/pulseras/1017-conexion-arcturiana-fina.jpeg',
@@ -166,7 +166,7 @@ const products = [
   {
     sku: 'puls_1018', name: 'Pulsera Conexión Arcturiana Amplio',
     short_description: 'Activada por seres estelares arcturianos',
-    description: 'Transmite energía ascensional de la 7a y 9a dimensión | Facilita la apertura e integración de las dimensiones superiores de luz | Acelera tu proceso de ascensión personal | Mejora capacidad intelectual y cognitiva',
+    description: 'Energía ascensional 7ma y 9na dimensión | Apertura a las dimensiones superiores de la luz | Acelera tu proceso de ascensión personal | Mejora capacidad intelectual y cognitiva',
     activated_by: 'Seres estelares arcturianos',
     stone: 'Cuarzo Sandía de la India', category: 'Conexión Arcturiana', price: 2700,
     image_url: '/images/pulseras/1018-conexion-arcturiana-amplio.jpeg',

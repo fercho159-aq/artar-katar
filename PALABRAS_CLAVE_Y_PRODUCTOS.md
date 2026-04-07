@@ -347,7 +347,43 @@
 
 ---
 
-#### 16. Pulsera ACTIVACIÓN DONES y PROPÓSITO DE ALMA
+#### 16. Pulsera CONEXIÓN ARCTURIANA FINA
+| Campo | Valor |
+|-------|-------|
+| **SKU** | puls_1017 |
+| **Precio** | $2,700.00 MXN |
+| **Piedra** | Cuarzo Sandía de la India |
+| **Categoría** | Conexión Arcturiana |
+| **Descripción Corta** | Activada por seres estelares arcturianos |
+| **Activado Por** | Seres estelares arcturianos |
+
+**Beneficios:**
+- Energía ascensional 7ma y 9na dimensión
+- Apertura a las dimensiones superiores de la luz
+- Acelera tu proceso de ascensión personal
+- Mejora capacidad intelectual y cognitiva
+
+---
+
+#### 17. Pulsera CONEXIÓN ARCTURIANA AMPLIO
+| Campo | Valor |
+|-------|-------|
+| **SKU** | puls_1018 |
+| **Precio** | $2,700.00 MXN |
+| **Piedra** | Cuarzo Sandía de la India |
+| **Categoría** | Conexión Arcturiana |
+| **Descripción Corta** | Activada por seres estelares arcturianos |
+| **Activado Por** | Seres estelares arcturianos |
+
+**Beneficios:**
+- Energía ascensional 7ma y 9na dimensión
+- Apertura a las dimensiones superiores de la luz
+- Acelera tu proceso de ascensión personal
+- Mejora capacidad intelectual y cognitiva
+
+---
+
+#### 18. Pulsera ACTIVACIÓN DONES y PROPÓSITO DE ALMA
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_dones_proposito |
@@ -365,7 +401,7 @@
 
 ---
 
-#### 17. Pulsera SANADORES CÓSMICOS
+#### 19. Pulsera SANADORES CÓSMICOS
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_sanadores_cosmicos |
@@ -383,7 +419,7 @@
 
 ---
 
-#### 18. Pulsera PROTECCIÓN ENERGÉTICA
+#### 20. Pulsera PROTECCIÓN ENERGÉTICA
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_proteccion |
@@ -401,7 +437,7 @@
 
 ---
 
-#### 19. ANCLAS DE PROTECCIÓN ENERGÉTICA (Para Espacios)
+#### 21. ANCLAS DE PROTECCIÓN ENERGÉTICA (Para Espacios)
 | Campo | Valor |
 |-------|-------|
 | **SKU** | anclas_proteccion |
@@ -472,6 +508,7 @@ Los talleres se almacenan en la base de datos y se gestionan dinámicamente.
 | Kundalini Hombre | $599.00 MXN |
 | Sanadores Cósmicos | $599.00 MXN |
 | Einstein | $649.00 MXN |
+| Conexión Arcturiana | $2,700.00 MXN |
 | ADN Millonario | $2,900.00 MXN |
 | Dones y Propósito | $699.00 MXN |
 | Anclas de Protección | $799.00 MXN |
