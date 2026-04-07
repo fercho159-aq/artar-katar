@@ -394,7 +394,7 @@ export default function TiendaPage() {
                           className={`flex flex-col overflow-hidden group hover:shadow-xl transition-shadow duration-300 ${group.borderColor}`}
                         >
                           <Link href={`/tienda/${product.id}`} className="flex flex-col flex-grow">
-                            <div className="p-0 relative overflow-hidden">
+                            <div className="p-4 relative overflow-hidden bg-muted/5 flex items-center justify-center aspect-square">
                               <Image
                                 src={
                                   product.image_url ||
@@ -405,7 +405,7 @@ export default function TiendaPage() {
                                 data-ai-hint={image?.imageHint}
                                 width={500}
                                 height={500}
-                                className="object-cover aspect-square group-hover:scale-105 transition-transform duration-500"
+                                className="object-contain w-full h-full group-hover:scale-110 transition-transform duration-500"
                               />
                             </div>
                             <CardContent className="p-4 flex flex-col flex-grow text-foreground/80">
