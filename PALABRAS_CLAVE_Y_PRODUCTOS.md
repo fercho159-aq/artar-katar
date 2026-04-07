@@ -178,7 +178,58 @@
 
 ---
 
-#### 6. Pulsera ACTIVACIÓN DONES y PROPÓSITO DE ALMA
+#### 6. Pulsera ADN MILLONARIO MODELO 6
+| Campo | Valor |
+|-------|-------|
+| **SKU** | puls_1006 |
+| **Precio** | $2,900.00 MXN |
+| **Piedra** | Agatha Naranja |
+| **Categoría** | Abundancia |
+| **Descripción Corta** | Astar katar & la Fuente<br>Reconecta tus filamentos multidimensionales de "de abundancia" y ayuda a atraer riqueza |
+| **Activado Por** | Astar katar & la Fuente |
+
+**Beneficios:**
+- Activa tu capacidad natural de manifestación sin límites
+- Reconecta tus filamentos de ADN multidimensional de manifestación
+- Atrae abundancia económica desde la Fuente
+
+---
+
+#### 7. Pulsera ADN MILLONARIO MODELO 7
+| Campo | Valor |
+|-------|-------|
+| **SKU** | puls_1007 |
+| **Precio** | $2,900.00 MXN |
+| **Piedra** | Ágata y Obsidiana |
+| **Categoría** | Abundancia |
+| **Descripción Corta** | Astar katar & la Fuente<br>Reconecta tus filamentos multidimensionales de "de abundancia" y ayuda a atraer riqueza |
+| **Activado Por** | Astar katar & la Fuente |
+
+**Beneficios:**
+- Activa tu capacidad natural de manifestación sin límites
+- Reconecta tus filamentos de ADN multidimensional de manifestación
+- Atrae abundancia económica desde la Fuente
+
+---
+
+#### 8. Pulsera ADN MILLONARIO MODELO 8
+| Campo | Valor |
+|-------|-------|
+| **SKU** | puls_1008 |
+| **Precio** | $2,900.00 MXN |
+| **Piedra** | Ágata Roja y Obsidiana |
+| **Categoría** | Abundancia |
+| **Descripción Corta** | Astar katar & la Fuente<br>Reconecta tus filamentos multidimensionales de "de abundancia" y ayuda a atraer riqueza |
+| **Activado Por** | Astar katar & la Fuente |
+
+**Beneficios:**
+- Activa tu capacidad natural de manifestación sin límites
+- Reconecta tus filamentos de ADN multidimensional de manifestación
+- Atrae abundancia económica desde la Fuente
+
+---
+
+#### 9. Pulsera ACTIVACIÓN DONES y PROPÓSITO DE ALMA
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_dones_proposito |
@@ -196,7 +247,7 @@
 
 ---
 
-#### 7. Pulsera SANADORES CÓSMICOS
+#### 10. Pulsera SANADORES CÓSMICOS
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_sanadores_cosmicos |
