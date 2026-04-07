@@ -466,22 +466,52 @@
 #### 23. Pulsera SANADORES CÓSMICOS
 | Campo | Valor |
 |-------|-------|
-| **SKU** | puls_sanadores_cosmicos |
-| **Precio** | $599.00 MXN |
-| **Piedra** | Piedra de Luna |
+| **SKU** | puls_1022 |
+| **Precio** | $1,200.00 MXN |
+| **Piedra** | Piedra de luna |
 | **Categoría** | Sanación |
 | **Descripción Corta** | Conecta con la tecnología espiritual de Sirio para tu sanación integral |
-| **Activado Por** | Numo y Nikol (sanadores estelares de Sirio A y B) |
+| **Activado Por** | Numo y Nikol, sanadores cósmicos de Sirio A y B |
 
 **Beneficios:**
-- Apoyo en sanación física, mental y emocional
-- Conexión con tecnología espiritual de Sirio
-- Armonización de frecuencias personales
-- Sanación de la relación con la economía
+- Conecta con energía sanadora de Sirio A y B
+- Facilita la sanación integral cuerpo-mente-espíritu
+- Transmuta emociones negativas somatizadas
 
 ---
 
-#### 24. Pulsera PROTECCIÓN ENERGÉTICA
+#### 24. ANCLAS SANADORES CÓSMICOS
+| Campo | Valor |
+|-------|-------|
+| **SKU** | puls_1025 |
+| **Precio** | $300.00 MXN |
+| **Piedra** | N/A |
+| **Categoría** | Sanación |
+| **Descripción Corta** | Activadas por Numo y Nikol, sanadores cósmicos de Sirio A y B |
+| **Activado Por** | Numo y Nikol, sanadores cósmicos de Sirio A y B |
+
+**Beneficios:**
+- Atraen y anclan energías cósmicas sanadoras
+- Un ancla crea espacio sanador de varios metros de radio
+
+---
+
+#### 25. KIT, ANCLAS SANADORES CÓSMICOS
+| Campo | Valor |
+|-------|-------|
+| **SKU** | puls_1026 |
+| **Precio** | $800.00 MXN |
+| **Piedra** | N/A |
+| **Categoría** | Sanación |
+| **Descripción Corta** | Activados por Sanadores Cósmicos de Sirio A y B |
+| **Activado Por** | Sanadores Cósmicos de Sirio A y B |
+
+**Beneficios:**
+- Puestos en triángulo, crea vórtice de energía sanadora cósmica.
+
+---
+
+#### 26. Pulsera PROTECCIÓN ENERGÉTICA
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_proteccion |
@@ -499,7 +529,7 @@
 
 ---
 
-#### 25. ANCLAS DE PROTECCIÓN ENERGÉTICA (Para Espacios)
+#### 27. ANCLAS DE PROTECCIÓN ENERGÉTICA (Para Espacios)
 | Campo | Valor |
 |-------|-------|
 | **SKU** | anclas_proteccion |

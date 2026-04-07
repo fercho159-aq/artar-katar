@@ -217,18 +217,27 @@ const products = [
     short_description: 'Conecta con la tecnología espiritual de Sirio para tu sanación integral',
     description: 'Conecta con energía sanadora de Sirio A y B | Facilita la sanación integral cuerpo-mente-espíritu | Transmuta emociones negativas somatizadas',
     activated_by: 'Numo y Nikol, sanadores cósmicos de Sirio A y B',
-    stone: 'Obsidiana', category: 'Sanación', price: 1200,
+    stone: 'Piedra de luna', category: 'Sanación', price: 1200,
     image_url: '/images/pulseras/sanadores-cosmicos-1.png',
     learn_more: 'Tecnología Espiritual de Sirio: Numo y Nikol transmiten su energía y tecnología espiritual a través de estas pulseras. Es un anhelo profundo de estos seres ayudarles a sanar. Al usar estas pulseras, contactan con su verdadera esencia, la cual no es vivir con escasez ni enfermedad.'
   },
   {
     sku: 'puls_1025', name: 'Anclas Sanadores Cósmicos',
     short_description: 'Activadas por Numo y Nikol, sanadores cósmicos de Sirio A y B',
-    description: 'Permiten atraer y anclar energías cósmicas sanadoras a un espacio | Un ancla crea espacio sanador de varios metros de radio',
+    description: 'Atraen y anclan energías cósmicas sanadoras | Un ancla crea espacio sanador de varios metros de radio',
     activated_by: 'Numo y Nikol, sanadores cósmicos de Sirio A y B',
     stone: null, category: 'Sanación', price: 300,
     image_url: '/images/pulseras/sanadores-cosmicos-2.png',
     learn_more: 'Activadas por Numo y Nikol, sanadores cósmicos de Sirio A y B. Ubicadas en forma de triángulo crea un vórtice de energía sanadora cósmica al interior del triángulo. Ideal para habitaciones y casas.\n\nKit de 3 anclas: $800 MXN'
+  },
+  {
+    sku: 'puls_1026', name: 'Kit, Anclas Sanadores Cósmicos',
+    short_description: 'Activados por Sanadores Cósmicos de Sirio A y B',
+    description: 'Puestos en triángulo, crea vórtice de energía sanadora cósmica.',
+    activated_by: 'Sanadores Cósmicos de Sirio A y B',
+    stone: null, category: 'Sanación', price: 800,
+    image_url: '/images/pulseras/1024-anclas-proteccion-kit.jpeg',
+    learn_more: 'Kit especial que incluye 3 Anclas Sanadores Cósmicos. Formando un triángulo en un lugar específico, atraen y anclan un poderoso vórtice de energía curativa de Sirio A y B directamente en el espacio.'
   },
 
   // === PROTECCIÓN (Protección Energética, Extra-fuerte, Anclas de Protección) ===
