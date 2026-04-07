@@ -85,14 +85,14 @@
 
 ### A. PULSERAS (Productos Físicos)
 
-#### 1. PULSERA SEXUALIDAD KUNDALINI HOMBRES
+#### 1. PULSERA SEXUALIDAD & KUNDALINI HOMBRES
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_1019 |
 | **Precio** | $1,600.00 MXN |
 | **Piedra** | Amatista |
 | **Categoría** | Sexualidad |
-| **Descripción Corta** | Sirianos, Lemurianos, Sekhmeth, María de Magdala<br>Despierta tu energía kundalini y potencia tu virilidad y fuerza vital |
+| **Descripción Corta** | Sirianos, Lemurianos, Sekhmeth, María de Magdala<br>Despierta tu energía kundalini and potencia tu virilidad y fuerza vital |
 | **Activado Por** | Sirianos, Lemurianos, Sekhmeth, María de Magdala |
 
 **Beneficios:**
@@ -102,18 +102,18 @@
 
 ---
 
-#### 2. PULSERA SEXUALIDAD KUNDALINI MUJERES
+#### 2. PULSERA SEXUALIDAD & KUNDALINI MUJERES
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_1020 |
 | **Precio** | $1,600.00 MXN |
 | **Piedra** | Amatista |
 | **Categoría** | Sexualidad |
-| **Descripción Corta** | Sirianos, Lemurianos, Sekhmeth, María de Magdala<br>Despierta tu energía kundalini y potencia tu fuerza vital femenina |
+| **Descripción Corta** | Sirianos, Lemurianos, Sekhmeth, María de Magdala<br>Despierta tu energía kundalini and potencia tu fuerza vital femenina |
 | **Activado Por** | Sirianos, Lemurianos, Sekhmeth, María de Magdala |
 
 **Beneficios:**
-- Potencia tu fuerza vital y sensualidad
+- Potencia tu fuerza vital and sensualidad
 - Despierta tu energía kundalini femenina
 - Limpia memorias antiguas y libera emociones
 

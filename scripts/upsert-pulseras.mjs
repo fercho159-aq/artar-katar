@@ -126,7 +126,7 @@ const products = [
 
   // === SEXUALIDAD (Mujeres, Hombres, Parejas) ===
   {
-    sku: 'puls_1019', name: 'PULSERA SEXUALIDAD KUNDALINI HOMBRES',
+    sku: 'puls_1019', name: 'PULSERA SEXUALIDAD & KUNDALINI HOMBRES',
     short_description: 'Sirianos, Lemurianos, Sekhmeth, María de Magdala\nDespierta tu energía kundalini y potencia tu virilidad y fuerza vital',
     description: 'Potencia tu virilidad y fuerza vital | Despierta tu energía kundalini masculina | Limpia memorias antiguas y desbloquea emociones',
     activated_by: 'Sirianos, Lemurianos, Sekhmeth, María de Magdala',
@@ -135,7 +135,7 @@ const products = [
     learn_more: 'El despertar de la Kundalini: La energía kundalini es el misterio más antiguo del ser humano. Ha sido llamada Shakti dormida, la madre del despertar, la energía primordial. Es una fuerza vital latente enroscada en la base de tu columna, esperando ser reconocida para ascender. No es simbólica, es real y tangible; un fuego contenido.\n\nAl activarse y ascender por la columna (atravesando los siete chakras), limpia memorias antiguas, desbloquea emociones reprimidas y expande la percepción. Estas pulseras no te liberan de algo, sino que sacan tu conciencia de la prisión de la ilusión.'
   },
   {
-    sku: 'puls_1020', name: 'PULSERA SEXUALIDAD KUNDALINI MUJERES',
+    sku: 'puls_1020', name: 'PULSERA SEXUALIDAD & KUNDALINI MUJERES',
     short_description: 'Sirianos, Lemurianos, Sekhmeth, María de Magdala\nDespierta tu energía kundalini y potencia tu fuerza vital femenina',
     description: 'Potencia tu fuerza vital y sensualidad | Despierta tu energía kundalini femenina | Limpia memorias antiguas y libera emociones',
     activated_by: 'Sirianos, Lemurianos, Sekhmeth, María de Magdala',
