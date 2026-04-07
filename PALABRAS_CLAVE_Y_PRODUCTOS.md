@@ -161,7 +161,75 @@
 
 ---
 
-#### 5. Pulsera ADN MILLONARIO MODELO 5
+#### 5. Pulsera ADN MILLONARIO MODELO 1
+| Campo | Valor |
+|-------|-------|
+| **SKU** | puls_1001 |
+| **Precio** | $2,900.00 MXN |
+| **Piedra** | Ágata y Obsidiana |
+| **Categoría** | Abundancia |
+| **Descripción Corta** | Astar katar & la Fuente<br>Reconecta tus filamentos multidimensionales "de abundancia" y ayuda a atraer riqueza financiera |
+| **Activado Por** | Astar katar & la Fuente |
+
+**Beneficios:**
+- Activa tu capacidad natural de manifestación sin límites
+- Reconecta tus filamentos de ADN multidimensional de manifestación
+- Atrae abundancia económica desde la Fuente
+
+---
+
+#### 6. Pulsera ADN MILLONARIO MODELO 2
+| Campo | Valor |
+|-------|-------|
+| **SKU** | puls_1002 |
+| **Precio** | $2,900.00 MXN |
+| **Piedra** | Agatha y Obsidiana |
+| **Categoría** | Abundancia |
+| **Descripción Corta** | Astar katar & la Fuente<br>Reconecta tus filamentos multidimensionales "de abundancia" y ayuda a atraer riqueza financiera |
+| **Activado Por** | Astar katar & la Fuente |
+
+**Beneficios:**
+- Activa tu capacidad natural de manifestación sin límites
+- Reconecta tus filamentos de ADN multidimensional de manifestación
+- Atrae abundancia económica desde la Fuente
+
+---
+
+#### 7. Pulsera ADN MILLONARIO MODELO 3
+| Campo | Valor |
+|-------|-------|
+| **SKU** | puls_1003 |
+| **Precio** | $2,900.00 MXN |
+| **Piedra** | Ágata Naranja |
+| **Categoría** | Abundancia |
+| **Descripción Corta** | Astar katar & la Fuente<br>Reconecta tus filamentos multidimensionales "de abundancia" y ayuda a atraer riqueza financiera |
+| **Activado Por** | Astar katar & la Fuente |
+
+**Beneficios:**
+- Activa tu capacidad natural de manifestación sin límites
+- Reconecta tus filamentos de ADN multidimensional de manifestación
+- Atrae abundancia económica desde la Fuente
+
+---
+
+#### 8. Pulsera ADN MILLONARIO MODELO 4
+| Campo | Valor |
+|-------|-------|
+| **SKU** | puls_1004 |
+| **Precio** | $2,900.00 MXN |
+| **Piedra** | Agatha y obsidiana |
+| **Categoría** | Abundancia |
+| **Descripción Corta** | Astar katar & la Fuente<br>Reconecta tus filamentos multidimensionales "de abundancia" y ayuda a atraer riqueza financiera |
+| **Activado Por** | Astar katar & la Fuente |
+
+**Beneficios:**
+- Activa tu capacidad natural de manifestación sin límites
+- Reconecta tus filamentos de ADN multidimensional de manifestación
+- Atrae abundancia económica desde la Fuente
+
+---
+
+#### 9. Pulsera ADN MILLONARIO MODELO 5
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_1005 |
@@ -178,7 +246,7 @@
 
 ---
 
-#### 6. Pulsera ADN MILLONARIO MODELO 6
+#### 10. Pulsera ADN MILLONARIO MODELO 6
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_1006 |
@@ -195,7 +263,7 @@
 
 ---
 
-#### 7. Pulsera ADN MILLONARIO MODELO 7
+#### 11. Pulsera ADN MILLONARIO MODELO 7
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_1007 |
@@ -212,7 +280,7 @@
 
 ---
 
-#### 8. Pulsera ADN MILLONARIO MODELO 8
+#### 12. Pulsera ADN MILLONARIO MODELO 8
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_1008 |
@@ -229,7 +297,7 @@
 
 ---
 
-#### 9. Pulsera ACTIVACIÓN DONES y PROPÓSITO DE ALMA
+#### 13. Pulsera ACTIVACIÓN DONES y PROPÓSITO DE ALMA
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_dones_proposito |
@@ -247,7 +315,7 @@
 
 ---
 
-#### 10. Pulsera SANADORES CÓSMICOS
+#### 14. Pulsera SANADORES CÓSMICOS
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_sanadores_cosmicos |
@@ -265,7 +333,7 @@
 
 ---
 
-#### 8. Pulsera PROTECCIÓN ENERGÉTICA
+#### 15. Pulsera PROTECCIÓN ENERGÉTICA
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_proteccion |
@@ -283,7 +351,7 @@
 
 ---
 
-#### 9. ANCLAS DE PROTECCIÓN ENERGÉTICA (Para Espacios)
+#### 16. ANCLAS DE PROTECCIÓN ENERGÉTICA (Para Espacios)
 | Campo | Valor |
 |-------|-------|
 | **SKU** | anclas_proteccion |
