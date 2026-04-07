@@ -175,38 +175,38 @@ const products = [
 
   // === PROPÓSITO (Dones y Potencial del Alma) ===
   {
-    sku: 'puls_1013', name: 'Pulsera Dones y Propósito del Alma Modelo 1',
-    short_description: 'Activa tus dones dormidos y descubre tu propósito de alma',
+    sku: 'puls_1013', name: 'PULSERA DONES Y PROPÓSITO DEL ALMA MODELO 1',
+    short_description: 'Ashirion, Sekhmeth, Enki\nActiva tus dones dormidos y descubre tu propósito de alma',
     description: 'Activa tus dones y talentos dormidos | Descubre y alinea tu propósito de alma | Despierta capacidades psíquicas latentes',
-    activated_by: 'Ashírion, Sekhmeth y Enki (creadores y guerreros cósmicos)',
-    stone: 'Obsidiana y Dzi', category: 'Propósito', price: 2700,
+    activated_by: 'Ashirion, Sekhmeth, Enki',
+    stone: 'Obsidiana y Agatha', category: 'Propósito', price: 2700,
     image_url: '/images/pulseras/dones-proposito-1.png',
     learn_more: 'El propósito del Alma: Activadas con vibraciones altísimas (más allá de la densidad 33). Algunos sentirán la energía muy fuerte, otros más sutil. Tu alma encarnó para vivir ciertas experiencias y desarrollar habilidades; estas pulseras apoyan la flexibilidad y adaptabilidad ante esos cambios, despertando con naturalidad tus capacidades psíquicas latentes.'
   },
   {
-    sku: 'puls_1014', name: 'Pulsera Dones y Propósito del Alma Modelo 2',
-    short_description: 'Activa tus dones dormidos y descubre tu propósito de alma',
+    sku: 'puls_1014', name: 'PULSERA DONES Y PROPÓSITO DEL ALMA MODELO 2',
+    short_description: 'Ashirion, Sekhmeth, Enki\nActiva tus dones dormidos y descubre tu propósito de alma',
     description: 'Activa tus dones y talentos dormidos | Descubre y alinea tu propósito de alma | Despierta capacidades psíquicas latentes',
-    activated_by: 'Ashírion, Sekhmeth y Enki (creadores y guerreros cósmicos)',
-    stone: 'Madera Petrificada y Obsidiana', category: 'Propósito', price: 2700,
+    activated_by: 'Ashirion, Sekhmeth, Enki',
+    stone: 'Obsidiana y Agatha', category: 'Propósito', price: 2700,
     image_url: '/images/pulseras/dones-proposito-2.png',
     learn_more: 'El propósito del Alma: Activadas con vibraciones altísimas (más allá de la densidad 33). Algunos sentirán la energía muy fuerte, otros más sutil. Tu alma encarnó para vivir ciertas experiencias y desarrollar habilidades; estas pulseras apoyan la flexibilidad y adaptabilidad ante esos cambios, despertando con naturalidad tus capacidades psíquicas latentes.'
   },
   {
-    sku: 'puls_1015', name: 'Pulsera Dones y Propósito del Alma Modelo 4',
-    short_description: 'Activa tus dones dormidos y descubre tu propósito de alma',
+    sku: 'puls_1015', name: 'PULSERA DONES Y PROPÓSITO DEL ALMA MODELO 4',
+    short_description: 'Ashirion, Sekhmeth, Enki\nActiva tus dones dormidos y descubre tu propósito de alma',
     description: 'Activa tus dones y talentos dormidos | Descubre y alinea tu propósito de alma | Despierta capacidades psíquicas latentes',
-    activated_by: 'Ashírion, Sekhmeth y Enki (creadores y guerreros cósmicos)',
-    stone: 'Ágata Roja Esmerilada y Obsidiana', category: 'Propósito', price: 2700,
+    activated_by: 'Ashirion, Sekhmeth, Enki',
+    stone: 'Obsidiana y Agatha', category: 'Propósito', price: 2700,
     image_url: '/images/pulseras/dones-proposito-4.png',
     learn_more: 'El propósito del Alma: Activadas con vibraciones altísimas (más allá de la densidad 33). Algunos sentirán la energía muy fuerte, otros más sutil. Tu alma encarnó para vivir ciertas experiencias y desarrollar habilidades; estas pulseras apoyan la flexibilidad y adaptabilidad ante esos cambios, despertando con naturalidad tus capacidades psíquicas latentes.'
   },
   {
-    sku: 'puls_1016', name: 'Pulsera Dones y Propósito del Alma Modelo 3',
-    short_description: 'Activa tus dones dormidos y descubre tu propósito de alma',
+    sku: 'puls_1016', name: 'PULSERA DONES Y PROPÓSITO DEL ALMA MODELO 3',
+    short_description: 'Ashirion, Sekhmeth, Enki\nActiva tus dones dormidos y descubre tu propósito de alma',
     description: 'Activa tus dones y talentos dormidos | Descubre y alinea tu propósito de alma | Despierta capacidades psíquicas latentes',
-    activated_by: 'Ashírion, Sekhmeth y Enki (creadores y guerreros cósmicos)',
-    stone: 'Cornalina y Obsidiana Mate', category: 'Propósito', price: 2700,
+    activated_by: 'Ashirion, Sekhmeth, Enki',
+    stone: 'Obsidiana y Agatha', category: 'Propósito', price: 2700,
     image_url: '/images/pulseras/dones-proposito-3.png',
     learn_more: 'El propósito del Alma: Activadas con vibraciones altísimas (más allá de la densidad 33). Algunos sentirán la energía muy fuerte, otros más sutil. Tu alma encarnó para vivir ciertas experiencias y desarrollar habilidades; estas pulseras apoyan la flexibilidad y adaptabilidad ante esos cambios, despertando con naturalidad tus capacidades psíquicas latentes.'
   },

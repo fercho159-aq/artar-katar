@@ -395,25 +395,75 @@
 
 ---
 
-#### 19. Pulsera ACTIVACIÓN DONES y PROPÓSITO DE ALMA
+#### 19. PULSERA DONES Y PROPÓSITO DEL ALMA MODELO 1
 | Campo | Valor |
 |-------|-------|
-| **SKU** | puls_dones_proposito |
-| **Precio** | $699.00 MXN |
-| **Piedra** | Jade Naranja y Obsidiana |
+| **SKU** | puls_1013 |
+| **Precio** | $2,700.00 MXN |
+| **Piedra** | Obsidiana y Agatha |
 | **Categoría** | Propósito |
-| **Descripción Corta** | Activa tus dones dormidos y descubre tu propósito de alma |
-| **Activado Por** | Ashírion, Sekhmeth y Enki |
+| **Descripción Corta** | Ashirion, Sekhmeth, Enki<br>Activa tus dones dormidos y descubre tu propósito de alma |
+| **Activado Por** | Ashirion, Sekhmeth, Enki |
 
 **Beneficios:**
-- Activa tus dones y habilidades dormidas (intuición, clarividencia, etc.)
-- Te guía hacia tu "propósito de alma"
-- Da la capacidad de manifestar tus objetivos
-- Promueve concentración, firmeza y decisión
+- Activa tus dones y talentos dormidos
+- Descubre y alinea tu propósito de alma
+- Despierta capacidades psíquicas latentes
 
 ---
 
-#### 20. Pulsera SANADORES CÓSMICOS
+#### 20. PULSERA DONES Y PROPÓSITO DEL ALMA MODELO 2
+| Campo | Valor |
+|-------|-------|
+| **SKU** | puls_1014 |
+| **Precio** | $2,700.00 MXN |
+| **Piedra** | Obsidiana y Agatha |
+| **Categoría** | Propósito |
+| **Descripción Corta** | Ashirion, Sekhmeth, Enki<br>Activa tus dones dormidos y descubre tu propósito de alma |
+| **Activado Por** | Ashirion, Sekhmeth, Enki |
+
+**Beneficios:**
+- Activa tus dones y talentos dormidos
+- Descubre y alinea tu propósito de alma
+- Despierta capacidades psíquicas latentes
+
+---
+
+#### 21. PULSERA DONES Y PROPÓSITO DEL ALMA MODELO 3
+| Campo | Valor |
+|-------|-------|
+| **SKU** | puls_1016 |
+| **Precio** | $2,700.00 MXN |
+| **Piedra** | Obsidiana y Agatha |
+| **Categoría** | Propósito |
+| **Descripción Corta** | Ashirion, Sekhmeth, Enki<br>Activa tus dones dormidos y descubre tu propósito de alma |
+| **Activado Por** | Ashirion, Sekhmeth, Enki |
+
+**Beneficios:**
+- Activa tus dones y talentos dormidos
+- Descubre y alinea tu propósito de alma
+- Despierta capacidades psíquicas latentes
+
+---
+
+#### 22. PULSERA DONES Y PROPÓSITO DEL ALMA MODELO 4
+| Campo | Valor |
+|-------|-------|
+| **SKU** | puls_1015 |
+| **Precio** | $2,700.00 MXN |
+| **Piedra** | Obsidiana y Agatha |
+| **Categoría** | Propósito |
+| **Descripción Corta** | Ashirion, Sekhmeth, Enki<br>Activa tus dones dormidos y descubre tu propósito de alma |
+| **Activado Por** | Ashirion, Sekhmeth, Enki |
+
+**Beneficios:**
+- Activa tus dones y talentos dormidos
+- Descubre y alinea tu propósito de alma
+- Despierta capacidades psíquicas latentes
+
+---
+
+#### 23. Pulsera SANADORES CÓSMICOS
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_sanadores_cosmicos |
@@ -431,7 +481,7 @@
 
 ---
 
-#### 21. Pulsera PROTECCIÓN ENERGÉTICA
+#### 24. Pulsera PROTECCIÓN ENERGÉTICA
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_proteccion |
@@ -449,7 +499,7 @@
 
 ---
 
-#### 22. ANCLAS DE PROTECCIÓN ENERGÉTICA (Para Espacios)
+#### 25. ANCLAS DE PROTECCIÓN ENERGÉTICA (Para Espacios)
 | Campo | Valor |
 |-------|-------|
 | **SKU** | anclas_proteccion |
