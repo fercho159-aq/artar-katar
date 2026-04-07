@@ -143,25 +143,41 @@
 
 ---
 
-#### 4. Pulsera ABUNDANCIA Y BIENESTAR
+#### 4. Pulsera ABUNDANCIA Y BIENESTAR AMPLIO
 | Campo | Valor |
 |-------|-------|
-| **SKU** | puls_abundancia |
-| **Precio** | $549.00 MXN |
-| **Piedra** | Ágata Amarilla |
+| **SKU** | puls_1011 |
+| **Precio** | $1,600.00 MXN |
+| **Piedra** | Agatha amarillo |
 | **Categoría** | Abundancia |
-| **Descripción Corta** | Transforma tus paradigmas de escasez y conecta con el flujo de abundancia |
-| **Activado Por** | Arcángeles Uriel, Jofiel y el maestro Yashua |
+| **Descripción Corta** | Arcángel Jofiel, Arcángel Uriel, rayo dorado<br>Transforma tus paradigmas de escasez y conecta con el flujo de abundancia |
+| **Activado Por** | Arcángel Jofiel, Arcángel Uriel, rayo dorado |
 
 **Beneficios:**
-- Permite aceptar la abundancia como un derecho natural de vida
-- Instala la consciencia de cocreador vibracional
-- Transforma paradigmas y condicionamientos de escasez (ancestrales y de otras vidas)
-- Conecta con el flujo natural de abundancia en la tierra
+- Activa tu capacidad natural de manifestation sin límites
+- Reconecta tus filamentos de ADN multidimensional de manifestación
+- Reprograma tu subconsciente para recibir
 
 ---
 
-#### 5. Pulsera ADN MILLONARIO MODELO 1
+#### 5. Pulsera ABUNDANCIA Y BIENESTAR FINO
+| Campo | Valor |
+|-------|-------|
+| **SKU** | puls_1012 |
+| **Precio** | $1,600.00 MXN |
+| **Piedra** | Agatha amarillo |
+| **Categoría** | Abundancia |
+| **Descripción Corta** | Arcángel Jofiel, Arcángel Uriel, rayo dorado<br>Transforma tus paradigmas de escasez y conecta con el flujo de abundancia |
+| **Activado Por** | Arcángel Jofiel, Arcángel Uriel, rayo dorado |
+
+**Beneficios:**
+- Activa tu capacidad natural de manifestation sin límites
+- Reconecta tus filamentos de ADN multidimensional de manifestación
+- Reprograma tu subconsciente para recibir
+
+---
+
+#### 6. Pulsera ADN MILLONARIO MODELO 1
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_1001 |
@@ -178,7 +194,7 @@
 
 ---
 
-#### 6. Pulsera ADN MILLONARIO MODELO 2
+#### 7. Pulsera ADN MILLONARIO MODELO 2
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_1002 |
@@ -195,7 +211,7 @@
 
 ---
 
-#### 7. Pulsera ADN MILLONARIO MODELO 3
+#### 8. Pulsera ADN MILLONARIO MODELO 3
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_1003 |
@@ -212,7 +228,7 @@
 
 ---
 
-#### 8. Pulsera ADN MILLONARIO MODELO 4
+#### 9. Pulsera ADN MILLONARIO MODELO 4
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_1004 |
@@ -229,7 +245,7 @@
 
 ---
 
-#### 9. Pulsera ADN MILLONARIO MODELO 5
+#### 10. Pulsera ADN MILLONARIO MODELO 5
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_1005 |
@@ -246,7 +262,7 @@
 
 ---
 
-#### 10. Pulsera ADN MILLONARIO MODELO 6
+#### 11. Pulsera ADN MILLONARIO MODELO 6
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_1006 |
@@ -263,12 +279,12 @@
 
 ---
 
-#### 11. Pulsera ADN MILLONARIO MODELO 7
+#### 12. Pulsera ADN MILLONARIO MODELO 7
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_1007 |
 | **Precio** | $2,900.00 MXN |
-| **Piedra** | Ágata y Obsidiana |
+| **Piedra** | Agatha y Obsidiana |
 | **Categoría** | Abundancia |
 | **Descripción Corta** | Astar katar & la Fuente<br>Reconecta tus filamentos multidimensionales de "de abundancia" y ayuda a atraer riqueza |
 | **Activado Por** | Astar katar & la Fuente |
@@ -280,12 +296,12 @@
 
 ---
 
-#### 12. Pulsera ADN MILLONARIO MODELO 8
+#### 13. Pulsera ADN MILLONARIO MODELO 8
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_1008 |
 | **Precio** | $2,900.00 MXN |
-| **Piedra** | Ágata Roja y Obsidiana |
+| **Piedra** | Agatha Roja y Obsidiana |
 | **Categoría** | Abundancia |
 | **Descripción Corta** | Astar katar & la Fuente<br>Reconecta tus filamentos multidimensionales de "de abundancia" y ayuda a atraer riqueza |
 | **Activado Por** | Astar katar & la Fuente |
@@ -297,7 +313,7 @@
 
 ---
 
-#### 13. Pulsera ADN MILLONARIO JADE AZUL GRANDE
+#### 14. Pulsera ADN MILLONARIO JADE AZUL GRANDE
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_1009 |
@@ -314,7 +330,7 @@
 
 ---
 
-#### 14. Pulsera ADN MILLONARIO JADE AZUL CHICO
+#### 15. Pulsera ADN MILLONARIO JADE AZUL CHICO
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_1010 |
@@ -331,7 +347,7 @@
 
 ---
 
-#### 15. Pulsera ACTIVACIÓN DONES y PROPÓSITO DE ALMA
+#### 16. Pulsera ACTIVACIÓN DONES y PROPÓSITO DE ALMA
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_dones_proposito |
@@ -342,14 +358,14 @@
 | **Activado Por** | Ashírion, Sekhmeth y Enki |
 
 **Beneficios:**
-- Activa tus dones y habilidades dormidas (intuición, clariviridencia, etc.)
+- Activa tus dones y habilidades dormidas (intuición, clarividencia, etc.)
 - Te guía hacia tu "propósito de alma"
 - Da la capacidad de manifestar tus objetivos
 - Promueve concentración, firmeza y decisión
 
 ---
 
-#### 16. Pulsera SANADORES CÓSMICOS
+#### 17. Pulsera SANADORES CÓSMICOS
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_sanadores_cosmicos |
@@ -367,7 +383,7 @@
 
 ---
 
-#### 17. Pulsera PROTECCIÓN ENERGÉTICA
+#### 18. Pulsera PROTECCIÓN ENERGÉTICA
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_proteccion |
@@ -385,7 +401,7 @@
 
 ---
 
-#### 18. ANCLAS DE PROTECCIÓN ENERGÉTICA (Para Espacios)
+#### 19. ANCLAS DE PROTECCIÓN ENERGÉTICA (Para Espacios)
 | Campo | Valor |
 |-------|-------|
 | **SKU** | anclas_proteccion |
@@ -450,12 +466,13 @@ Los talleres se almacenan en la base de datos y se gestionan dinámicamente.
 | Producto | Precio |
 |----------|--------|
 | Protección Energética | $549.00 MXN |
+| Abundancia y Bienestar | $1,600.00 MXN |
 | Abundancia y Bienestar | $549.00 MXN |
 | Kundalini Mujer | $599.00 MXN |
 | Kundalini Hombre | $599.00 MXN |
 | Sanadores Cósmicos | $599.00 MXN |
 | Einstein | $649.00 MXN |
-| ADN Millonario | $649.00 MXN |
+| ADN Millonario | $2,900.00 MXN |
 | Dones y Propósito | $699.00 MXN |
 | Anclas de Protección | $799.00 MXN |
 

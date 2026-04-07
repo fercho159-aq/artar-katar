@@ -107,19 +107,19 @@ const products = [
   },
   {
     sku: 'puls_1011', name: 'Pulsera Abundancia y Bienestar Amplio',
-    short_description: 'Transforma tus paradigmas de escasez y conecta con el flujo de abundancia',
-    description: 'Transforma patrones de escasez en abundancia | Conecta con el flujo universal de bienestar | Reprograma tu subconsciente para recibir',
-    activated_by: 'Arcángeles Uriel, Jofiel y el maestro Yashua',
-    stone: 'Citrino', category: 'Abundancia', price: 1600,
+    short_description: 'Arcángel Jofiel, Arcángel Uriel, rayo dorado\nTransforma tus paradigmas de escasez y conecta con el flujo de abundancia',
+    description: 'Activa tu capacidad natural de manifestación sin límites | Reconecta tus filamentos de ADN multidimensional de manifestación | Reprograma tu subconsciente para recibir',
+    activated_by: 'Arcángel Jofiel, Arcángel Uriel, rayo dorado',
+    stone: 'Agatha amarillo', category: 'Abundancia', price: 1600,
     image_url: '/images/pulseras/1011-abundancia-amplio.jpeg',
     learn_more: 'La vibración de la Abundancia: El Arcángel Jofiel dice: "La abundancia no es externa, es una vibración". Muchos han sido programados con frases como "el dinero no crece en los árboles", creando un sistema de creencias de escasez. La abundancia responde a quien está preparado para recibirla. Con estas pulseras, se aplica una "neurociencia espiritual" que transforma sus patrones mentales. No necesitas hacer más, necesitas ser más. Vibra en la certeza que tú mismo te permites.'
   },
   {
     sku: 'puls_1012', name: 'Pulsera Abundancia y Bienestar Fino',
-    short_description: 'Transforma tus paradigmas de escasez y conecta con el flujo de abundancia',
-    description: 'Transforma patrones de escasez en abundancia | Conecta con el flujo universal de bienestar | Reprograma tu subconsciente para recibir',
-    activated_by: 'Arcángeles Uriel, Jofiel y el maestro Yashua',
-    stone: 'Citrino', category: 'Abundancia', price: 1600,
+    short_description: 'Arcángel Jofiel, Arcángel Uriel, rayo dorado\nTransforma tus paradigmas de escasez y conecta con el flujo de abundancia',
+    description: 'Activa tu capacidad natural de manifestación sin límites | Reconecta tus filamentos de ADN multidimensional de manifestación | Reprograma tu subconsciente para recibir',
+    activated_by: 'Arcángel Jofiel, Arcángel Uriel, rayo dorado',
+    stone: 'Agatha amarillo', category: 'Abundancia', price: 1600,
     image_url: '/images/pulseras/1012-abundancia-fino.jpeg',
     learn_more: 'La vibración de la Abundancia: El Arcángel Jofiel dice: "La abundancia no es externa, es una vibración". Muchos han sido programados con frases como "el dinero no crece en los árboles", creando un sistema de creencias de escasez. La abundancia responde a quien está preparado para recibirla. Con estas pulseras, se aplica una "neurociencia espiritual" que transforma sus patrones mentales. No necesitas hacer más, necesitas ser más. Vibra en la certeza que tú mismo te permites.'
   },
