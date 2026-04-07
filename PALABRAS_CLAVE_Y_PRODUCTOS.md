@@ -168,7 +168,7 @@
 | **Precio** | $2,900.00 MXN |
 | **Piedra** | Agatha Naranja |
 | **Categoría** | Abundancia |
-| **Descripción Corta** | Reconecta tus filamentos de ADN de abundancia y atrae riqueza financiera |
+| **Descripción Corta** | Astar katar & la Fuente<br>Reconecta tus filamentos multidimensionales de "de abundancia" y ayuda a atraer riqueza |
 | **Activado Por** | Astar katar & la Fuente |
 
 **Beneficios:**
