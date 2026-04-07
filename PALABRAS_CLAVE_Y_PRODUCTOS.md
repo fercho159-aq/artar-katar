@@ -166,7 +166,7 @@
 |-------|-------|
 | **SKU** | puls_1001 |
 | **Precio** | $2,900.00 MXN |
-| **Piedra** | Ágata y Obsidiana |
+| **Piedra** | Agatha y Obsidiana |
 | **Categoría** | Abundancia |
 | **Descripción Corta** | Astar katar & la Fuente<br>Reconecta tus filamentos multidimensionales "de abundancia" y ayuda a atraer riqueza financiera |
 | **Activado Por** | Astar katar & la Fuente |
@@ -200,7 +200,7 @@
 |-------|-------|
 | **SKU** | puls_1003 |
 | **Precio** | $2,900.00 MXN |
-| **Piedra** | Ágata Naranja |
+| **Piedra** | Agatha Naranja |
 | **Categoría** | Abundancia |
 | **Descripción Corta** | Astar katar & la Fuente<br>Reconecta tus filamentos multidimensionales "de abundancia" y ayuda a atraer riqueza financiera |
 | **Activado Por** | Astar katar & la Fuente |
@@ -297,7 +297,41 @@
 
 ---
 
-#### 13. Pulsera ACTIVACIÓN DONES y PROPÓSITO DE ALMA
+#### 13. Pulsera ADN MILLONARIO JADE AZUL GRANDE
+| Campo | Valor |
+|-------|-------|
+| **SKU** | puls_1009 |
+| **Precio** | $2,900.00 MXN |
+| **Piedra** | Jade Azul - Verde |
+| **Categoría** | Abundancia |
+| **Descripción Corta** | Astar katar & la Fuente<br>Reconecta tus filamentos multidimensionales "de abundancia" y ayuda a atraer riqueza financiera |
+| **Activado Por** | Astar katar & la Fuente |
+
+**Beneficios:**
+- Activa tu capacidad natural de manifestación sin límites
+- Reconecta tus filamentos de ADN multidimensional de manifestación
+- Atrae abundancia económica desde la Fuente
+
+---
+
+#### 14. Pulsera ADN MILLONARIO JADE AZUL CHICO
+| Campo | Valor |
+|-------|-------|
+| **SKU** | puls_1010 |
+| **Precio** | $2,900.00 MXN |
+| **Piedra** | Jade Azul - Verde |
+| **Categoría** | Abundancia |
+| **Descripción Corta** | Astar katar & la Fuente<br>Reconecta tus filamentos multidimensionales "de abundancia" y ayuda a atraer riqueza financiera |
+| **Activado Por** | Astar katar & la Fuente |
+
+**Beneficios:**
+- Activa tu capacidad natural de manifestación sin límites
+- Reconecta tus filamentos de ADN multidimensional de manifestación
+- Atrae abundancia económica desde la Fuente
+
+---
+
+#### 15. Pulsera ACTIVACIÓN DONES y PROPÓSITO DE ALMA
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_dones_proposito |
@@ -308,14 +342,14 @@
 | **Activado Por** | Ashírion, Sekhmeth y Enki |
 
 **Beneficios:**
-- Activa tus dones y habilidades dormidas (intuición, clarividencia, etc.)
+- Activa tus dones y habilidades dormidas (intuición, clariviridencia, etc.)
 - Te guía hacia tu "propósito de alma"
 - Da la capacidad de manifestar tus objetivos
 - Promueve concentración, firmeza y decisión
 
 ---
 
-#### 14. Pulsera SANADORES CÓSMICOS
+#### 16. Pulsera SANADORES CÓSMICOS
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_sanadores_cosmicos |
@@ -333,7 +367,7 @@
 
 ---
 
-#### 15. Pulsera PROTECCIÓN ENERGÉTICA
+#### 17. Pulsera PROTECCIÓN ENERGÉTICA
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_proteccion |
@@ -351,7 +385,7 @@
 
 ---
 
-#### 16. ANCLAS DE PROTECCIÓN ENERGÉTICA (Para Espacios)
+#### 18. ANCLAS DE PROTECCIÓN ENERGÉTICA (Para Espacios)
 | Campo | Valor |
 |-------|-------|
 | **SKU** | anclas_proteccion |
