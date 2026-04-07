@@ -63,7 +63,7 @@ const products = [
   {
     sku: 'puls_1006', name: 'Pulsera ADN Millonario Modelo 6',
     short_description: 'Astar katar & la Fuente\nReconecta tus filamentos multidimensionales de "de abundancia" y ayuda a atraer riqueza',
-    description: 'Activa tu capacidad natural de manifestación sin límites | Reconecta tus filamentos de ADN multidimensional de manifestación | Atrae abundancia económica desde la Fuente',
+    description: 'Activa tu capacidad natural de manifestación sin límites | Reconecta tus filamentos de ADN millonario | Atrae abundancia económica desde la Fuente',
     activated_by: 'Astar katar & la Fuente',
     stone: 'Agatha Naranja', category: 'Abundancia', price: 2900,
     image_url: '/images/pulseras/adn-millonario-6.png',
@@ -72,7 +72,7 @@ const products = [
   {
     sku: 'puls_1007', name: 'Pulsera ADN Millonario Modelo 7',
     short_description: 'Astar katar & la Fuente\nReconecta tus filamentos multidimensionales de "de abundancia" y ayuda a atraer riqueza',
-    description: 'Activa tu capacidad natural de manifestación sin límites | Reconecta tus filamentos de ADN multidimensional de manifestación | Atrae abundancia económica desde la Fuente',
+    description: 'Activa tu capacidad natural de manifestación sin límites | Reconecta tus filamentos de ADN millonario | Atrae abundancia económica desde la Fuente',
     activated_by: 'Astar katar & la Fuente',
     stone: 'Ágata y Obsidiana', category: 'Abundancia', price: 2900,
     image_url: '/images/pulseras/adn-millonario-7.png',
@@ -81,7 +81,7 @@ const products = [
   {
     sku: 'puls_1008', name: 'Pulsera ADN Millonario Modelo 8',
     short_description: 'Astar katar & la Fuente\nReconecta tus filamentos multidimensionales de "de abundancia" y ayuda a atraer riqueza',
-    description: 'Activa tu capacidad natural de manifestación sin límites | Reconecta tus filamentos de ADN multidimensional de manifestación | Atrae abundancia económica desde la Fuente',
+    description: 'Activa tu capacidad natural de manifestación sin límites | Reconecta tus filamentos de ADN millonario | Atrae abundancia económica desde la Fuente',
     activated_by: 'Astar katar & la Fuente',
     stone: 'Ágata Roja y Obsidiana', category: 'Abundancia', price: 2900,
     image_url: '/images/pulseras/adn-millonario-8.png',
