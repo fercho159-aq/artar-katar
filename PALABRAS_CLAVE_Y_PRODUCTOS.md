@@ -85,46 +85,58 @@
 
 ### A. PULSERAS (Productos Físicos)
 
-#### 1. Pulsera KUNDALINI & SEXUALIDAD (Mujeres)
+#### 1. PULSERA SEXUALIDAD KUNDALINI HOMBRES
 | Campo | Valor |
 |-------|-------|
-| **SKU** | puls_kundalini_mujer |
-| **Precio** | $599.00 MXN |
+| **SKU** | puls_1019 |
+| **Precio** | $1,600.00 MXN |
 | **Piedra** | Amatista |
-| **Categoría** | Kundalini |
-| **Descripción Corta** | Despierta tu energía kundalini y potencia tu fuerza vital femenina |
-| **Activado Por** | Sirianos, Lemurianos, Sekhmeth, María Magdala |
+| **Categoría** | Sexualidad |
+| **Descripción Corta** | Sirianos, Lemurianos, Sekhmeth, María de Magdala<br>Despierta tu energía kundalini y potencia tu virilidad y fuerza vital |
+| **Activado Por** | Sirianos, Lemurianos, Sekhmeth, María de Magdala |
 
 **Beneficios:**
-- Despierta la energía kundalini de manera armónica, fuerte y profunda
-- Promueve mayor libido y disfrute sexual
-- Aumenta placer y creatividad sexual
-- Libera de traumas sexuales
-- Aumenta energía vital y "radiación sexual"
-- Facilita pasar conscientemente a otras dimensiones
+- Potencia tu virilidad y fuerza vital
+- Despierta tu energía kundalini masculina
+- Limpia memorias antiguas y desbloquea emociones
 
 ---
 
-#### 2. Pulsera KUNDALINI & SEXUALIDAD (Hombres)
+#### 2. PULSERA SEXUALIDAD KUNDALINI MUJERES
 | Campo | Valor |
 |-------|-------|
-| **SKU** | puls_kundalini_hombre |
-| **Precio** | $599.00 MXN |
+| **SKU** | puls_1020 |
+| **Precio** | $1,600.00 MXN |
 | **Piedra** | Amatista |
-| **Categoría** | Kundalini |
-| **Descripción Corta** | Despierta tu energía kundalini y potencia tu virilidad y fuerza vital |
-| **Activado Por** | Sirianos, Lemurianos, Sekhmeth, María Magdala |
+| **Categoría** | Sexualidad |
+| **Descripción Corta** | Sirianos, Lemurianos, Sekhmeth, María de Magdala<br>Despierta tu energía kundalini y potencia tu fuerza vital femenina |
+| **Activado Por** | Sirianos, Lemurianos, Sekhmeth, María de Magdala |
 
 **Beneficios:**
-- Despierta la energía Kundalini de manera armónica, fuerte y profunda
-- Aumenta virilidad y fuerza sexual
-- Mayor libido y vigor sexual
-- Aumenta energía vital y "radiación sexual"
-- Facilita pasar conscientemente a otras dimensiones
+- Potencia tu fuerza vital y sensualidad
+- Despierta tu energía kundalini femenina
+- Limpia memorias antiguas y libera emociones
 
 ---
 
-#### 3. Pulsera EINSTEIN
+#### 3. PULSERA SEXUALIDAD KUNDALINI PAREJAS
+| Campo | Valor |
+|-------|-------|
+| **SKU** | puls_1021 |
+| **Precio** | $3,100.00 MXN |
+| **Piedra** | Amatista |
+| **Categoría** | Sexualidad |
+| **Descripción Corta** | Sirianos, Lemurianos, Sekhmeth, María de Magdala<br>Estimula la compenetración sexual en la pareja |
+| **Activado Por** | Sirianos, Lemurianos, Sekhmeth, María de Magdala |
+
+**Beneficios:**
+- Profundiza la relación sexual
+- Potencia la conexión íntima
+- Despierta la kundalini compartida
+
+---
+
+#### 4. Pulsera EINSTEIN
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_einstein |
@@ -143,7 +155,7 @@
 
 ---
 
-#### 4. Pulsera ABUNDANCIA Y BIENESTAR AMPLIO
+#### 5. Pulsera ABUNDANCIA Y BIENESTAR AMPLIO
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_1011 |
@@ -155,12 +167,12 @@
 
 **Beneficios:**
 - Activa tu capacidad natural de manifestation sin límites
-- Reconecta tus filamentos de ADN multidimensional de manifestación
+- Reconecta tus filamentos de ADN multidimensional de manifestation
 - Reprograma tu subconsciente para recibir
 
 ---
 
-#### 5. Pulsera ABUNDANCIA Y BIENESTAR FINO
+#### 6. Pulsera ABUNDANCIA Y BIENESTAR FINO
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_1012 |
@@ -172,12 +184,12 @@
 
 **Beneficios:**
 - Activa tu capacidad natural de manifestation sin límites
-- Reconecta tus filamentos de ADN multidimensional de manifestación
+- Reconecta tus filamentos de ADN multidimensional de manifestation
 - Reprograma tu subconsciente para recibir
 
 ---
 
-#### 6. Pulsera ADN MILLONARIO MODELO 1
+#### 7. Pulsera ADN MILLONARIO MODELO 1
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_1001 |
@@ -194,7 +206,7 @@
 
 ---
 
-#### 7. Pulsera ADN MILLONARIO MODELO 2
+#### 8. Pulsera ADN MILLONARIO MODELO 2
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_1002 |
@@ -211,7 +223,7 @@
 
 ---
 
-#### 8. Pulsera ADN MILLONARIO MODELO 3
+#### 9. Pulsera ADN MILLONARIO MODELO 3
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_1003 |
@@ -228,7 +240,7 @@
 
 ---
 
-#### 9. Pulsera ADN MILLONARIO MODELO 4
+#### 10. Pulsera ADN MILLONARIO MODELO 4
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_1004 |
@@ -245,7 +257,7 @@
 
 ---
 
-#### 10. Pulsera ADN MILLONARIO MODELO 5
+#### 11. Pulsera ADN MILLONARIO MODELO 5
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_1005 |
@@ -262,7 +274,7 @@
 
 ---
 
-#### 11. Pulsera ADN MILLONARIO MODELO 6
+#### 12. Pulsera ADN MILLONARIO MODELO 6
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_1006 |
@@ -279,7 +291,7 @@
 
 ---
 
-#### 12. Pulsera ADN MILLONARIO MODELO 7
+#### 13. Pulsera ADN MILLONARIO MODELO 7
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_1007 |
@@ -296,7 +308,7 @@
 
 ---
 
-#### 13. Pulsera ADN MILLONARIO MODELO 8
+#### 14. Pulsera ADN MILLONARIO MODELO 8
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_1008 |
@@ -313,7 +325,7 @@
 
 ---
 
-#### 14. Pulsera ADN MILLONARIO JADE AZUL GRANDE
+#### 15. Pulsera ADN MILLONARIO JADE AZUL GRANDE
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_1009 |
@@ -325,12 +337,12 @@
 
 **Beneficios:**
 - Activa tu capacidad natural de manifestación sin límites
-- Reconecta tus filamentos de ADN multidimensional de manifestación
+- Reconecta tus filamentos de ADN multidimensional de manifestation
 - Atrae abundancia económica desde la Fuente
 
 ---
 
-#### 15. Pulsera ADN MILLONARIO JADE AZUL CHICO
+#### 16. Pulsera ADN MILLONARIO JADE AZUL CHICO
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_1010 |
@@ -342,12 +354,12 @@
 
 **Beneficios:**
 - Activa tu capacidad natural de manifestación sin límites
-- Reconecta tus filamentos de ADN multidimensional de manifestación
+- Reconecta tus filamentos de ADN multidimensional de manifestation
 - Atrae abundancia económica desde la Fuente
 
 ---
 
-#### 16. Pulsera CONEXIÓN ARCTURIANA FINA
+#### 17. Pulsera CONEXIÓN ARCTURIANA FINA
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_1017 |
@@ -365,7 +377,7 @@
 
 ---
 
-#### 17. Pulsera CONEXIÓN ARCTURIANA AMPLIO
+#### 18. Pulsera CONEXIÓN ARCTURIANA AMPLIO
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_1018 |
@@ -383,7 +395,7 @@
 
 ---
 
-#### 18. Pulsera ACTIVACIÓN DONES y PROPÓSITO DE ALMA
+#### 19. Pulsera ACTIVACIÓN DONES y PROPÓSITO DE ALMA
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_dones_proposito |
@@ -401,7 +413,7 @@
 
 ---
 
-#### 19. Pulsera SANADORES CÓSMICOS
+#### 20. Pulsera SANADORES CÓSMICOS
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_sanadores_cosmicos |
@@ -419,7 +431,7 @@
 
 ---
 
-#### 20. Pulsera PROTECCIÓN ENERGÉTICA
+#### 21. Pulsera PROTECCIÓN ENERGÉTICA
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_proteccion |
@@ -437,7 +449,7 @@
 
 ---
 
-#### 21. ANCLAS DE PROTECCIÓN ENERGÉTICA (Para Espacios)
+#### 22. ANCLAS DE PROTECCIÓN ENERGÉTICA (Para Espacios)
 | Campo | Valor |
 |-------|-------|
 | **SKU** | anclas_proteccion |
@@ -504,8 +516,9 @@ Los talleres se almacenan en la base de datos y se gestionan dinámicamente.
 | Protección Energética | $549.00 MXN |
 | Abundancia y Bienestar | $1,600.00 MXN |
 | Abundancia y Bienestar | $549.00 MXN |
-| Kundalini Mujer | $599.00 MXN |
-| Kundalini Hombre | $599.00 MXN |
+| Kundalini Mujer | $1,600.00 MXN |
+| Kundalini Hombre | $1,600.00 MXN |
+| Kundalini Parejas | $3,100.00 MXN |
 | Sanadores Cósmicos | $599.00 MXN |
 | Einstein | $649.00 MXN |
 | Conexión Arcturiana | $2,700.00 MXN |
