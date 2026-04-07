@@ -242,22 +242,31 @@ const products = [
 
   // === PROTECCIÓN (Protección Energética, Extra-fuerte, Anclas de Protección) ===
   {
-    sku: 'puls_1023', name: 'Protección Energética Extra Fuerte',
-    short_description: 'Protección contra energías negativas activada por la maestra Pachita',
-    description: 'Protección extra fuerte contra envidias y ataques energéticos | Limpieza del campo áurico | Escudo contra larvas energéticas y bajo astral',
-    activated_by: 'Pachita (desde la 5ª densidad)',
-    stone: 'Obsidiana Plateada', category: 'Protección', price: 1600,
+    sku: 'puls_1023', name: 'PULSERA PROTECCIÓN ENERGÉTICA EXTRA FUERTE',
+    short_description: 'Maestras Pachita y María Sabina desde la 5ta dimensión\nEscudo contra envidias y ataques energéticos',
+    description: 'Protección extra-fuerte contra envidias, ataques psíquicos, brujería | Limpieza del campo áurico | Escudo contra larvas energéticas y bajo astral',
+    activated_by: 'Maestras Pachita y María Sabina',
+    stone: 'Obsidiana', category: 'Protección', price: 1600,
     image_url: '/images/pulseras/proteccion-energetica-1.png',
     learn_more: 'El legado de Pachita: Pachita, eminente maestra chamánica multidimensional, activa estas piedras desde la 5ª densidad. Utiliza su energía específica y la de sus guías para brindar protección personal contra envidias, larvas energéticas y ataques del bajo astral.'
   },
   {
-    sku: 'puls_1024', name: 'Anclas de Protección Energética',
+    sku: 'puls_1024', name: 'ANCLAS DE PROTECCIÓN ENERGÉTICA',
     short_description: 'Protege tus espacios con vórtices de energía sagrada',
     description: 'Genera un campo de energía protectora en tus espacios | Estabiliza y protege contra cambios de frecuencia | Crea vórtices de protección en forma de triángulo',
     activated_by: 'Pachita y María Sabina (desde la 5ª densidad)',
-    stone: 'Opalita', category: 'Protección', price: 300,
+    stone: 'Obsidiana', category: 'Protección', price: 300,
     image_url: '/images/pulseras/proteccion-energetica-2.png',
     learn_more: 'Vórtices de Protección: Al colocar estas anclas en las esquinas, se genera una estructura de vórtices que crea un campo de energía protectora en tu realidad. Esto es vital dado que los cambios de frecuencia del planeta pueden provocar inquietud o estrés; estas anclas estabilizan y protegen el lugar y a ti.\n\nKit de 4 anclas: $1,100 MXN'
+  },
+  {
+    sku: 'puls_1027', name: 'Kit de anclas de protección energética.',
+    short_description: 'Puestos en cada esquina, crean vórtice energético de protección y limpieza',
+    description: 'Muy efectivo para casas, negocios',
+    activated_by: 'Maestras Pachita y María Sabina',
+    stone: 'Obsidiana', category: 'Protección', price: 1100,
+    image_url: '/images/pulseras/1023-proteccion-extra-fuerte.jpeg',
+    learn_more: 'Protección para espacios: Colocadas estratégicamente en las esquinas de tu propiedad, estas anclas generan un vórtice energético de limpieza y protección continua. Activadas por el linaje de las maestras Pachita y María Sabina.'
   },
 ];
 

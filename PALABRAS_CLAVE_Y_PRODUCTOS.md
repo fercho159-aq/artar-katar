@@ -511,39 +511,53 @@
 
 ---
 
-#### 26. Pulsera PROTECCIÓN ENERGÉTICA
+#### 26. PULSERA PROTECCIÓN ENERGÉTICA EXTRA FUERTE
 | Campo | Valor |
 |-------|-------|
-| **SKU** | puls_proteccion |
-| **Precio** | $549.00 MXN |
-| **Piedra** | Piedra Volcánica |
+| **SKU** | puls_1023 |
+| **Precio** | $1,600.00 MXN |
+| **Piedra** | Obsidiana |
 | **Categoría** | Protección |
-| **Descripción Corta** | Protección contra energías negativas activada por la maestra Pachita |
-| **Activado Por** | Pachita (desde la 5ª densidad) |
+| **Descripción Corta** | Maestras Pachita y María Sabina desde la 5ta dimensión<br>Escudo contra envidias y ataques energéticos |
+| **Activado Por** | Maestras Pachita y María Sabina |
 
 **Beneficios:**
-- Protege al portador contra energías negativas y brujerías
-- Repele malas vibras y elimina negatividad
-- Quita ansiedad, ira y estados depresivos
-- Otorga fuerza espiritual
+- Protección extra-fuerte contra envidias, ataques psíquicos, brujería
+- Limpieza del campo áurico
+- Escudo contra larvas energéticas y bajo astral
 
 ---
 
-#### 27. ANCLAS DE PROTECCIÓN ENERGÉTICA (Para Espacios)
+#### 27. ANCLAS DE PROTECCIÓN ENERGÉTICA
 | Campo | Valor |
 |-------|-------|
-| **SKU** | anclas_proteccion |
-| **Precio** | $799.00 MXN |
+| **SKU** | puls_1024 |
+| **Precio** | $300.00 MXN |
 | **Piedra** | Obsidiana |
 | **Categoría** | Protección |
 | **Descripción Corta** | Protege tus espacios con vórtices de energía sagrada |
 | **Activado Por** | Pachita y María Sabina (desde la 5ª densidad) |
 
 **Beneficios:**
-- Protege espacios de energías negativas y brujerías
-- Elimina negatividad dejada por otras personas
-- Genera un hexágono vibracional y estructuras de vórtices
-- **Uso:** Colocar un ancla en cada esquina del espacio (casa, oficina)
+- Genera un campo de energía protectora en tus espacios
+- Estabiliza y protege contra cambios de frecuencia
+- Crea vórtices de protección en forma de triángulo
+
+---
+
+#### 28. KIT DE ANCLAS DE PROTECCIÓN ENERGÉTICA.
+| Campo | Valor |
+|-------|-------|
+| **SKU** | puls_1027 |
+| **Precio** | $1,100.00 MXN |
+| **Piedra** | Obsidiana |
+| **Categoría** | Protección |
+| **Descripción Corta** | Puestos en cada esquina, crean vórtice energético de protección y limpieza |
+| **Activado Por** | Maestras Pachita y María Sabina |
+
+**Beneficios:**
+- Muy efectivo para casas, negocios
+- Puestos en cada esquina crean vórtice de protección y limpieza
 
 ---
 
