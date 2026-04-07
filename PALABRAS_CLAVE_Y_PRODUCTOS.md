@@ -119,7 +119,7 @@
 
 ---
 
-#### 3. PULSERA SEXUALIDAD KUNDALINI PAREJAS
+#### 3. PULSERA SEXUALIDAD & KUNDALINI PAREJAS
 | Campo | Valor |
 |-------|-------|
 | **SKU** | puls_1021 |
