@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#2d2d4e"/>
+    </linearGradient>
+  </defs>
+  <rect width="1080" height="1350" fill="url(#bg)"/>
+  <circle cx="540" cy="580" r="180" fill="none" stroke="#6b6b9a" stroke-width="2" opacity="0.5"/>
+  <circle cx="540" cy="580" r="130" fill="none" stroke="#6b6b9a" stroke-width="1.5" opacity="0.4"/>
+  <circle cx="540" cy="580" r="80" fill="#3a3a6a" opacity="0.6"/>
+  <polygon points="540,430 570,520 665,520 590,575 617,665 540,612 463,665 490,575 415,520 510,520" fill="#6b6b9a" opacity="0.5"/>
+  <text x="540" y="820" text-anchor="middle" fill="#9999cc" font-size="42" font-family="Georgia, serif" font-style="italic">Imagen próximamente</text>
+  <text x="540" y="880" text-anchor="middle" fill="#6b6b9a" font-size="28" font-family="sans-serif">CONÉCTATE CON TU YO SUPERIOR</text>
+</svg>
