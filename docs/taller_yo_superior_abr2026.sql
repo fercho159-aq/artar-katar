@@ -62,7 +62,7 @@ España: sesión especial a las 22:00 hrs, hora local',
     '7 noches: del 13 al 19 de abril, 10 pm (hora México-centro)',
     'Abierto',
     TRUE,
-    '/images/talleres/taller_yo_superior_placeholder.svg'
+    '/images/talleres/taller-abril.jpeg'
 );
 
 -- PASO 3: Verificar cambios
@@ -109,5 +109,5 @@ España: sesión especial a las 22:00 hrs, hora local',
     couple_price = NULL,
     workshop_date = '7 noches: del 13 al 19 de abril, 10 pm (hora México-centro)',
     workshop_status = 'Abierto',
-    image_url = '/images/talleres/taller_yo_superior_placeholder.svg'
+    image_url = '/images/talleres/taller-abril.jpeg'
 WHERE product_sku = 'wshop_008';
