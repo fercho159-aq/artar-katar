@@ -1,8 +1,9 @@
 'use client';
 
 import { Suspense, useEffect, useState, useRef } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
+import { useAuth } from '@/context/AuthContext';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { CheckCircle2, XCircle, Loader2 } from 'lucide-react';
@@ -10,15 +11,20 @@ import Link from 'next/link';
 
 function CheckoutSuccessContent() {
     const searchParams = useSearchParams();
+    const router = useRouter();
     const { clearCart } = useCart();
+    const { refreshSubscriptions } = useAuth();
     const hasProcessed = useRef(false);
 
     const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
     const [message, setMessage] = useState('');
     const [isGuest, setIsGuest] = useState(false);
+    const [isSubscription, setIsSubscription] = useState(false);
 
-    const reference = searchParams.get('reference');
+    const reference = searchParams.get('reference') || searchParams.get('ref');
     const error = searchParams.get('error');
+    const type = searchParams.get('type');
+    const program = searchParams.get('program') || 'activaciones_diarias';
 
     useEffect(() => {
         // Prevent double processing
@@ -37,6 +43,47 @@ function CheckoutSuccessContent() {
             if (!reference) {
                 setStatus('error');
                 setMessage('No se encontró referencia de pago.');
+                return;
+            }
+
+            // Subscription flow: poll for active subscription (webhook handles DB write)
+            if (type === 'subscription') {
+                setIsSubscription(true);
+                let pending: { user_uid?: string } | null = null;
+                try {
+                    const raw = localStorage.getItem('pendingSubscription');
+                    if (raw) pending = JSON.parse(raw);
+                } catch {}
+
+                const uid = pending?.user_uid;
+                if (!uid) {
+                    setStatus('success');
+                    setMessage('Tu pago fue recibido. Tu suscripción se activará en instantes.');
+                    return;
+                }
+
+                const deadline = Date.now() + 30_000;
+                while (Date.now() < deadline) {
+                    try {
+                        const res = await fetch(`/api/subscriptions/${uid}?program=${program}`);
+                        if (res.ok) {
+                            const sub = await res.json();
+                            if (sub && sub.status === 'Activa') {
+                                try { localStorage.removeItem('pendingSubscription'); } catch {}
+                                await refreshSubscriptions();
+                                const target = program === 'activaciones_diarias'
+                                    ? '/activaciones-diarias/biblioteca'
+                                    : '/mis-compras';
+                                router.push(target);
+                                return;
+                            }
+                        }
+                    } catch {}
+                    await new Promise(r => setTimeout(r, 2000));
+                }
+
+                setStatus('success');
+                setMessage('Tu pago fue recibido. Tu suscripción se activará en instantes; por favor recarga la página en un minuto.');
                 return;
             }
 
@@ -117,7 +164,7 @@ function CheckoutSuccessContent() {
         };
 
         processPayment();
-    }, [reference, error]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [reference, error, type, program]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div className="container py-16 md:py-24 flex justify-center">
@@ -147,7 +194,16 @@ function CheckoutSuccessContent() {
 
                     {status === 'success' && (
                         <div className="space-y-3">
-                            {isGuest ? (
+                            {isSubscription ? (
+                                <>
+                                    <Button asChild className="w-full">
+                                        <Link href="/activaciones-diarias/biblioteca">Ir a la biblioteca</Link>
+                                    </Button>
+                                    <Button asChild variant="outline" className="w-full">
+                                        <Link href="/activaciones-diarias">Ver mi suscripción</Link>
+                                    </Button>
+                                </>
+                            ) : isGuest ? (
                                 <Button asChild className="w-full">
                                     <Link href="/tienda">Seguir Comprando</Link>
                                 </Button>

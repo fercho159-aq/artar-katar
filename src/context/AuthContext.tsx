@@ -39,10 +39,12 @@ type AuthContextType = {
   user: User | null;
   orders: Order[];
   subscription: Subscription | null;
+  activacionesSubscription: Subscription | null;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
   signup: (name: string, email: string, password: string) => Promise<void>;
   logout: () => void;
+  refreshSubscriptions: () => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -51,7 +53,23 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [orders, setOrders] = useState<Order[]>([]);
   const [subscription, setSubscription] = useState<Subscription | null>(null);
+  const [activacionesSubscription, setActivacionesSubscription] = useState<Subscription | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  const fetchSubscriptions = useCallback(async (userId: string) => {
+    try {
+      const [medRes, actRes] = await Promise.all([
+        fetch(`/api/subscriptions/${userId}?program=meditaciones`),
+        fetch(`/api/subscriptions/${userId}?program=activaciones_diarias`),
+      ]);
+      setSubscription(medRes.ok ? await medRes.json() : null);
+      setActivacionesSubscription(actRes.ok ? await actRes.json() : null);
+    } catch (error) {
+      console.error('Failed to fetch subscriptions:', error);
+      setSubscription(null);
+      setActivacionesSubscription(null);
+    }
+  }, []);
 
   const fetchUserData = useCallback(async (userId: string) => {
     // Fetch Orders
@@ -82,20 +100,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setOrders([]);
     }
 
-    // Fetch Subscription
-    try {
-      const subResponse = await fetch(`/api/subscriptions/${userId}`);
-      if (subResponse.ok) {
-        const subData: Subscription | null = await subResponse.json();
-        setSubscription(subData);
-      } else {
-        setSubscription(null);
-      }
-    } catch (error) {
-      console.error("Failed to fetch subscription:", error);
-      setSubscription(null);
-    }
-  }, []);
+    // Fetch subscriptions for both programs
+    await fetchSubscriptions(userId);
+  }, [fetchSubscriptions]);
+
+  const refreshSubscriptions = useCallback(async () => {
+    if (user) await fetchSubscriptions(user.uid);
+  }, [user, fetchSubscriptions]);
 
   // Load user from localStorage on mount
   useEffect(() => {
@@ -168,6 +179,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setUser(data);
     setOrders([]);
     setSubscription(null);
+    setActivacionesSubscription(null);
     setIsLoading(false);
   };
 
@@ -175,6 +187,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setUser(null);
     setOrders([]);
     setSubscription(null);
+    setActivacionesSubscription(null);
     // Clear from localStorage
     try {
       localStorage.removeItem(USER_STORAGE_KEY);
@@ -184,7 +197,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, orders, subscription, isLoading, login, signup, logout }}>
+    <AuthContext.Provider value={{ user, orders, subscription, activacionesSubscription, isLoading, login, signup, logout, refreshSubscriptions }}>
       {children}
     </AuthContext.Provider>
   );

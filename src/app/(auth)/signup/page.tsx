@@ -17,8 +17,9 @@ import {
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAuth } from '@/context/AuthContext';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
+import { Suspense } from 'react';
 
 const formSchema = z.object({
   name: z.string().min(2, { message: 'El nombre debe tener al menos 2 caracteres.' }),
@@ -26,9 +27,11 @@ const formSchema = z.object({
   password: z.string().min(6, { message: 'La contraseña debe tener al menos 6 caracteres.' }),
 });
 
-export default function SignupPage() {
+function SignupPageInner() {
   const { signup } = useAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get('redirect');
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -47,7 +50,7 @@ export default function SignupPage() {
         title: '¡Cuenta Creada!',
         description: 'Te has registrado correctamente.',
       });
-      router.push('/mis-compras');
+      router.push(redirect && redirect.startsWith('/') ? redirect : '/mis-compras');
     } catch (error) {
       toast({
         variant: 'destructive',
@@ -115,12 +118,23 @@ export default function SignupPage() {
           </Form>
           <div className="mt-6 text-center text-sm">
             ¿Ya tienes una cuenta?{' '}
-            <Link href="/login" className="underline hover:text-primary">
+            <Link
+              href={redirect ? `/login?redirect=${encodeURIComponent(redirect)}` : '/login'}
+              className="underline hover:text-primary"
+            >
               Inicia sesión aquí
             </Link>
           </div>
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+export default function SignupPage() {
+  return (
+    <Suspense fallback={null}>
+      <SignupPageInner />
+    </Suspense>
   );
 }

@@ -56,7 +56,12 @@ const nextConfig: NextConfig = {
   },
   env: {
     CLIP_API_KEY: process.env.CLIP_API_KEY,
-  }
+  },
+  // Ensure private-audio/* is bundled into the serverless function for the
+  // activaciones audio streaming route (critical for Vercel deploy).
+  outputFileTracingIncludes: {
+    '/api/activaciones/audio/[slug]': ['./private-audio/**/*'],
+  },
 };
 
 export default nextConfig;

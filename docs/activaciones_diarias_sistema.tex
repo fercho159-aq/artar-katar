@@ -1,0 +1,285 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, fit, backgrounds}
+
+% --- Brand-ish palette ---
+\definecolor{brandprimary}{HTML}{6B4FA8}
+\definecolor{brandaccent}{HTML}{A68FD6}
+\definecolor{brandsoft}{HTML}{EEE7FA}
+\definecolor{brandok}{HTML}{2E8B57}
+\definecolor{brandwarn}{HTML}{C27500}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=brandprimary,
+  urlcolor=brandprimary
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textcolor{brandprimary}{\textbf{Astar Katar}}}
+\fancyhead[R]{Programa Activaciones Diarias}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% --- TikZ node styles ---
+\tikzset{
+  startstop/.style   = {rectangle, rounded corners, minimum width=3.2cm, minimum height=0.9cm,
+                        text centered, draw=brandprimary, fill=brandsoft, font=\small\bfseries},
+  akbox/.style       = {rectangle, rounded corners=3pt, minimum width=3.6cm, minimum height=0.9cm,
+                        text centered, text width=3.6cm, draw=brandprimary, fill=white, font=\small},
+  decision/.style    = {diamond, aspect=2, minimum width=3.4cm, minimum height=0.6cm,
+                        text centered, text width=3.2cm, draw=brandaccent, fill=brandsoft, font=\scriptsize},
+  db/.style          = {cylinder, shape border rotate=90, aspect=0.3, minimum width=2.6cm, minimum height=1cm,
+                        text centered, draw=brandprimary, fill=brandsoft, font=\small\bfseries},
+  external/.style    = {rectangle, minimum width=3.2cm, minimum height=0.9cm, text centered,
+                        draw=brandwarn, fill=white, font=\small\bfseries, dashed},
+  arrow/.style       = {-{Stealth[length=2.5mm]}, thick, draw=brandprimary}
+}
+
+\begin{document}
+
+% =================================================================
+\begin{titlepage}
+\centering
+\vspace*{3cm}
+{\Huge\bfseries\color{brandprimary} Programa Activaciones Diarias}\\[0.4cm]
+{\Large Cómo funciona el sistema}\\[1.5cm]
+
+\begin{tikzpicture}
+  \fill[brandprimary] (0,0) circle (0.08);
+  \fill[brandaccent] (0.6,0) circle (0.08);
+  \fill[brandsoft] (1.2,0) circle (0.08);
+\end{tikzpicture}
+
+\vfill
+{\large Documento explicativo para el dueño}\\[0.4cm]
+{\small Astar Katar $\cdot$ \today}
+\end{titlepage}
+
+% =================================================================
+\section{Resumen en una página}
+
+El programa \textbf{Activaciones Diarias} es una suscripción de tiempo limitado
+que da al cliente acceso a una biblioteca privada de audios guiados. No se vende
+por pieza: el cliente paga un plan (1 día, 1 mes, 3 meses o 6 meses) y mientras
+esté vigente puede escuchar \emph{toda} la biblioteca en línea.
+
+\begin{center}
+\begin{tikzpicture}[node distance=1.5cm]
+  \node[startstop] (user) {Cliente};
+  \node[akbox, right=of user] (pay) {Paga plan en Clip};
+  \node[akbox, right=of pay] (access) {Escucha biblioteca};
+  \node[db, right=of access] (exp) {Vence};
+
+  \draw[arrow] (user) -- (pay);
+  \draw[arrow] (pay) -- (access);
+  \draw[arrow] (access) -- (exp);
+  \draw[arrow, dashed] (exp.north) to[bend left=35] node[above, font=\scriptsize] {renueva} (pay.north);
+\end{tikzpicture}
+\end{center}
+
+\subsection*{Puntos clave}
+\begin{itemize}[leftmargin=*]
+  \item El cobro se hace con \textbf{Clip}. Nosotros no guardamos datos de tarjeta.
+  \item La suscripción se \textbf{activa sola} cuando Clip confirma el pago (webhook).
+  \item Si el cliente renueva antes de vencer, \textbf{se suman los días} (no se pierde tiempo).
+  \item Los audios \textbf{no se pueden descargar}: cada reproducción usa un enlace firmado que expira a los 10 minutos.
+\end{itemize}
+
+\newpage
+% =================================================================
+\section{Planes y precios}
+
+Los cuatro planes viven en la base de datos (tabla \texttt{subscription\_plans}).
+Modificarlos no requiere cambiar código.
+
+\begin{center}
+\begin{tabular}{@{}llrr@{}}
+\toprule
+\textbf{SKU} & \textbf{Nombre} & \textbf{Duración} & \textbf{Precio (MXN)} \\
+\midrule
+ACT-1D & Prueba 1 día & 1 día    & \$90 \\
+ACT-1M & 1 mes        & 30 días  & \$390 \\
+ACT-3M & 3 meses      & 90 días  & \$990 \\
+ACT-6M & 6 meses      & 180 días & \$1{,}690 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\textbf{Nota:} el plan de \emph{prueba 1 día} sirve para que el cliente
+conozca la biblioteca antes de comprometerse con un plan largo.
+
+% =================================================================
+\section{Flujo 1: Compra de una suscripción}
+
+Desde que el cliente elige un plan hasta que queda activo en su cuenta.
+
+\begin{center}
+\begin{tikzpicture}[node distance=1.1cm and 1.3cm]
+  \node[startstop] (client) {Cliente elige plan};
+  \node[akbox, below=of client] (web) {Sitio web crea referencia\\ \textit{SUB-ACT-\{uid\}-\{sku\}}};
+  \node[external, below=of web] (clip) {Clip (pasarela)};
+  \node[decision, below=of clip] (ok) {¿Pago exitoso?};
+  \node[akbox, below left=1cm and 0.3cm of ok] (fail) {Cliente ve error\\ nada cambia en BD};
+  \node[akbox, below right=1cm and 0.3cm of ok] (wh) {Webhook \texttt{transaction.succeeded}};
+  \node[akbox, below=1.2cm of wh] (verify) {Verifica firma HMAC\\ (secreto compartido con Clip)};
+  \node[decision, below=of verify] (dup) {¿Ya procesado?};
+  \node[akbox, left=of dup] (skip) {Ignora duplicado};
+  \node[db, below=of dup] (db) {Tabla \texttt{subscriptions}};
+  \node[akbox, below=of db] (done) {Cliente ve acceso\\ en Mis Compras};
+
+  \draw[arrow] (client) -- (web);
+  \draw[arrow] (web) -- (clip);
+  \draw[arrow] (clip) -- (ok);
+  \draw[arrow] (ok) -| node[above, pos=0.25, font=\scriptsize] {no} (fail);
+  \draw[arrow] (ok) -| node[above, pos=0.25, font=\scriptsize] {sí} (wh);
+  \draw[arrow] (wh) -- (verify);
+  \draw[arrow] (verify) -- (dup);
+  \draw[arrow] (dup) -- node[above, font=\scriptsize] {sí} (skip);
+  \draw[arrow] (dup) -- node[right, font=\scriptsize] {no} (db);
+  \draw[arrow] (db) -- (done);
+\end{tikzpicture}
+\end{center}
+
+\subsection*{¿Qué pasa si el cliente ya tiene una suscripción activa?}
+
+No se crea una segunda. El sistema \textbf{extiende} la existente: suma los días
+del nuevo plan a la fecha de vencimiento actual. La regla es
+\emph{``nunca encoger''}: si el plan vence el 15 de junio y hoy renueva por 30 días,
+el nuevo vencimiento es el 15 de julio (no desde hoy).
+
+\newpage
+% =================================================================
+\section{Flujo 2: Escuchar los audios}
+
+El cliente entra a \texttt{/activaciones-diarias/biblioteca}. El navegador
+pide al servidor los enlaces. El servidor valida suscripción y firma cada URL
+con una clave secreta. Los audios viven en un directorio privado; nunca se
+sirven directo.
+
+\begin{center}
+\begin{tikzpicture}[node distance=1.1cm]
+  \node[startstop] (a) {Cliente abre Biblioteca};
+  \node[akbox, below=of a] (b) {Navegador pide lista firmada};
+  \node[decision, below=of b] (c) {¿Suscripción activa?};
+  \node[akbox, left=of c] (deny) {403 Forbidden\\ sin acceso};
+  \node[akbox, below=of c] (d) {Servidor firma cada audio\\ (HMAC + exp 10 min)};
+  \node[akbox, below=of d] (e) {Cliente reproduce audio};
+  \node[decision, below=of e] (f) {¿Firma válida\\ y vigente?};
+  \node[db, below=of f, align=center] (g) {Carpeta privada};
+  \node[akbox, left=of f] (g2) {403 Forbidden};
+
+  \draw[arrow] (a) -- (b);
+  \draw[arrow] (b) -- (c);
+  \draw[arrow] (c) -- node[above, font=\scriptsize] {no} (deny);
+  \draw[arrow] (c) -- node[right, font=\scriptsize] {sí} (d);
+  \draw[arrow] (d) -- (e);
+  \draw[arrow] (e) -- (f);
+  \draw[arrow] (f) -- node[above, font=\scriptsize] {no} (g2);
+  \draw[arrow] (f) -- node[right, font=\scriptsize] {sí} (g);
+\end{tikzpicture}
+\end{center}
+
+\subsection*{¿Por qué tanto cuidado?}
+
+Sin firma, cualquier persona con el enlace podría compartir un audio o descargarlo.
+Con firma:
+
+\begin{itemize}[leftmargin=*]
+  \item Cada enlace es \textbf{único por cliente} y \textbf{expira a los 10 minutos}.
+  \item Compartir el enlace no sirve: expira antes de que el otro lo use.
+  \item El reproductor tiene el botón de \textbf{descargar oculto} (no es el candado, pero desalienta al usuario casual).
+  \item Al servidor solo llegan pedidos con firma válida \emph{y} suscripción vigente.
+\end{itemize}
+
+\noindent\textbf{Aviso honesto:} un técnico con herramientas de desarrollador
+puede capturar el audio mientras suena. No existe protección perfecta en web.
+El sistema disuade la copia casual; no imita DRM de Spotify.
+
+\newpage
+% =================================================================
+\section{Flujo 3: Vista del cliente en ``Mis Compras''}
+
+\begin{center}
+\begin{tikzpicture}[node distance=1.1cm]
+  \node[startstop] (l) {Cliente inicia sesión};
+  \node[akbox, below=of l] (f1) {Sistema consulta 2 suscripciones};
+  \node[akbox, below=of f1] (f2) {meditaciones + activaciones\_diarias};
+  \node[decision, below=of f2] (d1) {¿Activaciones\\activa?};
+  \node[akbox, left=of d1] (hide) {No se muestra banner};
+  \node[akbox, below=of d1] (show) {Banner ``Activaciones Diarias''\\ con días restantes};
+  \node[akbox, below=of show] (go) {Botón ``Ir a Biblioteca''};
+
+  \draw[arrow] (l) -- (f1);
+  \draw[arrow] (f1) -- (f2);
+  \draw[arrow] (f2) -- (d1);
+  \draw[arrow] (d1) -- node[above, font=\scriptsize] {no} (hide);
+  \draw[arrow] (d1) -- node[right, font=\scriptsize] {sí} (show);
+  \draw[arrow] (show) -- (go);
+\end{tikzpicture}
+\end{center}
+
+% =================================================================
+\section{Ciclo de vida de una suscripción}
+
+\begin{center}
+\begin{tikzpicture}[node distance=1.6cm]
+  \node[startstop, fill=brandsoft] (nosub) {Sin suscripción};
+  \node[startstop, right=of nosub, fill=white, draw=brandok, text=brandok] (act) {Activa};
+  \node[startstop, right=of act, fill=white] (exp) {Vencida};
+
+  \draw[arrow] (nosub) -- node[above, font=\scriptsize] {paga plan} (act);
+  \draw[arrow] (act.north) to[bend left=25] node[above, font=\scriptsize] {renovación (suma días)} (act.north);
+  \draw[arrow] (act) -- node[above, font=\scriptsize] {llega \texttt{end\_date}} (exp);
+  \draw[arrow, dashed] (exp.south) to[bend left=35] node[below, font=\scriptsize] {vuelve a pagar} (act.south);
+\end{tikzpicture}
+\end{center}
+
+\noindent Estado en la base de datos:
+\begin{itemize}[leftmargin=*]
+  \item \texttt{status = 'Activa'} + \texttt{end\_date > NOW()}: el cliente tiene acceso.
+  \item \texttt{end\_date < NOW()}: vencida, se le quita el acceso al siguiente pedido.
+  \item Se mantiene el historial completo en \texttt{subscription\_events} (auditoría de pagos).
+\end{itemize}
+
+% =================================================================
+\section{Qué pasa si algo falla}
+
+\begin{center}
+\begin{tabular}{@{}p{5.8cm}p{9cm}@{}}
+\toprule
+\textbf{Síntoma} & \textbf{Qué revisar} \\
+\midrule
+El cliente pagó pero no ve acceso &
+El webhook de Clip no llegó o la firma fue rechazada. Revisar logs del endpoint \texttt{/api/webhooks/clip}. \\
+\addlinespace
+El cliente pagó dos veces &
+La tabla \texttt{subscription\_events} tiene la referencia de pago como única, así que el segundo webhook se ignora. Sí genera cargo en Clip: reembolsar desde el panel de Clip. \\
+\addlinespace
+El audio no se reproduce &
+Verificar que el archivo existe en \texttt{private-audio/} y que la fila en \texttt{activaciones} apunta al \texttt{audio\_filename} correcto. \\
+\addlinespace
+La suscripción dice activa pero no deja escuchar &
+Probablemente \texttt{end\_date} ya pasó pero \texttt{status} sigue en `Activa'. El endpoint de audio valida ambos. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% =================================================================
+\vfill
+\begin{center}
+\textit{Documento de referencia. Ante cualquier duda operativa, contactar al equipo técnico.}
+\end{center}
+
+\end{document}

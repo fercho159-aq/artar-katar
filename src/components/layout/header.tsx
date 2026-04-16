@@ -44,6 +44,7 @@ export function Header() {
   const navLinks = [
     { href: '/talleres', label: translations.header.workshops },
     { href: '/tienda', label: translations.header.shop },
+    { href: '/activaciones-diarias', label: language === 'es' ? 'Activaciones Diarias' : 'Daily Activations' },
     // { href: '/meditaciones', label: translations.header.meditations },
   ];
 

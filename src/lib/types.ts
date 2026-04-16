@@ -31,6 +31,8 @@ export type Product = {
     max_capacity: number | null;
 };
 
+export type SubscriptionProgram = 'meditaciones' | 'activaciones_diarias';
+
 export type Subscription = {
     id: number;
     user_id: number;
@@ -38,6 +40,32 @@ export type Subscription = {
     start_date: string;
     next_billing_date: string | null;
     end_date: string | null;
+    program: SubscriptionProgram;
+    plan_sku: string | null;
+    last_payment_reference: string | null;
+    days_remaining?: number;
+};
+
+export type SubscriptionPlan = {
+    id: number;
+    plan_sku: string;
+    program: SubscriptionProgram;
+    name: string;
+    price: number;
+    duration_days: number;
+    is_active: boolean;
+};
+
+export type Activacion = {
+    id: number;
+    slug: string;
+    title: string;
+    description: string | null;
+    category: string | null;
+    duration_seconds: number | null;
+    audio_filename: string;
+    sort_order: number;
+    is_active: boolean;
 };
 
 export type Order = {

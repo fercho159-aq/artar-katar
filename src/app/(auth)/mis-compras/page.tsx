@@ -27,7 +27,8 @@ import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { BookUser, CreditCard, History, Music, PlayCircle, Users } from 'lucide-react';
+import Link from 'next/link';
+import { BookUser, CreditCard, History, Music, PlayCircle, Sparkles, Users } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useRouter } from 'next/navigation';
@@ -50,7 +51,7 @@ const allWorkshops = [
 ];
 
 export default function MisComprasPage() {
-  const { user, logout, orders, subscription } = useAuth();
+  const { user, logout, orders, subscription, activacionesSubscription } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
@@ -121,6 +122,25 @@ export default function MisComprasPage() {
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
+              {activacionesSubscription?.status === 'Activa' && (
+                <Link
+                  href="/activaciones-diarias/biblioteca"
+                  className="flex items-center justify-between gap-4 p-4 border border-primary/30 bg-primary/5 rounded-lg hover:bg-primary/10 transition-colors"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="h-20 w-20 rounded-md bg-primary/10 flex items-center justify-center shrink-0">
+                      <Sparkles className="h-8 w-8 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">Activaciones Diarias</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Biblioteca completa · {activacionesSubscription.days_remaining ?? 0} días restantes
+                      </p>
+                    </div>
+                  </div>
+                  <Button variant="outline">Ir a Biblioteca</Button>
+                </Link>
+              )}
               {purchasedMeditations.length > 0 ? (
                 purchasedMeditations.map((meditation) => {
                   const image = PlaceHolderImages.find(p => p.id === meditation.imageId);

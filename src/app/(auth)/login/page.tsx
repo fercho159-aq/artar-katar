@@ -17,17 +17,20 @@ import {
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAuth } from '@/context/AuthContext';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
+import { Suspense } from 'react';
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Por favor, introduce un email válido.' }),
   password: z.string().min(1, { message: 'La contraseña es requerida.' }),
 });
 
-export default function LoginPage() {
+function LoginPageInner() {
   const { login } = useAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get('redirect');
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -45,7 +48,7 @@ export default function LoginPage() {
         title: '¡Bienvenido!',
         description: 'Has iniciado sesión correctamente.',
       });
-      router.push('/mis-compras');
+      router.push(redirect && redirect.startsWith('/') ? redirect : '/mis-compras');
     } catch (error) {
       toast({
         variant: 'destructive',
@@ -100,12 +103,23 @@ export default function LoginPage() {
           </Form>
           <div className="mt-6 text-center text-sm">
             ¿No tienes una cuenta?{' '}
-            <Link href="/signup" className="underline hover:text-primary">
+            <Link
+              href={redirect ? `/signup?redirect=${encodeURIComponent(redirect)}` : '/signup'}
+              className="underline hover:text-primary"
+            >
               Regístrate aquí
             </Link>
           </div>
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={null}>
+      <LoginPageInner />
+    </Suspense>
   );
 }
