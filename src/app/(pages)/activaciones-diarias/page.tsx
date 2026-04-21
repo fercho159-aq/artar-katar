@@ -1,7 +1,15 @@
+import Image from 'next/image';
 import { dbQuery } from '@/lib/db';
 import { PlanCard } from '@/components/activaciones/PlanCard';
 import type { SubscriptionPlan } from '@/lib/types';
 import { Sparkles, Sun, Compass, TrendingUp } from 'lucide-react';
+
+const dailyContexts = [
+  { src: '/images/activaciones/manejando.png', label: 'Manejando' },
+  { src: '/images/activaciones/cocina.png', label: 'En la cocina' },
+  { src: '/images/activaciones/gym.jpg', label: 'En el gym' },
+  { src: '/images/activaciones/ejercicio.png', label: 'Haciendo ejercicio' },
+];
 
 export const dynamic = 'force-dynamic';
 
@@ -83,6 +91,36 @@ export default async function ActivacionesDiariasPage() {
                 vibración día a día.
               </p>
             </div>
+          </div>
+        </div>
+
+        {/* Daily contexts gallery */}
+        <div className="max-w-6xl mx-auto mb-20">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold font-headline mb-3">Úsalas donde sea</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Los audios son cortos y con los ojos abiertos. Llévalos contigo a lo largo del día.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {dailyContexts.map(({ src, label }) => (
+              <div
+                key={src}
+                className="group relative aspect-[3/4] overflow-hidden rounded-xl shadow-md"
+              >
+                <Image
+                  src={src}
+                  alt={label}
+                  fill
+                  sizes="(min-width: 768px) 25vw, 50vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                <span className="absolute bottom-3 left-4 right-4 text-white font-headline text-base md:text-lg">
+                  {label}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
 
