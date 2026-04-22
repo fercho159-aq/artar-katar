@@ -25,7 +25,6 @@ async function getPlans(): Promise<SubscriptionPlan[]> {
 
 export default async function ActivacionesDiariasPage() {
   const plans = await getPlans();
-  const youtubeId = process.env.NEXT_PUBLIC_ACTIVACIONES_INTRO_YT || '';
 
   return (
     <div className="bg-background">
@@ -45,19 +44,17 @@ export default async function ActivacionesDiariasPage() {
         </div>
 
         {/* Intro video */}
-        {youtubeId && (
-          <div className="max-w-4xl mx-auto mb-16">
-            <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black">
-              <iframe
-                src={`https://www.youtube.com/embed/${youtubeId}`}
-                title="Introducción - Activaciones Diarias"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="absolute inset-0 w-full h-full"
-              />
-            </div>
+        <div className="max-w-4xl mx-auto mb-16">
+          <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black">
+            <iframe
+              src="https://drive.google.com/file/d/1_HC8zO78DAUO7efSa6ru6N_sJw98lLcJ/preview"
+              title="Introducción - Activaciones Diarias"
+              allow="autoplay"
+              allowFullScreen
+              className="absolute inset-0 w-full h-full"
+            />
           </div>
-        )}
+        </div>
 
         {/* How it works */}
         <div className="max-w-5xl mx-auto mb-16">
