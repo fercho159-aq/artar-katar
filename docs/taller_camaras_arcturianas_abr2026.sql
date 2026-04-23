@@ -71,7 +71,7 @@ España: sesión especial a las 22:00 hrs, hora local',
     '7 noches: del 27 de abril al 3 de mayo, 10 pm (hora México-centro)',
     'Abierto',
     TRUE,
-    '/images/talleres/taller_ciclo_nocturno.jpeg'
+    '/images/talleres/taller_arcturianas.jpeg'
 );
 
 -- PASO 3: Verificar cambios
@@ -130,5 +130,5 @@ España: sesión especial a las 22:00 hrs, hora local',
     workshop_date = '7 noches: del 27 de abril al 3 de mayo, 10 pm (hora México-centro)',
     workshop_status = 'Abierto',
     is_active = TRUE,
-    image_url = '/images/talleres/taller_ciclo_nocturno.jpeg'
+    image_url = '/images/talleres/taller_arcturianas.jpeg'
 WHERE product_sku = 'wshop_009';
