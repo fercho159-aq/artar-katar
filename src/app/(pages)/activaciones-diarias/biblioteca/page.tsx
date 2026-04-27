@@ -125,6 +125,8 @@ export default function BibliotecaPage() {
             {activaciones.map((a) => (
               <AudioPlayer
                 key={a.id}
+                slug={a.slug}
+                userId={user?.uid}
                 title={a.title}
                 description={a.description}
                 category={a.category}

@@ -34,8 +34,10 @@ import {
     Loader2,
     GraduationCap,
     ShoppingBag,
+    BarChart3,
 } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { ActivacionStatsTable } from '@/components/admin/ActivacionStatsTable';
 
 type OrderItem = {
     quantity: number;
@@ -82,7 +84,7 @@ export default function AdminOrdersPage() {
     const [orders, setOrders] = useState<Order[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [statusFilter, setStatusFilter] = useState('all');
-    const [productTypeFilter, setProductTypeFilter] = useState<'all' | 'workshops' | 'products'>('all');
+    const [productTypeFilter, setProductTypeFilter] = useState<'all' | 'workshops' | 'products' | 'meditations'>('all');
     const [updatingOrderId, setUpdatingOrderId] = useState<number | null>(null);
 
     // Redirect if not admin
@@ -213,7 +215,7 @@ export default function AdminOrdersPage() {
 
                 {/* Tabs for product type filtering */}
                 <Tabs value={productTypeFilter} onValueChange={(value) => setProductTypeFilter(value as typeof productTypeFilter)} className="w-full">
-                    <TabsList className="grid w-full md:w-[400px] grid-cols-3">
+                    <TabsList className="grid w-full md:w-[560px] grid-cols-4">
                         <TabsTrigger value="all" className="flex items-center gap-2">
                             <Package className="h-4 w-4" />
                             Todas
@@ -226,33 +228,41 @@ export default function AdminOrdersPage() {
                             <ShoppingBag className="h-4 w-4" />
                             Productos
                         </TabsTrigger>
+                        <TabsTrigger value="meditations" className="flex items-center gap-2">
+                            <BarChart3 className="h-4 w-4" />
+                            Meditaciones
+                        </TabsTrigger>
                     </TabsList>
                 </Tabs>
 
-                {/* Filters row */}
-                <div className="flex items-center gap-4">
-                    <Select value={statusFilter} onValueChange={setStatusFilter}>
-                        <SelectTrigger className="w-48">
-                            <SelectValue placeholder="Filtrar por estado" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value="all">Todas las órdenes</SelectItem>
-                            {STATUS_OPTIONS.map(status => (
-                                <SelectItem key={status.value} value={status.value}>
-                                    {status.label}
-                                </SelectItem>
-                            ))}
-                        </SelectContent>
-                    </Select>
+                {/* Filters row — only relevant for order tabs */}
+                {productTypeFilter !== 'meditations' && (
+                    <div className="flex items-center gap-4">
+                        <Select value={statusFilter} onValueChange={setStatusFilter}>
+                            <SelectTrigger className="w-48">
+                                <SelectValue placeholder="Filtrar por estado" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="all">Todas las órdenes</SelectItem>
+                                {STATUS_OPTIONS.map(status => (
+                                    <SelectItem key={status.value} value={status.value}>
+                                        {status.label}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
 
-                    <Button onClick={fetchOrders} variant="outline" disabled={isLoading}>
-                        <RefreshCw className={`h-4 w-4 mr-2 ${isLoading ? 'animate-spin' : ''}`} />
-                        Actualizar
-                    </Button>
-                </div>
+                        <Button onClick={fetchOrders} variant="outline" disabled={isLoading}>
+                            <RefreshCw className={`h-4 w-4 mr-2 ${isLoading ? 'animate-spin' : ''}`} />
+                            Actualizar
+                        </Button>
+                    </div>
+                )}
             </div>
 
-            {isLoading ? (
+            {productTypeFilter === 'meditations' ? (
+                <ActivacionStatsTable adminUid={user.uid} />
+            ) : isLoading ? (
                 <div className="flex justify-center py-16">
                     <Loader2 className="h-8 w-8 animate-spin text-primary" />
                 </div>

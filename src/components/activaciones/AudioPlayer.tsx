@@ -1,5 +1,6 @@
 'use client';
 
+import { useRef } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Clock } from 'lucide-react';
 
@@ -9,6 +10,8 @@ type Props = {
   category: string | null;
   durationSeconds: number | null;
   audioUrl: string;
+  slug?: string;
+  userId?: string;
 };
 
 function formatDuration(seconds: number | null): string {
@@ -18,7 +21,22 @@ function formatDuration(seconds: number | null): string {
   return `${m}:${String(s).padStart(2, '0')}`;
 }
 
-export function AudioPlayer({ title, description, category, durationSeconds, audioUrl }: Props) {
+export function AudioPlayer({ title, description, category, durationSeconds, audioUrl, slug, userId }: Props) {
+  const playFiredRef = useRef(false);
+
+  const handlePlay = () => {
+    if (playFiredRef.current || !slug || !userId) return;
+    playFiredRef.current = true;
+    fetch('/api/activaciones/track-play', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId, slug }),
+      keepalive: true,
+    }).catch(() => {
+      playFiredRef.current = false;
+    });
+  };
+
   return (
     <Card className="overflow-hidden">
       <CardContent className="p-5 space-y-3">
@@ -43,6 +61,7 @@ export function AudioPlayer({ title, description, category, durationSeconds, aud
           controls
           controlsList="nodownload noplaybackrate"
           onContextMenu={(e) => e.preventDefault()}
+          onPlay={handlePlay}
           preload="none"
           className="w-full"
           src={audioUrl}
