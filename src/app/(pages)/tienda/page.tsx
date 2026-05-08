@@ -7,7 +7,7 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { useEffect, useState } from 'react';
 import { Product } from '@/lib/types';
 import { Skeleton } from '@/components/ui/skeleton';
-import { CheckCircle, ShoppingCart, Sparkles, Shield, Heart, Brain, Flame, Gem, ChevronDown, ChevronUp, Moon, Clock, Star, Eye, Zap } from 'lucide-react';
+import { CheckCircle, ShoppingCart, Sparkles, Shield, Heart, Brain, Flame, Gem, ChevronDown, ChevronUp, Moon, Clock, Star, Eye, Zap, MessageCircle } from 'lucide-react';
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
 import {
@@ -107,6 +107,21 @@ const getGroupForProduct = (product: Product): string => {
     }
   }
   return 'other';
+};
+
+const GENERAL_VIDEO_ID = '1XmIKESFcxYY7yZPVzml7bG2Bn2nTIMp4';
+const WHATSAPP_PULSERAS = '524424742162';
+
+const categoryVideos: Record<string, { id: string; title: string }[]> = {
+  abundancia: [
+    { id: '1VDxovafGHcCtUX1Fapl3M7iCZmk9tTPu', title: 'Pulseras Abundancia' },
+    { id: '1XmIKESFcxYY7yZPVzml7bG2Bn2nTIMp4', title: 'Pulseras Abundancia ADN Millonario' },
+  ],
+  sexualidad: [{ id: '1u3HfgYYzqZQK6KB0NTyywgTDC5CPLDCK', title: 'Pulseras Sexualidad' }],
+  'conexion-arcturiana': [{ id: '1Fz1_120UA__XzrgrDjZLtsealpQBQpzE', title: 'Pulseras Conexión Arcturiana' }],
+  proposito: [{ id: '17QNyMFcbnuH367Z1_2263prT4TgOVY8K', title: 'Pulseras Propósito' }],
+  sanacion: [{ id: '1qTdJGKbDqJz9CU9chclbiGEei29frTIo', title: 'Pulseras Sanación' }],
+  proteccion: [{ id: '1F75T4Ogs6O8jR8QgbxzoVfYzexZB5ZTM', title: 'Pulseras Protección' }],
 };
 
 export default function TiendaPage() {
@@ -311,6 +326,24 @@ export default function TiendaPage() {
         </div>
       </div>
 
+      {/* General Bracelet Video */}
+      <div className="container pb-8">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-xl font-semibold mb-4 text-foreground">
+            ¿Cómo funcionan las pulseras Astar Katar?
+          </h2>
+          <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black">
+            <iframe
+              src={`https://drive.google.com/file/d/${GENERAL_VIDEO_ID}/preview`}
+              title="Descripción general - Pulseras Astar Katar"
+              allow="autoplay"
+              allowFullScreen
+              className="absolute inset-0 w-full h-full"
+            />
+          </div>
+        </div>
+      </div>
+
       {/* Quick Navigation */}
       {!isLoading && groupedProducts.length > 0 && (
         <div className="sticky top-0 z-20 bg-background/80 backdrop-blur-md border-b border-border">
@@ -379,6 +412,28 @@ export default function TiendaPage() {
                       </div>
                     </div>
                   </div>
+
+                  {/* Category Video(s) */}
+                  {categoryVideos[group.id] && (
+                    <div className="mb-8">
+                      <div className={`grid gap-6 ${categoryVideos[group.id].length > 1 ? 'sm:grid-cols-2' : 'max-w-2xl mx-auto'}`}>
+                        {categoryVideos[group.id].map(video => (
+                          <div key={video.id}>
+                            <p className="text-sm font-medium text-center text-muted-foreground mb-2">{video.title}</p>
+                            <div className="relative aspect-video rounded-xl overflow-hidden shadow-md bg-black">
+                              <iframe
+                                src={`https://drive.google.com/file/d/${video.id}/preview`}
+                                title={video.title}
+                                allow="autoplay"
+                                allowFullScreen
+                                className="absolute inset-0 w-full h-full"
+                              />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
 
                   {/* Product Grid */}
                   <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
@@ -462,6 +517,20 @@ export default function TiendaPage() {
             })}
           </div>
         )}
+
+        {/* WhatsApp Contact */}
+        <div className="mt-12 text-center">
+          <p className="text-muted-foreground mb-4">¿Tienes dudas sobre nuestras pulseras?</p>
+          <a
+            href={`https://wa.me/${WHATSAPP_PULSERAS}?text=${encodeURIComponent('Hola, me gustaría recibir información sobre las pulseras Astar Katar.')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-green-500 hover:bg-green-600 text-white font-semibold transition-colors shadow-md"
+          >
+            <MessageCircle className="h-5 w-5" />
+            Contactar por WhatsApp · 442 474 2162
+          </a>
+        </div>
       </div>
     </div>
   );
