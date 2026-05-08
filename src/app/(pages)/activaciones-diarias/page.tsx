@@ -47,7 +47,7 @@ export default async function ActivacionesDiariasPage() {
         <div className="max-w-xs mx-auto mb-16">
           <div className="relative aspect-[9/16] rounded-xl overflow-hidden shadow-lg bg-black">
             <iframe
-              src="https://drive.google.com/file/d/1_HC8zO78DAUO7efSa6ru6N_sJw98lLcJ/preview"
+              src="https://drive.google.com/file/d/1yISR3IxfmJm-RVDrw6REQLOVjReC3Xwz/preview"
               title="Introducción - Activaciones Diarias"
               allow="autoplay"
               allowFullScreen
