@@ -328,11 +328,11 @@ export default function TiendaPage() {
 
       {/* General Bracelet Video */}
       <div className="container pb-8">
-        <div className="max-w-2xl mx-auto text-center">
+        <div className="max-w-xs mx-auto text-center">
           <h2 className="text-xl font-semibold mb-4 text-foreground">
             ¿Cómo funcionan las pulseras Astar Katar?
           </h2>
-          <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black">
+          <div className="relative aspect-[9/16] rounded-xl overflow-hidden shadow-lg bg-black">
             <iframe
               src={`https://drive.google.com/file/d/${GENERAL_VIDEO_ID}/preview`}
               title="Descripción general - Pulseras Astar Katar"
@@ -416,11 +416,11 @@ export default function TiendaPage() {
                   {/* Category Video(s) */}
                   {categoryVideos[group.id] && (
                     <div className="mb-8">
-                      <div className={`grid gap-6 ${categoryVideos[group.id].length > 1 ? 'sm:grid-cols-2' : 'max-w-2xl mx-auto'}`}>
+                      <div className={`flex flex-wrap justify-center gap-6`}>
                         {categoryVideos[group.id].map(video => (
-                          <div key={video.id}>
+                          <div key={video.id} className="w-full max-w-xs">
                             <p className="text-sm font-medium text-center text-muted-foreground mb-2">{video.title}</p>
-                            <div className="relative aspect-video rounded-xl overflow-hidden shadow-md bg-black">
+                            <div className="relative aspect-[9/16] rounded-xl overflow-hidden shadow-md bg-black">
                               <iframe
                                 src={`https://drive.google.com/file/d/${video.id}/preview`}
                                 title={video.title}
