@@ -4,7 +4,7 @@ import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Button } from '@/components/ui/button';
-import { CheckCircle, ShoppingCart, Sparkles, Gem, BookOpen, ArrowLeft, Users } from 'lucide-react';
+import { CheckCircle, ShoppingCart, Sparkles, Gem, BookOpen, ArrowLeft, Users, MessageCircle } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useEffect, useState } from 'react';
@@ -239,6 +239,17 @@ export default function TiendaDetailPage() {
                   <p>Para cualquier edad (adultos, adolescentes y niños). Puedes combinar varias pulseras para potenciar sus efectos.</p>
                 </div>
               </div>
+
+              {/* WhatsApp Contact */}
+              <a
+                href={`https://wa.me/524424742162?text=${encodeURIComponent('Hola, me gustaría recibir información sobre: ' + product.name)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-green-500 hover:bg-green-600 text-white font-medium transition-colors text-sm"
+              >
+                <MessageCircle className="h-4 w-4" />
+                Consultar por WhatsApp · 442 474 2162
+              </a>
             </div>
           </div>
         </div>
