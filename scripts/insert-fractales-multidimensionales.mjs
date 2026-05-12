@@ -42,6 +42,7 @@ async function main() {
           description = $4,
           price = 600.00,
           couple_price = NULL,
+          max_capacity = 60,
           workshop_date = 'Sábado 23 de mayo, 10–14 hrs',
           image_url = '/images/talleres/taller_fractales_multidimensionales.jpeg'
         WHERE product_sku = $1`,
@@ -52,8 +53,8 @@ async function main() {
       const result = await client.query(
         `INSERT INTO products (
           product_sku, type, name, short_description, description,
-          price, workshop_date, workshop_status, is_active, image_url
-        ) VALUES ($1, 'WORKSHOP', $2, $3, $4, 600.00, $5, 'Abierto', TRUE, $6)
+          price, max_capacity, workshop_date, workshop_status, is_active, image_url
+        ) VALUES ($1, 'WORKSHOP', $2, $3, $4, 600.00, 60, $5, 'Abierto', TRUE, $6)
         RETURNING id`,
         [
           SKU,
