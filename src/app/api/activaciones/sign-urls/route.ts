@@ -26,7 +26,7 @@ export async function POST(request: Request) {
     const subRows = await dbQuery(
       `SELECT id FROM subscriptions
        WHERE user_id = $1
-         AND program = 'activaciones_diarias'
+         AND program IN ('activaciones_diarias', 'meditaciones')
          AND status = 'Activa'
          AND end_date > NOW()
        LIMIT 1`,

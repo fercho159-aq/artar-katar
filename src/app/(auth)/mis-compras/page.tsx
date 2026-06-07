@@ -32,7 +32,17 @@ import { BookUser, CreditCard, History, Music, PlayCircle, Sparkles, Users } fro
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useRouter } from 'next/navigation';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { AudioPlayer } from '@/components/activaciones/AudioPlayer';
+
+type AudioItem = {
+  id: number;
+  slug: string;
+  title: string;
+  description: string | null;
+  category: string | null;
+  duration_seconds: number | null;
+};
 
 // --- Meditations Data ---
 const allMeditations = [
@@ -54,11 +64,54 @@ export default function MisComprasPage() {
   const { user, logout, orders, subscription, activacionesSubscription } = useAuth();
   const router = useRouter();
 
+  const [audioLibrary, setAudioLibrary] = useState<AudioItem[]>([]);
+  const [audioUrlMap, setAudioUrlMap] = useState<Record<string, string>>({});
+
   useEffect(() => {
     if (!user) {
       router.push('/login');
     }
   }, [user, router]);
+
+  // Reproductor: con suscripción de meditaciones O activaciones_diarias se cargan
+  // los audios reales (mismos que la biblioteca de Activaciones Diarias).
+  const hasAudioAccess =
+    subscription?.status === 'Activa' || activacionesSubscription?.status === 'Activa';
+
+  useEffect(() => {
+    if (!user || !hasAudioAccess) return;
+
+    let cancelled = false;
+    const load = async () => {
+      try {
+        const [listRes, signRes] = await Promise.all([
+          fetch('/api/activaciones'),
+          fetch('/api/activaciones/sign-urls', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userId: user.uid }),
+          }),
+        ]);
+        if (!listRes.ok || !signRes.ok) return;
+
+        const list: AudioItem[] = await listRes.json();
+        const signData: { urls: { slug: string; url: string }[] } = await signRes.json();
+
+        if (cancelled) return;
+        const map: Record<string, string> = {};
+        for (const s of signData.urls) map[s.slug] = s.url;
+        setAudioLibrary(list);
+        setAudioUrlMap(map);
+      } catch {
+        // silencioso: si falla, la pestaña muestra el estado vacío
+      }
+    };
+
+    load();
+    return () => {
+      cancelled = true;
+    };
+  }, [user, hasAudioAccess]);
 
   const purchasedItems = useMemo(() => {
     return orders.flatMap(order => order.items.map(item => item.product));
@@ -141,7 +194,24 @@ export default function MisComprasPage() {
                   <Button variant="outline">Ir a Biblioteca</Button>
                 </Link>
               )}
-              {purchasedMeditations.length > 0 ? (
+              {audioLibrary.length > 0 ? (
+                <div className="grid gap-5 md:grid-cols-2">
+                  {audioLibrary.map((a) => (
+                    <AudioPlayer
+                      key={a.id}
+                      slug={a.slug}
+                      userId={user?.uid}
+                      title={a.title}
+                      description={a.description}
+                      category={a.category}
+                      durationSeconds={a.duration_seconds}
+                      audioUrl={audioUrlMap[a.slug] || ''}
+                    />
+                  ))}
+                </div>
+              ) : hasAudioAccess ? (
+                <p className="text-muted-foreground text-center py-8">Cargando tus meditaciones…</p>
+              ) : purchasedMeditations.length > 0 ? (
                 purchasedMeditations.map((meditation) => {
                   const image = PlaceHolderImages.find(p => p.id === meditation.imageId);
                   return (

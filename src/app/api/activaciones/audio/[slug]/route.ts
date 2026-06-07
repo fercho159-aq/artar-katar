@@ -35,7 +35,7 @@ export async function GET(request: Request, { params }: Params) {
     const subRows = await dbQuery(
       `SELECT 1 FROM subscriptions
        WHERE user_id = $1
-         AND program = 'activaciones_diarias'
+         AND program IN ('activaciones_diarias', 'meditaciones')
          AND status = 'Activa'
          AND end_date > NOW()
        LIMIT 1`,
