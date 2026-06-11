@@ -14,7 +14,7 @@ const SHORT_DESCRIPTION =
 
 const WORKSHOP_DATE = 'Querétaro · Sábado 27 de junio, 10–14 hrs';
 
-const IMAGE_URL = '/images/talleres/taller_arcturianas_qro_junio2026.jpeg';
+const IMAGE_URL = '/images/talleres/taller_arcturianas_qro_27junio2026.jpeg';
 
 const DESCRIPTION = `✨ EXPERIMENTA TU VIAJE A LAS CÁMARAS CUÁNTICAS DE SANACIÓN ARCTURIANAS ✨
 

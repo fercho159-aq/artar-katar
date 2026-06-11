@@ -116,6 +116,23 @@ export default function BibliotecaClient() {
           </CardContent>
         </Card>
 
+        {/* Video de bienvenida para suscriptores */}
+        <div className="max-w-3xl mx-auto mb-12">
+          <h2 className="font-headline text-xl font-semibold mb-3 text-center">
+            Video de bienvenida
+          </h2>
+          <div className="rounded-xl overflow-hidden shadow-lg bg-black">
+            <video
+              src="/videos/bienvenida-activaciones-diarias.mp4"
+              controls
+              playsInline
+              preload="metadata"
+              controlsList="nodownload"
+              className="w-full h-auto"
+            />
+          </div>
+        </div>
+
         {activaciones.length === 0 ? (
           <p className="text-center text-muted-foreground py-12">
             Pronto agregaremos las primeras activaciones.
