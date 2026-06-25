@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { dbQuery } from '@/lib/db';
 import { PlanCard } from '@/components/activaciones/PlanCard';
+import { SubscriberRedirect } from '@/components/activaciones/SubscriberRedirect';
 import type { SubscriptionPlan } from '@/lib/types';
 import { Sparkles, Sun, Compass, TrendingUp } from 'lucide-react';
 
@@ -28,6 +29,7 @@ export default async function ActivacionesDiariasPage() {
 
   return (
     <div className="bg-background">
+      <SubscriberRedirect />
       <div className="container py-16 md:py-24">
         {/* Hero */}
         <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
