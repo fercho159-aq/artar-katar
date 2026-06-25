@@ -47,6 +47,7 @@ export function PlanCard({ plan, highlight }: Props) {
         'pendingSubscription',
         JSON.stringify({
           reference: data.reference,
+          payment_request_id: data.payment_request_id,
           plan_sku: plan.plan_sku,
           program: plan.program,
           user_uid: user.uid,

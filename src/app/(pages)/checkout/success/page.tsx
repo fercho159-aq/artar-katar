@@ -46,16 +46,37 @@ function CheckoutSuccessContent() {
                 return;
             }
 
-            // Subscription flow: poll for active subscription (webhook handles DB write)
+            // Subscription flow: confirm server-side (no dependemos solo del webhook)
             if (type === 'subscription') {
                 setIsSubscription(true);
-                let pending: { user_uid?: string } | null = null;
+                let pending: {
+                    user_uid?: string;
+                    reference?: string;
+                    payment_request_id?: string;
+                } | null = null;
                 try {
                     const raw = localStorage.getItem('pendingSubscription');
                     if (raw) pending = JSON.parse(raw);
                 } catch {}
 
                 const uid = pending?.user_uid;
+
+                // Activación activa: verificamos el pago con Clip y creamos la
+                // suscripción sin esperar al webhook.
+                const confirmRef = pending?.reference || reference;
+                if (confirmRef && pending?.payment_request_id) {
+                    try {
+                        await fetch('/api/activaciones/confirm', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                reference: confirmRef,
+                                payment_request_id: pending.payment_request_id,
+                            }),
+                        });
+                    } catch {}
+                }
+
                 if (!uid) {
                     setStatus('success');
                     setMessage('Tu pago fue recibido. Tu suscripción se activará en instantes.');
