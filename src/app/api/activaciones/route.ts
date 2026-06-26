@@ -7,7 +7,7 @@ export async function GET() {
     const rows = await dbQuery(
       `SELECT id, slug, title, description, category, duration_seconds, sort_order
        FROM activaciones
-       WHERE is_active = TRUE
+       WHERE is_active = TRUE AND program_slug IS NULL
        ORDER BY sort_order ASC, title ASC`
     );
     return NextResponse.json(rows, { status: 200 });

@@ -37,7 +37,7 @@ export async function POST(request: Request) {
     }
 
     const rows = await dbQuery(
-      `SELECT slug FROM activaciones WHERE is_active = TRUE ORDER BY sort_order ASC, title ASC`
+      `SELECT slug FROM activaciones WHERE is_active = TRUE AND program_slug IS NULL ORDER BY sort_order ASC, title ASC`
     );
 
     const ttl = 600; // 10 minutes

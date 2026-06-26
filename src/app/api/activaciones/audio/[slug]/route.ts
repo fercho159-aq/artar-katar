@@ -4,6 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import { dbQuery } from '@/lib/db';
 import { verify } from '@/lib/signed-url';
+import { isProgramStepUnlocked } from '@/lib/activaciones-programa';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -47,12 +48,22 @@ export async function GET(request: Request, { params }: Params) {
 
     // 3. Resolve audio file
     const actRows = await dbQuery(
-      'SELECT audio_filename FROM activaciones WHERE slug = $1 AND is_active = TRUE',
+      'SELECT audio_filename, program_slug, sequence_order FROM activaciones WHERE slug = $1 AND is_active = TRUE',
       [slug]
     );
     if (actRows.length === 0) {
       return NextResponse.json({ message: 'Not found' }, { status: 404 });
     }
+
+    // 3b. Programas secuenciados: bloqueo por 21 días (anti-bypass de URL firmada)
+    const { program_slug, sequence_order } = actRows[0];
+    if (program_slug) {
+      const unlocked = await isProgramStepUnlocked(internalUserId, program_slug, sequence_order);
+      if (!unlocked) {
+        return NextResponse.json({ message: 'Activación bloqueada todavía.' }, { status: 403 });
+      }
+    }
+
     const filename = path.basename(actRows[0].audio_filename); // traversal guard
     const filePath = path.join(PRIVATE_DIR, filename);
 

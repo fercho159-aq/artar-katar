@@ -6,7 +6,7 @@ import { useAuth } from '@/context/AuthContext';
 import { AudioPlayer } from '@/components/activaciones/AudioPlayer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Loader2, Clock, CalendarDays } from 'lucide-react';
+import { Loader2, Clock, CalendarDays, Sparkles, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import type { Activacion } from '@/lib/types';
 
@@ -132,6 +132,31 @@ export default function BibliotecaClient() {
             />
           </div>
         </div>
+
+        {/* Programa secuenciado: Bajar de Peso */}
+        <Link href="/activaciones-diarias/bajar-de-peso" className="block max-w-3xl mx-auto mb-12">
+          <Card className="bg-gradient-to-r from-primary/10 to-primary/5 border-primary/30 hover:border-primary/60 transition-colors">
+            <CardContent className="p-5 flex items-center justify-between gap-4">
+              <div className="flex items-start gap-3">
+                <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary/15 text-primary shrink-0">
+                  <Sparkles className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-1">
+                    Programa de 5 activaciones
+                  </p>
+                  <h3 className="font-headline text-lg font-semibold leading-tight">
+                    Bajar de Peso y Rejuvenecimiento Cuántico
+                  </h3>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Secuencia guiada con desbloqueo cada 21 días. Empieza por la primera activación.
+                  </p>
+                </div>
+              </div>
+              <ArrowRight className="h-5 w-5 text-primary shrink-0" />
+            </CardContent>
+          </Card>
+        </Link>
 
         {activaciones.length === 0 ? (
           <p className="text-center text-muted-foreground py-12">
