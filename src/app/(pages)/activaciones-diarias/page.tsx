@@ -3,7 +3,7 @@ import { dbQuery } from '@/lib/db';
 import { PlanCard } from '@/components/activaciones/PlanCard';
 import { SubscriberRedirect } from '@/components/activaciones/SubscriberRedirect';
 import type { SubscriptionPlan } from '@/lib/types';
-import { Sparkles, Sun, Compass, TrendingUp } from 'lucide-react';
+import { Sparkles, Sun, Compass, TrendingUp, Music2, Lock } from 'lucide-react';
 
 const dailyContexts = [
   { src: '/images/activaciones/manejando.png', label: 'Manejando' },
@@ -24,8 +24,35 @@ async function getPlans(): Promise<SubscriptionPlan[]> {
   return rows as SubscriptionPlan[];
 }
 
+async function getActivacionTitles(): Promise<string[]> {
+  const rows = await dbQuery(
+    `SELECT title
+     FROM activaciones
+     WHERE is_active = TRUE AND program_slug IS NULL
+     ORDER BY sort_order ASC, title ASC`
+  );
+  return (rows as { title: string }[]).map((r) => r.title);
+}
+
+type ProgramStep = { sequence_order: number; title: string };
+
+async function getProgramSteps(programSlug: string): Promise<ProgramStep[]> {
+  const rows = await dbQuery(
+    `SELECT sequence_order, title
+     FROM activaciones
+     WHERE is_active = TRUE AND program_slug = $1
+     ORDER BY sequence_order ASC`,
+    [programSlug]
+  );
+  return rows as ProgramStep[];
+}
+
 export default async function ActivacionesDiariasPage() {
-  const plans = await getPlans();
+  const [plans, activacionTitles, bajarDePesoSteps] = await Promise.all([
+    getPlans(),
+    getActivacionTitles(),
+    getProgramSteps('bajar-de-peso'),
+  ]);
 
   return (
     <div className="bg-background">
@@ -122,6 +149,62 @@ export default async function ActivacionesDiariasPage() {
             ))}
           </div>
         </div>
+
+        {/* Catálogo de activaciones */}
+        <div className="max-w-6xl mx-auto mb-20">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold font-headline mb-3">
+              Activaciones incluidas
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Con tu afiliación accedes a las {activacionTitles.length} activaciones de la
+              biblioteca. Estos son los títulos disponibles hoy — periódicamente agregamos nuevas.
+            </p>
+          </div>
+          <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3">
+            {activacionTitles.map((title) => (
+              <li key={title} className="flex items-start gap-2.5 text-sm">
+                <Music2 className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                <span>{title}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Programa de Rejuvenecimiento y Bajar de Peso */}
+        {bajarDePesoSteps.length > 0 && (
+          <div className="max-w-4xl mx-auto mb-20 p-8 bg-muted/40 rounded-xl">
+            <div className="text-center mb-6">
+              <div className="inline-flex items-center gap-2 text-primary text-sm font-semibold uppercase tracking-widest mb-3">
+                <Sparkles className="h-4 w-4" /> Programa secuenciado
+              </div>
+              <h2 className="text-3xl font-bold font-headline mb-3">
+                Rejuvenecimiento y Bajar de Peso
+              </h2>
+              <p className="text-muted-foreground">
+                Con Astar Katar y los seres estelares de Sirio. Un programa de{' '}
+                {bajarDePesoSteps.length} meditaciones que se sigue <strong>en orden</strong>: cada
+                activación se repite durante <strong>21 días</strong>, varias veces al día, antes de
+                desbloquear la siguiente. Así los nuevos programas multidimensionales penetran en
+                profundidad en tu supra consciente. Incluido en tu afiliación.
+              </p>
+            </div>
+            <ol className="max-w-2xl mx-auto space-y-3">
+              {bajarDePesoSteps.map((step) => (
+                <li key={step.sequence_order} className="flex items-start gap-3">
+                  <div className="flex items-center justify-center w-7 h-7 rounded-full bg-primary text-primary-foreground font-bold text-xs shrink-0">
+                    {step.sequence_order}
+                  </div>
+                  <span className="text-sm leading-relaxed pt-0.5">{step.title}</span>
+                </li>
+              ))}
+            </ol>
+            <p className="flex items-center justify-center gap-2 text-xs text-muted-foreground mt-6">
+              <Lock className="h-3.5 w-3.5" /> Cada meditación se desbloquea 21 días después de
+              iniciar la anterior.
+            </p>
+          </div>
+        )}
 
         {/* Pricing */}
         <div className="max-w-6xl mx-auto">
