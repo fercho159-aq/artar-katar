@@ -45,6 +45,7 @@ type AuthContextType = {
   signup: (name: string, email: string, password: string) => Promise<void>;
   logout: () => void;
   refreshSubscriptions: () => Promise<void>;
+  refreshOrders: () => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -71,8 +72,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   }, []);
 
-  const fetchUserData = useCallback(async (userId: string) => {
-    // Fetch Orders
+  const fetchOrders = useCallback(async (userId: string) => {
     try {
       const ordersResponse = await fetch(`/api/orders/${userId}`);
       if (ordersResponse.ok) {
@@ -84,7 +84,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           items: apiOrder.items.map(item => ({
             quantity: item.quantity,
             product: {
-              id: item.product_id, // product_sku
+              id: item.product_id,
               name: item.name,
               price: parseFloat(item.price_at_purchase as any),
               image: item.image_url || '',
@@ -99,14 +99,22 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       console.error("Failed to fetch orders:", error);
       setOrders([]);
     }
+  }, []);
 
-    // Fetch subscriptions for both programs
-    await fetchSubscriptions(userId);
-  }, [fetchSubscriptions]);
+  const fetchUserData = useCallback(async (userId: string) => {
+    await Promise.all([
+      fetchOrders(userId),
+      fetchSubscriptions(userId),
+    ]);
+  }, [fetchOrders, fetchSubscriptions]);
 
   const refreshSubscriptions = useCallback(async () => {
     if (user) await fetchSubscriptions(user.uid);
   }, [user, fetchSubscriptions]);
+
+  const refreshOrders = useCallback(async () => {
+    if (user) await fetchOrders(user.uid);
+  }, [user, fetchOrders]);
 
   // Load user from localStorage on mount
   useEffect(() => {
@@ -197,7 +205,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, orders, subscription, activacionesSubscription, isLoading, login, signup, logout, refreshSubscriptions }}>
+    <AuthContext.Provider value={{ user, orders, subscription, activacionesSubscription, isLoading, login, signup, logout, refreshSubscriptions, refreshOrders }}>
       {children}
     </AuthContext.Provider>
   );

@@ -13,7 +13,7 @@ function CheckoutSuccessContent() {
     const searchParams = useSearchParams();
     const router = useRouter();
     const { clearCart } = useCart();
-    const { refreshSubscriptions } = useAuth();
+    const { refreshSubscriptions, refreshOrders } = useAuth();
     const hasProcessed = useRef(false);
 
     const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
@@ -168,6 +168,8 @@ function CheckoutSuccessContent() {
                     console.warn('Could not clear cart/localStorage:', e);
                 }
 
+                await refreshOrders();
+
                 setStatus('success');
                 setMessage('¡Tu pago ha sido recibido! Tu pedido está siendo procesado.');
 
@@ -185,7 +187,7 @@ function CheckoutSuccessContent() {
         };
 
         processPayment();
-    }, [reference, error, type, program]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [reference, error, type, program, refreshOrders]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div className="container py-16 md:py-24 flex justify-center">
