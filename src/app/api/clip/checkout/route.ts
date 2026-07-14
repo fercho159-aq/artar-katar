@@ -61,8 +61,12 @@ export async function POST(request: Request) {
                     default: validatedData.return_url,
                 },
                 webhook_url: validatedData.webhook_url,
-                reference: validatedData.reference,
-                metadata: validatedData.metadata || {},
+                // Clip solo persiste metadata.external_reference; un `reference`
+                // de primer nivel se descarta y el webhook llega sin referencia.
+                metadata: {
+                    ...(validatedData.metadata || {}),
+                    external_reference: validatedData.reference,
+                },
             }),
         });
 

@@ -65,12 +65,11 @@ export async function POST(request: Request) {
           default: `${baseUrl}/checkout/success?type=subscription&ref=${reference}`,
         },
         webhook_url: `${baseUrl}/api/webhooks/clip`,
-        reference,
+        // Clip ignora un `reference` de primer nivel y solo persiste
+        // metadata.external_reference, que es lo que reenvía en el webhook
+        // como me_reference_id. Es el único dato nuestro que sobrevive.
         metadata: {
-          type: 'subscription',
-          program: plan.program,
-          plan_sku: plan.plan_sku,
-          user_uid: userId,
+          external_reference: reference,
         },
       }),
     });

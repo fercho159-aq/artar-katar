@@ -37,6 +37,16 @@ type ClipStatus = {
 };
 
 /**
+ * Clip usa dos vocabularios para el mismo estado: la API de checkout devuelve
+ * `CHECKOUT_COMPLETED` y el webhook manda `resource_status: COMPLETED`.
+ * Normalizamos el prefijo antes de comparar.
+ */
+export function isCompletedStatus(rawStatus: string): boolean {
+  const status = rawStatus.toUpperCase().replace(/^CHECKOUT_/, '');
+  return ['COMPLETED', 'PAID', 'APPROVED', 'SUCCEEDED'].includes(status);
+}
+
+/**
  * Consulta a Clip el estado real de un payment_request. Es la fuente de verdad:
  * nunca activamos una suscripción sin que Clip confirme COMPLETED.
  */
@@ -62,8 +72,9 @@ export async function fetchClipCheckoutStatus(paymentRequestId: string): Promise
     const rawStatus = String(
       data.status ?? data.resource_status ?? data.payment_status ?? ''
     ).toUpperCase();
-    const completed = ['COMPLETED', 'PAID', 'APPROVED', 'SUCCEEDED'].includes(rawStatus);
-    const reference = data.me_reference_id ?? data.reference ?? undefined;
+    const completed = isCompletedStatus(rawStatus);
+    const reference =
+      data.metadata?.external_reference ?? data.me_reference_id ?? data.reference ?? undefined;
     return { ok: true, completed, status: rawStatus, reference };
   } catch (err) {
     console.error('Error consultando estado Clip:', err);

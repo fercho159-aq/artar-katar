@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import { NextResponse } from 'next/server';
-import { confirmAndActivate } from '@/lib/activaciones-subscription';
+import { confirmAndActivate, isCompletedStatus } from '@/lib/activaciones-subscription';
 
 /**
  * Webhook (Postback) del Checkout de Clip.
@@ -42,7 +42,7 @@ export async function POST(request: Request) {
     });
 
     // Solo nos interesan pagos completados de suscripciones de activaciones.
-    if (resourceStatus !== 'COMPLETED') {
+    if (!isCompletedStatus(resourceStatus)) {
       return NextResponse.json({ message: 'Ignorado (no COMPLETED)' }, { status: 200 });
     }
     if (!reference || !reference.startsWith('SUB-')) {
